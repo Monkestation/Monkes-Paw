@@ -477,7 +477,7 @@
 
 /datum/status_effect/stabilized/grey/tick()
 	for(var/mob/living/basic/slime/new_friend in range(3, get_turf(owner)))
-		SEND_SIGNAL(new_friend, COMSIG_FRIENDSHIP_CHANGE, owner, 2)
+		new_friend.befriend(owner) // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: SEND_SIGNAL(new_friend, COMSIG_FRIENDSHIP_CHANGE, owner, 2)
 	return ..()
 
 /datum/status_effect/stabilized/orange
@@ -981,6 +981,7 @@
 	draining_ref = WEAKREF(draining)
 	to_chat(owner, span_boldnotice("You feel your hands melt around [draining]'s neck as you start to drain [draining.p_them()] of [draining.p_their()] life!"))
 	to_chat(draining, span_userdanger("[owner]'s hands melt around your neck as you can feel your life starting to drain away!"))
+	owner.balloon_alert_to_viewers("hands melt around neck!") // PAW EDIT ADDITION
 
 /datum/status_effect/stabilized/black/get_examine_text()
 	var/mob/living/draining = draining_ref?.resolve()
