@@ -240,7 +240,7 @@ Chilling extracts:
 	var/slimesfound = FALSE
 	for(var/mob/living/basic/slime/S in view(get_turf(user), 7))
 		slimesfound = TRUE
-		S.add_trait(/datum/slime_trait/docility)
+		S.set_pacified_behavior() // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: S.add_trait(/datum/slime_trait/docility)
 	if(slimesfound)
 		user.visible_message(span_notice("[src] lets out a peaceful ring as it shatters, and nearby slimes seem calm."))
 	else
