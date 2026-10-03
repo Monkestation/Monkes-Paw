@@ -1,0 +1,5 @@
+i think most the stuff in this folder is from https://github.com/SmArtKar
+biomass.dmi - https://github.com/SmArtKar
+slime_pen.dmi stuff, iceroach, and gemroach by salted-zen
+slimed.dmi - copied from tgstation (icons/hud/screen_alert.dmi "slimed", icons/effects/particles/goop.dmi)
+slime_cat_ears.dmi - made for this module, fitted to each frame of the slime sprites by script

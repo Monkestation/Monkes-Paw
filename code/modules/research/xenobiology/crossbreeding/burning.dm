@@ -34,7 +34,7 @@ Burning extracts:
 /obj/item/slimecross/burning/grey/do_effect(mob/user)
 	var/mob/living/basic/slime/S = new(get_turf(user))
 	S.visible_message(span_danger("A baby slime emerges from [src], and it nuzzles [user] before burbling hungrily!"))
-	SEND_SIGNAL(S, COMSIG_FRIENDSHIP_CHANGE, user, 110)
+	S.befriend(user) // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: SEND_SIGNAL(S, COMSIG_FRIENDSHIP_CHANGE, user, 110)
 	S.bodytemperature = T0C + 400 //We gonna step on the gas.
 	..()
 
@@ -216,7 +216,7 @@ Burning extracts:
 		else
 			S.clear_friends()
 		*/
-		ADD_TRAIT(S, TRAIT_SLIME_RABID, "burning-red")
+		S.ai_controller?.set_blackboard_key(BB_SLIME_RABID, TRUE) // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: ADD_TRAIT(S, TRAIT_SLIME_RABID, "burning-red")
 		S.visible_message(span_danger("The [S] is driven into a dangerous frenzy!"))
 	..()
 
