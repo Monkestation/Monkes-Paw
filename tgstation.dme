@@ -3083,6 +3083,7 @@
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_pda_message.dm"
 #include "code\modules\admin\admin_ranks.dm"
+#include "code\modules\admin\admin_verb_panel.dm"
 #include "code\modules\admin\admin_verbs.dm"
 #include "code\modules\admin\adminmenu.dm"
 #include "code\modules\admin\antag_tokens.dm"
