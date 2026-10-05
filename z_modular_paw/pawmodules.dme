@@ -1,0 +1,16 @@
+// DM Environment file for paw_modules.dme.
+// This allows paw-only changes to be contained within a single, easily-added line in ../tgstation.dme
+
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+
+
+// BEGIN_INCLUDE
+#include "modules\automapper\code\area_spawn_entries.dm"
+#include "modules\automapper\code\area_spawn_subsystem.dm"
+#include "modules\automapper\code\automap_template.dm"
+#include "modules\automapper\code\automapper_subsystem.dm"
+#include "modules\automapper\code\modular_map_loader.dm"
+#include "modules\plushies\paw_plushies.dm"
+// END_INCLUDE
