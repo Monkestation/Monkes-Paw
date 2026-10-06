@@ -8933,4 +8933,5 @@
 #include "z_modular_paw\modules\automapper\code\automapper_subsystem.dm"
 #include "z_modular_paw\modules\automapper\code\modular_map_loader.dm"
 #include "z_modular_paw\modules\plushies\paw_plushies.dm"
+#include "z_modular_paw\modules\quirk-intrusive-thoughts\quirk-intrusive-thoughts.dme"
 // END_INCLUDE
