@@ -1,8 +1,0 @@
-// DME file for intrusive thoughts module
-
-
-// BEGIN_INCLUDE
-#include "datums\actions\mobs\intrude_thought.dm"
-#include "datums\brain_damage\intrusive_thoughts.dm"
-#include "datums\quirks\neutral_quirks\intrusivethoughts.dm"
-// END_INCLUDE
