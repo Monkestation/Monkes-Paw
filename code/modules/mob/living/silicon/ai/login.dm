@@ -11,6 +11,9 @@
 	view_core()
 	INVOKE_ASYNC(src, PROC_REF(preload_vox_voices))
 	show_laws(FALSE)
+	// PAW EDIT ADDITION START - AI_LAW_PICKER
+	INVOKE_ASYNC(src, PROC_REF(ai_law_picker)) // requires a mind & client hence it being so late
+	// PAW EDIT ADDITION END - AI_LAW_PICKER
 
 /// Preloads the `vox_voices.json` asset
 /mob/living/silicon/ai/proc/preload_vox_voices()

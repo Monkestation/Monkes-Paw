@@ -8927,6 +8927,7 @@
 #include "monkestation\code\modules\wiremod_chem\housing\_chem_housing.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\chemical_circuit.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\precursor_tank.dm"
+#include "z_modular_paw\modules\ai_law_picker\ai_law_picker.dm"
 #include "z_modular_paw\modules\automapper\code\area_spawn_entries.dm"
 #include "z_modular_paw\modules\automapper\code\area_spawn_subsystem.dm"
 #include "z_modular_paw\modules\automapper\code\automap_template.dm"
