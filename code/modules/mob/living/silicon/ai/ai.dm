@@ -159,6 +159,11 @@
 
 	///How much ai's client view_range should be adjusted by with view_size.setTo(). 0 Is default view size.
 	var/view_range_boost = 0
+	// PAW EDIT ADDITION START - AI_LAW_PICKER
+	/// Have we already offered the law choices?
+	var/law_picker_offered = FALSE
+	// PAW EDIT ADDITION END - AI_LAW_PICKER
+
 
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, mob/target_ai, shunted)
 	. = ..()
