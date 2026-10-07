@@ -1,6 +1,6 @@
 https://github.com/Monkestation/Monkes-Paw/pull/16
 
-## Slime Rancher
+## AI LAW PICKER
 
 Module ID: AI_LAW_PICKER
 
