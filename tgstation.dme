@@ -8933,7 +8933,7 @@
 #include "z_modular_paw\modules\automapper\code\automapper_subsystem.dm"
 #include "z_modular_paw\modules\automapper\code\modular_map_loader.dm"
 #include "z_modular_paw\modules\plushies\paw_plushies.dm"
-#include "z_modular_paw\modules\quirk-intrusive-thoughts\datums\actions\mobs\intrude_thought.dm"
-#include "z_modular_paw\modules\quirk-intrusive-thoughts\datums\brain_damage\intrusive_thoughts.dm"
-#include "z_modular_paw\modules\quirk-intrusive-thoughts\datums\quirks\neutral_quirks\intrusivethoughts.dm"
+#include "z_modular_paw\modules\quirk-intrusive-thoughts\code\intrude_thought.dm"
+#include "z_modular_paw\modules\quirk-intrusive-thoughts\code\intrusive_thoughts.dm"
+#include "z_modular_paw\modules\quirk-intrusive-thoughts\code\intrusivethoughts.dm"
 // END_INCLUDE

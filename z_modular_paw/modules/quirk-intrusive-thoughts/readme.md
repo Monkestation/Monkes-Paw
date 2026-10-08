@@ -35,9 +35,9 @@ E.g:
 
 ### Defines:
 
-- `z_modular_paw\modules\quirk-intrusive-thoughts\datums\actions\mobs\intrude_thought.dm`: `datum/action/intrude_thought`
-- `z_modular_paw\modules\quirk-intrusive-thoughts\datums\quirks\neutral_quirks\intrusivethoughts.dm`: `datum/quirk/intrusivethoughts`
-- `z_modular_paw\modules\quirk-intrusive-thoughts\datums\brain_damage\intrusive_thoughts.dm`: `datum/brain_trauma/special/intrusive_thoughts`
+- `z_modular_paw\modules\quirk-intrusive-thoughts\code\intrude_thought.dm`: `datum/action/intrude_thought`
+- `z_modular_paw\modules\quirk-intrusive-thoughts\code\intrusivethoughts.dm`: `datum/quirk/intrusivethoughts`
+- `z_modular_paw\modules\quirk-intrusive-thoughts\code\intrusive_thoughts.dm`: `datum/brain_trauma/special/intrusive_thoughts`
 <!-- - N/A -->
 <!-- If you needed to add any defines, mention the files you added those defines in, along with the name of the defines. -->
 
