@@ -158,6 +158,7 @@
 	///How much ai's client view_range should be adjusted by with view_size.setTo(). 0 Is default view size.
 	var/view_range_boost = 0
 
+
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, mob/target_ai, shunted)
 	. = ..()
 	if(!target_ai) //If there is no player/brain inside.
@@ -174,6 +175,9 @@
 		laws.associate(src)
 		for (var/law in laws.inherent)
 			lawcheck += law
+		// PAW EDIT ADDITION START - AI_LAW_PICKER
+		law_picker_offered = TRUE
+		// PAW EDIT ADDITION END - AI_LAW_PICKER
 	else
 		make_laws()
 		for (var/law in laws.inherent)
