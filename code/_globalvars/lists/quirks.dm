@@ -38,4 +38,3 @@ GLOBAL_LIST_INIT(limb_choice, list(
 	"Left Leg" = BODY_ZONE_L_LEG,
 	"Right Leg" = BODY_ZONE_R_LEG,
 ))
-
