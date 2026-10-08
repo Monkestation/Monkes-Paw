@@ -8933,5 +8933,6 @@
 #include "z_modular_paw\modules\automapper\code\automapper_subsystem.dm"
 #include "z_modular_paw\modules\automapper\code\modular_map_loader.dm"
 #include "z_modular_paw\modules\junkie_preference\junkie_drug_choice.dm"
+#include "z_modular_paw\modules\junkie_preference\junkie_quirk_list.dm"
 #include "z_modular_paw\modules\plushies\paw_plushies.dm"
 // END_INCLUDE
