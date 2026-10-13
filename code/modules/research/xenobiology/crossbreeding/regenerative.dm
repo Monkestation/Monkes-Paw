@@ -206,7 +206,7 @@ Regenerative extracts:
 	if(isslime(target))
 		target.visible_message(span_warning("\The [target] suddenly changes color!"))
 		var/mob/living/basic/slime/S = target
-		S.start_mutating(TRUE)
+		S.set_slime_type(SLIME_TYPE_RANDOM) // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: S.start_mutating(TRUE)
 	else if(isoozeling(target))
 		target.reagents.add_reagent(/datum/reagent/mutationtoxin/jelly, 5)
 
