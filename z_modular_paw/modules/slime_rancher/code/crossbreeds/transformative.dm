@@ -232,7 +232,6 @@
 
 /datum/slime_transformation/darkblue/on_apply(mob/living/user)
 	our_slime.set_cleaner_slime(TRUE)
-	COOLDOWN_RESET(our_slime, pen_expiry_cooldown) // you prolly WANT cleaner slimes to split outside of pens
 
 /obj/item/slimecross/transformative/silver
 	colour = SLIME_TYPE_SILVER
