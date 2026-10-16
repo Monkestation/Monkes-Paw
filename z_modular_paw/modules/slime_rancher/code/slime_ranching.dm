@@ -7,6 +7,7 @@
 	var/datum/slime_type/pending_ranch_mutation
 	COOLDOWN_DECLARE(ranch_retry_cooldown)
 
+/// Runs when we drain a meal, adults save up the amount as ranch_progress
 /mob/living/basic/slime/proc/on_ranch_drain(datum/source, mob/living/meal, drained)
 	SIGNAL_HANDLER
 	set_temporary_mood(SLIME_MOOD_SMILE) // a mouthful of someone is still a mouthful, even for babies
@@ -78,13 +79,14 @@
 /// Called every Life tick: resumes a stored mutation once we're off lunch, and retries primed splits.
 /mob/living/basic/slime/proc/handle_ranching()
 	if(pending_ranch_mutation)
-		if(ranch_mutation_ready() && !isliving(buckled))
+		if(ranch_mutation_ready() && !is_latched())
 			start_ranch_mutation()
 		return
 
 	if(primed_split_cost && !HAS_TRAIT(src, TRAIT_STASIS))
 		try_ranch_outcome()
 
+/// Gets us ready to split once we've saved up this much ranch_progress, 0 means go back to making extracts
 /mob/living/basic/slime/proc/set_primed_split_cost(new_cost)
 	if(new_cost && blocks_reproduction)
 		balloon_alert_to_viewers("can't split!")
@@ -97,11 +99,13 @@
 	refresh_wanted_targets() // so the AI starts (or stops) hunting down breeding pellets
 	try_ranch_outcome() // if we already banked enough, split right away instead of waiting on the next drain
 
+/// Makes us want breeding pellets, unless we're already gonna split
 /mob/living/basic/slime/proc/on_check_wanted_pellet(mob/living/basic/slime/source, obj/item/meal)
 	SIGNAL_HANDLER
 	if(!primed_split_cost && !blocks_reproduction && istype(meal, /obj/item/slime_breeding_pellet))
 		return COMPONENT_SLIME_WANTS_ITEM
 
+/// Pet command that tells the slime to split next (or to nvm that)
 /datum/pet_command/slime_split
 	command_name = "Split"
 	command_desc = "Prime (or unprime) your slime to split the next time it's fed enough."
@@ -115,6 +119,7 @@
 		return
 	parent.set_primed_split_cost(parent.primed_split_cost ? 0 : SLIME_RANCH_COMMAND_SPLIT_COST)
 
+/// Feed it to a slime and it'll split next
 /obj/item/slime_breeding_pellet
 	name = "slime breeding pellet"
 	desc = "A biomass pellet slimes go nuts for. Feed it to a slime, and it'll split the next time it's fed enough!"

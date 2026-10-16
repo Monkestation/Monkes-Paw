@@ -125,7 +125,7 @@
 		"mods" = message_mods
 	)
 	// levels = SSmapping.get_connected_levels(get_turf(source)) -- MONKESTATION EDIT OLD
-	levels = lvls != null ? lvls : SSmapping.get_connected_levels(get_turf(source)) // MONKESTATION EDIT NEW
+	levels = lvls != null ? lvls : get_telecomms_levels(get_turf(source)) // PAW EDIT CHANGE - SLIME_RANCHER - ORIGINAL: levels = lvls != null ? lvls : SSmapping.get_connected_levels(get_turf(source)) // MONKESTATION EDIT NEW
 
 /datum/signal/subspace/vocal/copy()
 	var/datum/signal/subspace/vocal/copy = new(source, frequency, virt, language)

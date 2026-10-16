@@ -24,6 +24,12 @@
 #define BB_SLIME_BOUNCE_TARGET "BB_slime_bounce_target"
 ///Mess (or pest) a cleaner slime is walking towards to dissolve
 #define BB_SLIME_CLEAN_TARGET "BB_slime_clean_target"
+///Slime we're walking over to sit on, or the one we're already sitting on
+#define BB_SLIME_STACK_TARGET "BB_slime_stack_target"
+///Turf a cleaner slime is wandering over to, to look for messes there
+#define BB_SLIME_ROAM_TARGET "BB_slime_roam_target"
+///Player a cleaner slime is wandering towards, getting as close as it can
+#define BB_SLIME_ROAM_PLAYER "BB_slime_roam_player"
 
 ///This slime is a baby
 #define SLIME_LIFE_STAGE_BABY "baby"
@@ -129,6 +135,8 @@
 
 /// A slime latched onto this mob at some point, so its death doesn't upset the crew
 #define TRAIT_WAS_SLIME_FOOD "was_slime_food"
+/// Weapon carries the starborne enchantment, just used to track "hey this thing is already enchanted", bc starborne uses an element
+#define TRAIT_STARBORNE "starborne"
 /// Source for pausing a slime's AI during a split or mutation wind-up
 #define SLIME_WINDUP_TRAIT "slime_windup"
 /// Source for pausing a slime's AI while it sits in a vacuum pack
@@ -150,6 +158,9 @@
 #define COMSIG_SLIME_SHOCKED "slime_shocked"
 /// From /mob/living/basic/slime/proc/finish_reproduce() and death(), once per new baby: (mob/living/basic/slime/baby)
 #define COMSIG_SLIME_SPLIT "slime_split"
+
+///called on a movable when it stops orbiting an atom: (atom/center)
+#define COMSIG_MOVABLE_STOPPED_ORBITING "movable_stopped_orbiting"
 
 /// From /obj/item/vacuum_pack/proc/store(): (mob/living/stored_mob)
 #define COMSIG_VACUUM_STORED "vacuum_stored"
@@ -176,6 +187,8 @@
 #define SLIME_RANCH_RETRY_COOLDOWN (5 SECONDS)
 /// How long a slime ignores a target it couldn't path to
 #define SLIME_CHASE_GIVE_UP_TIME (5 SECONDS)
+/// How far (in path steps) a slime will walk to go find a player, or chase anything once it's moving with A*
+#define SLIME_SEEK_PATH_LENGTH 150
 /// How long a slime holds a grudge after the last hit
 #define SLIME_GRUDGE_DURATION (1 MINUTES)
 /// How many damaging hits a cat slime shrugs off before it holds a grudge
@@ -193,3 +206,12 @@
 #define SLIME_MONKEY_RALLY_RANGE 5
 
 #define COMPRESSOR_LINK_RANGE 7
+
+// /mob/living/basic/slime
+#define VV_HK_SLIME_SET_TYPE "slime_set_type"
+#define VV_HK_SLIME_ADD_TRANSFORMATION "slime_add_transformation"
+#define VV_HK_SLIME_SET_LIFE_STAGE "slime_set_life_stage"
+#define VV_HK_SLIME_SET_POWER "slime_set_power"
+#define VV_HK_SLIME_SET_BEHAVIOR "slime_set_behavior"
+#define VV_HK_SLIME_FILL_GROWTH "slime_fill_growth"
+#define VV_HK_SLIME_FORCE_SPLIT "slime_force_split"

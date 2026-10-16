@@ -1,13 +1,19 @@
+/// Extracts the type tank holds.
 #define COMPRESSOR_EFFECT_EXTRACTS 8
+/// Extracts the color tank holds.
 #define COMPRESSOR_COLOR_EXTRACTS 2
+/// Biomass a cycle costs with tier 1 matter bins.
 #define COMPRESSOR_BASE_BIOMASS_COST 8
+/// Biomass cost saved per bin tier above 1. Also the lowest a cycle can cost.
 #define COMPRESSOR_BIOMASS_PER_BIN_TIER 2
+/// Cycle length with tier 1 manipulators. Halves per tier.
 #define COMPRESSOR_BASE_CYCLE_TIME (90 SECONDS)
 
 /particles/slime/extract_compressor
 	count = 20
 	spawning = 0.15
 
+/// Squishes slime extracts together into a crossbreed. Costs biomass.
 /obj/machinery/extract_compressor
 	name = "extract compressor"
 	desc = "Crossbreeds slime extracts under pressure, no slime required."
@@ -23,17 +29,20 @@
 	var/list/obj/item/slime_extract/effect_extracts = list()
 	/// Extracts feeding the crossbreed's color half.
 	var/list/obj/item/slime_extract/color_extracts = list()
-	/// Seconds accumulated into the current cycle.
+	/// Deciseconds accumulated into the current cycle.
 	var/cycle_progress = 0
-	/// Total seconds the current cycle needs. Set when a cycle starts.
+	/// Total deciseconds the current cycle needs. Set when a cycle starts.
 	var/cycle_length = COMPRESSOR_BASE_CYCLE_TIME
 	/// Biomass the current cycle will cost. Set when a cycle starts.
 	var/cycle_biomass_cost = COMPRESSOR_BASE_BIOMASS_COST
+	/// Weakref to the /obj/machinery/biomass_recycler that pays for cycles.
 	var/datum/weakref/linked_recycler_ref
 	/// Key used with add_shared_particles/remove_shared_particles for the current cycle, null when idle.
 	var/running_particle_key
+	/// Hum that plays while a cycle runs.
 	var/datum/looping_sound/extract_compressor/soundloop
 
+	/// world.time of the last process tick, to count cycle_progress.
 	var/last_process
 
 	/// "[effect]|[color]" -> crossbreed path, built once from every non-abstract slimecross.
@@ -50,13 +59,13 @@
 
 /obj/machinery/extract_compressor/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Eject effect tank"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Eject type tank"
 	context[SCREENTIP_CONTEXT_ALT_RMB] = "Eject color tank"
 	if(istype(held_item, /obj/item/slime_extract))
-		context[SCREENTIP_CONTEXT_LMB] = "Load effect tank"
+		context[SCREENTIP_CONTEXT_LMB] = "Load type tank"
 		context[SCREENTIP_CONTEXT_RMB] = "Load color tank"
 	else if(istype(held_item, /obj/item/storage/bag/xeno))
-		context[SCREENTIP_CONTEXT_LMB] = "Bulk-load effect tank"
+		context[SCREENTIP_CONTEXT_LMB] = "Bulk-load type tank"
 		context[SCREENTIP_CONTEXT_RMB] = "Bulk-load color tank"
 	else if(isnull(held_item))
 		context[SCREENTIP_CONTEXT_LMB] = "Start compressing"
@@ -76,6 +85,12 @@
 	linked_recycler_ref = null
 	return ..()
 
+/obj/machinery/extract_compressor/Exited(atom/movable/gone, direction)
+	. = ..()
+	effect_extracts -= gone
+	color_extracts -= gone
+
+/// Builds the crossbreed and extract color lookup lists, only the first time.
 /obj/machinery/extract_compressor/proc/build_lookups()
 	if(!isnull(crossbreed_lookup))
 		return
@@ -93,6 +108,7 @@
 		// crossbreeds spell two-word colors with a space ("dark purple"), slime types with a dash
 		extract_color_lookup[slime_type::core_type] = list(replacetext(slime_type::color, "-", " "), slime_type::rgb_code)
 
+/// Links the closest recycler in COMPRESSOR_LINK_RANGE, if not already linked.
 /obj/machinery/extract_compressor/proc/link_nearest_recycler()
 	if(get_recycler())
 		return
@@ -106,6 +122,7 @@
 	if(closest)
 		linked_recycler_ref = WEAKREF(closest)
 
+/// Returns the linked recycler, or null if it's gone.
 /obj/machinery/extract_compressor/proc/get_recycler()
 	var/obj/machinery/biomass_recycler/recycler = linked_recycler_ref?.resolve()
 	if(isnull(recycler))
@@ -127,7 +144,7 @@
 	. = ..()
 	if(!in_range(user, src) && !isobserver(user))
 		return
-	. += span_notice("The effect tank holds [length(effect_extracts)] of [COMPRESSOR_EFFECT_EXTRACTS] extracts.")
+	. += span_notice("The type tank holds [length(effect_extracts)] of [COMPRESSOR_EFFECT_EXTRACTS] extracts.")
 	. += span_notice("The color tank holds [length(color_extracts)] of [COMPRESSOR_COLOR_EXTRACTS] extracts.")
 	if(length(effect_extracts) && length(color_extracts))
 		var/obj/item/slimecross/result_path = get_resulting_crossbreed()
@@ -138,6 +155,7 @@
 	if(is_cycling())
 		. += span_notice("It is currently compressing a batch.")
 
+/// Whether a crossbreed cycle is running.
 /obj/machinery/extract_compressor/proc/is_cycling()
 	return cycle_progress > 0
 
@@ -181,6 +199,7 @@
 	. += screen
 	. += emissive_appearance(icon, "[base_icon_state]_screen_e", src)
 
+/// Screen tint: red for no recipe, yellow for not full, green for ready, null for empty.
 /obj/machinery/extract_compressor/proc/get_screen_color()
 	if(!length(effect_extracts) && !length(color_extracts))
 		return null
@@ -190,6 +209,7 @@
 		return "#ffb020"
 	return "#40ff40"
 
+/// Overlay showing how full a tank is, tinted to its extract color.
 /obj/machinery/extract_compressor/proc/tank_fill_overlay(side, list/obj/item/slime_extract/tank)
 	if(!length(tank))
 		return null
@@ -203,12 +223,14 @@
 		fill.color = vibrant_tint_matrix(extract_color[2])
 	return fill
 
+/// Makes a color brighter and more saturated.
 /obj/machinery/extract_compressor/proc/vibrant_tint(rgb)
 	var/list/hsv = rgb2hsv(rgb)
 	hsv[2] = min(hsv[2] * 1.3, 100)
 	hsv[3] = min(hsv[3] * 1.15, 100)
 	return hsv2rgb(hsv)
 
+/// Color matrix that paints the gray fill sprite with the vibrant_tint() of a color.
 /obj/machinery/extract_compressor/proc/vibrant_tint_matrix(rgb)
 	var/list/boosted = rgb2num(vibrant_tint(rgb))
 	var/boost = 1.5 // how far past the fill sprite's own average brightness to push the highlight
@@ -239,6 +261,7 @@
 		return .
 	return ..()
 
+/// Loads an extract, or a xeno bag's worth, trying the preferred tank first.
 /obj/machinery/extract_compressor/proc/try_insert(mob/living/user, obj/item/tool, list/obj/item/slime_extract/preferred)
 	if(!is_operational || panel_open || is_cycling())
 		return NONE
@@ -262,20 +285,23 @@
 		var/both_full = length(effect_extracts) >= COMPRESSOR_EFFECT_EXTRACTS && length(color_extracts) >= COMPRESSOR_COLOR_EXTRACTS
 		balloon_alert(user, both_full ? "tanks full" : "wrong extract")
 		return ITEM_INTERACT_BLOCKING
-	balloon_alert(user, "loaded [tank == effect_extracts ? "effect" : "color"] tank[prediction_suffix()]")
+	balloon_alert(user, "loaded [tank == effect_extracts ? "type" : "color"] tank[prediction_suffix()]")
 	play_fill_plop(tank)
 	update_appearance()
 	return ITEM_INTERACT_SUCCESS
 
+/// Returns the tank the extract went into, or null if neither took it.
 /obj/machinery/extract_compressor/proc/insert_into_either(obj/item/slime_extract/extract, list/obj/item/slime_extract/preferred)
 	if(insert_extract(extract, preferred))
 		return preferred
 	var/list/obj/item/slime_extract/other = (preferred == effect_extracts) ? color_extracts : effect_extracts
 	return insert_extract(extract, other) ? other : null
 
+/// How many extracts the given tank holds.
 /obj/machinery/extract_compressor/proc/tank_capacity(list/obj/item/slime_extract/tank)
 	return tank == effect_extracts ? COMPRESSOR_EFFECT_EXTRACTS : COMPRESSOR_COLOR_EXTRACTS
 
+/// Plop sound that gets higher pitched as the tank fills.
 /obj/machinery/extract_compressor/proc/play_fill_plop(list/obj/item/slime_extract/tank)
 	var/fraction = length(tank) / tank_capacity(tank)
 	var/pitch_min = 1
@@ -310,11 +336,12 @@
 /obj/machinery/extract_compressor/click_alt_secondary(mob/user)
 	return eject_tank(user, color_extracts)
 
+/// Drops every extract in the tank onto the floor. Blocked mid-cycle.
 /obj/machinery/extract_compressor/proc/eject_tank(mob/user, list/obj/item/slime_extract/tank)
 	if(is_cycling())
 		balloon_alert(user, "busy")
 		return CLICK_ACTION_BLOCKING
-	var/side = (tank == effect_extracts) ? "effect" : "color"
+	var/side = (tank == effect_extracts) ? "type" : "color"
 	if(!length(tank))
 		balloon_alert(user, "[side] tank empty")
 		return CLICK_ACTION_BLOCKING
@@ -353,9 +380,10 @@
 			if(length(tank) >= required)
 				return
 
+/// Starts a cycle if both tanks are full, a crossbreed exists, and there's enough biomass.
 /obj/machinery/extract_compressor/proc/start_cycle(mob/user)
 	if(length(effect_extracts) < COMPRESSOR_EFFECT_EXTRACTS)
-		balloon_alert(user, "not enough effect extracts")
+		balloon_alert(user, "not enough type extracts")
 		return
 	if(length(color_extracts) < COMPRESSOR_COLOR_EXTRACTS)
 		balloon_alert(user, "not enough color extracts")
@@ -386,6 +414,7 @@
 	begin_processing()
 	update_appearance()
 
+/// Shakes the machine side to side until stop_shake().
 /obj/machinery/extract_compressor/proc/start_shake()
 	animate(src, pixel_x = base_pixel_x - 1, time = 0.2 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
 	animate(pixel_x = base_pixel_x + 1, time = 0.2 SECONDS)
@@ -394,6 +423,7 @@
 /obj/machinery/extract_compressor/proc/stop_shake()
 	animate(src, pixel_x = base_pixel_x, time = 0.2 SECONDS)
 
+/// Returns the slimecross path the loaded tanks would make, or null.
 /obj/machinery/extract_compressor/proc/get_resulting_crossbreed()
 	if(!length(effect_extracts) || !length(color_extracts))
 		return null
@@ -403,7 +433,7 @@
 		return null
 	return crossbreed_lookup["[effect]|[color_info[1]]"]
 
-/obj/machinery/extract_compressor/process()
+/obj/machinery/extract_compressor/process(seconds_per_tick)
 	if(!is_cycling())
 		return PROCESS_KILL
 	if(!is_operational)
@@ -418,6 +448,7 @@
 		finish_cycle()
 		return PROCESS_KILL
 
+/// Eats the extracts and biomass, then spawns the crossbreed.
 /obj/machinery/extract_compressor/proc/finish_cycle()
 	var/result_path = get_resulting_crossbreed()
 	var/obj/machinery/biomass_recycler/recycler = get_recycler()

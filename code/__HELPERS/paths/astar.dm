@@ -269,10 +269,16 @@
 	closed = null
 	return ..()
 
+// PAW EDIT ADDITION START - SLIME_RANCHER
+/// A* only steps in cardinals, so its paths come out as long straight runs with hard corners.
+/// This pulls each stretch tight: from every node, keep stretching a straight line further along the path (up to 20 nodes)
+/// until one won't fit, then walk the longest one that did.
+// PAW EDIT ADDITION END
 /datum/pathfind/astar/proc/smooth_path_diagonals(list/input_path)
 	if(!input_path || length(input_path) < 3)
 		return input_path
 
+	/* // PAW EDIT REMOVAL START - SLIME_RANCHER
 	var/list/smoothed = list()
 	var/i = 1
 
@@ -299,8 +305,54 @@
 					continue
 
 		i++
+	*/ // PAW EDIT REMOVAL END
+	// PAW EDIT ADDITION START - SLIME_RANCHER
+	var/list/smoothed = list(input_path[1])
+	var/last = length(input_path)
+	var/i = 1
+	while(i < last)
+		var/turf/current = input_path[i]
+		var/list/shortcut
+		var/shortcut_end = i
+		for(var/j in i + 2 to min(i + 20, last))
+			var/turf/end = input_path[j]
+			// a straight line can't take stairs
+			if(end.z != current.z)
+				break
+			var/list/line = straight_walk(current, end)
+			if(!line)
+				break
+			shortcut = line
+			shortcut_end = j
+		if(shortcut)
+			smoothed += shortcut
+			i = shortcut_end
+		else
+			i++
+			smoothed += input_path[i]
+	// PAW EDIT ADDITION END
 
 	return smoothed
+
+// PAW EDIT ADDITION START - SLIME_RANCHER
+/// The turfs on a straight line from start to end (end included, start not), or null if anything's in the way.
+/// Diagonal and straight steps are spread evenly, so it doesn't come out as a diagonal bit then a straight bit.
+/datum/pathfind/astar/proc/straight_walk(turf/start, turf/end)
+	var/list/steps = list()
+	var/turf/current = start
+	var/dx = end.x - start.x
+	var/dy = end.y - start.y
+	var/step_count = max(abs(dx), abs(dy))
+	for(var/step_number in 1 to step_count)
+		var/turf/next = locate(start.x + round(dx * step_number / step_count, 1), start.y + round(dy * step_number / step_count, 1), start.z)
+		if(next == avoid)
+			return null
+		if(ISDIAGONALDIR(get_dir(current, next)) ? !can_move_diagonal(current, next, pass_info) : !current.reachable_turf_test(requester, next, pass_info))
+			return null
+		steps += next
+		current = next
+	return steps
+// PAW EDIT ADDITION END
 
 /datum/pathfind/astar/proc/can_move_diagonal(turf/from, turf/end, datum/can_pass_info/pass_info)
 	if(!from || !end)

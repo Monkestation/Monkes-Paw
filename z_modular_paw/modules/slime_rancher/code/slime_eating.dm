@@ -16,6 +16,7 @@
 		for(var/mob_type in mutation.latch_totals)
 			. |= mob_type
 
+/// Rebuilds the AI's lists of items and mobs we want to eat.
 /mob/living/basic/slime/proc/refresh_wanted_targets()
 	if(isnull(ai_controller))
 		return

@@ -15,7 +15,7 @@
 /mob/living/basic/slime/proc/on_attack_hand(mob/living/basic/slime/defender_slime, mob/living/attacker)
 	SIGNAL_HANDLER
 
-	if(!isliving(buckled)) // a slime on a chair has nobody to be wrestled off
+	if(!is_latched()) // a slime on a chair has nobody to be wrestled off
 		return
 
 	if(!(attacker.istate & ISTATE_HARM) && (attacker in ai_controller?.blackboard[BB_FRIENDS_LIST]))
@@ -124,7 +124,7 @@
 ///Stops the slime from feeding, and might remove rabidity and targets
 /mob/living/basic/slime/proc/discipline_slime()
 	var/mob/living/victim = buckled
-	if(isliving(victim))
+	if(is_latched())
 		COOLDOWN_START(src, latch_cooldown, SLIME_LATCH_COOLDOWN)
 		// a grudge skips can_feed_on(), so without this we'd just bite whoever we were eating instead of backing off
 		var/datum/ai_controller/basic_controller/slime/controller = ai_controller

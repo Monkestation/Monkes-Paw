@@ -2,6 +2,7 @@
 	/// Slime type we rolled to become when the current reproduction wind-up finishes
 	var/datum/slime_type/queued_mutation
 
+/// Starts a looping squish animation, extra squishy when splitting.
 /mob/living/basic/slime/proc/start_undulating(splitting = FALSE)
 	var/matrix/squished = matrix(transform)
 	squished.Scale(splitting ? 1.1 : 1, 0.85)
@@ -22,12 +23,14 @@
 	animate(transform = stretched, time = 0.1 SECONDS, easing = EASE_OUT)
 	animate(transform = base, time = 0.15 SECONDS, easing = EASE_IN)
 
+/// Stops the animation and puts the saved transform and pixel_z back.
 /mob/living/basic/slime/proc/stop_undulating(matrix/base, base_pixel_z)
 	animate(src)
 	if(base)
 		transform = base
 	pixel_z = base_pixel_z
 
+/// The bit where a slime wobbles around before it splits or mutates.
 /datum/status_effect/slime_reproducing
 	id = "slime_reproducing"
 	duration = SLIME_SPLIT_WINDUP
@@ -35,8 +38,11 @@
 	show_duration = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/slime_reproducing
 	processing_speed = STATUS_EFFECT_PRIORITY // so slimes don't spend half an eternity mutating/splitting if server is laggy
+	/// TRUE if something interrupted the wobbling, so the split or mutation doesn't happen.
 	var/interrupted = FALSE
+	/// Transform to restore when the animation stops.
 	var/matrix/base_transform
+	/// pixel_z to restore when the animation stops.
 	var/base_pixel_z
 
 /datum/status_effect/slime_reproducing/on_creation(mob/living/new_owner, new_duration)
@@ -64,6 +70,9 @@
 		owner.visible_message(span_notice("[owner] starts to undulate, [owner.p_they()] look[owner.p_s()] to be mutating."))
 		owner.balloon_alert_to_viewers("mutating...")
 
+	// before base_pixel_z gets saved, or we'd be put back at tower height once we're done
+	slime_owner.hop_off_stack()
+	slime_owner.dump_riders()
 	base_transform = matrix(owner.transform)
 	base_pixel_z = owner.pixel_z
 	slime_owner.start_undulating(splitting) // hehe jiggle
@@ -77,6 +86,7 @@
 		return
 	interrupt()
 
+/// Interrupts the wobbling, so the slime doesn't split or mutate.
 /datum/status_effect/slime_reproducing/proc/interrupt()
 	SIGNAL_HANDLER
 	interrupted = TRUE

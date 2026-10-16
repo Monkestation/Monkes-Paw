@@ -67,8 +67,14 @@
 
 	return TRUE
 
+/// Whether we're latched onto a meal. Sitting on another slime doesn't count.
+/mob/living/basic/slime/proc/is_latched()
+	return isliving(buckled) && !isslime(buckled)
+
 ///The slime will start feeding on the target
 /mob/living/basic/slime/proc/start_feeding(mob/living/target_mob)
+	// buckle_mob() tries to unbuckle us from our seat first, but not forcefully, so that does nothing for a slime
+	hop_off_stack()
 	target_mob.unbuckle_all_mobs(force = TRUE) // rips other mobs (eg: shoulder parrots) off - slime vs slime is already handled in can_feed_on()
 	if(!target_mob.buckle_mob(src, force = TRUE))
 		balloon_alert(src, "latch failed!")
@@ -84,8 +90,18 @@
 	to_chat(src, span_notice("<i>I start feeding on [target_mob]...</i>"))
 	balloon_alert(src, "feeding started")
 
+/mob/living/basic/slime/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	. = ..()
+	if(. == SUCCESSFUL_BLOCK || isnull(throwingdatum?.thrower))
+		return
+	if(can_feed_on(hit_atom, silent = TRUE, check_friendship = TRUE))
+		start_feeding(hit_atom)
+
 ///The slime will stop feeding
 /mob/living/basic/slime/proc/stop_feeding(silent = FALSE)
+	if(isslime(buckled))
+		hop_off_stack()
+		return
 	if(!isliving(buckled)) // don't "let go of" a chair
 		return
 

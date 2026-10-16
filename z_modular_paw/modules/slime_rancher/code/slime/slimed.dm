@@ -101,6 +101,7 @@
 	if (!rainbow)
 		holder.particles.color = "[slime_color]a0"
 
+/// The wetness effect with enough stacks to wash slime off, if any.
 /datum/status_effect/slimed/proc/get_washing_wetness()
 	var/seconds_between_ticks = tick_interval / (1 SECONDS)
 	for(var/datum/status_effect/fire_handler/wet_stacks/wetness in owner.status_effects)

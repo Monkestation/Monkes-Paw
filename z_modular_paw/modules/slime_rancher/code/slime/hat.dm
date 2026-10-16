@@ -12,6 +12,7 @@ GLOBAL_LIST_INIT(strippable_slime_items, create_strippable_list(list(
 		update_appearance(UPDATE_OVERLAYS)
 	return ..()
 
+/// Puts the item on the slime's head.
 /mob/living/basic/slime/proc/equip_hat(obj/item/item, mob/living/user)
 	if(user)
 		if(!user.transferItemToLoc(item, src))
@@ -26,6 +27,7 @@ GLOBAL_LIST_INIT(strippable_slime_items, create_strippable_list(list(
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
+/// The strip menu slot for a slime's hat.
 /datum/strippable_item/slime_head
 	key = STRIPPABLE_ITEM_HEAD
 

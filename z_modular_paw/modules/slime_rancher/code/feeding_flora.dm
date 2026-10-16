@@ -11,6 +11,7 @@
 	. = ..()
 	AddElement(/datum/element/death_drops, list(/obj/item/rockroach_shell))
 
+/// Dropped when a rockroach dies.
 /obj/item/rockroach_shell
 	name = "rockroach shell"
 	desc = "A rocky shell of some poor rockroach."
@@ -38,6 +39,7 @@
 	maxHealth = 15
 	biomass_value = 1
 
+/// Small critters for slimes to drain, deleted on death.
 /mob/living/basic/xenofauna
 	desc = "Feed these to the slimes!"
 	icon = 'z_modular_paw/modules/slime_rancher/icons/xenofauna.dmi'

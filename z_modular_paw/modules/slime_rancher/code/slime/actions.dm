@@ -183,6 +183,7 @@
 		baby.faction |= faction
 		baby.cores = max(cores, baby.cores)
 		SEND_SIGNAL(src, COMSIG_SLIME_SPLIT, baby)
+		baby.regenerate_icons()
 		SSblackbox.record_feedback("tally", "slime_babies_born", 1, baby.slime_type.color)
 		step_away(baby, src)
 		family += baby

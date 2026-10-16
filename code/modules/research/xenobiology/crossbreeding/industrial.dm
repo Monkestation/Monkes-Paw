@@ -43,8 +43,15 @@ Industrial extracts:
 	if(plasmaabsorbed >= plasmarequired)
 		playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
 		plasmaabsorbed -= plasmarequired
+		/* // PAW EDIT REMOVAL START - SLIME_RANCHER - spawn into the bag we're in, or at least not under a table
 		for(var/i in 1 to itemamount)
 			do_after_spawn(new itempath(get_turf(src)))
+		*/ // PAW EDIT REMOVAL END
+		// PAW EDIT ADDITION START - SLIME_RANCHER
+		var/spawn_loc = astype(loc, /obj/item/storage) || drop_location()
+		for(var/i in 1 to itemamount)
+			do_after_spawn(new itempath(spawn_loc))
+		// PAW EDIT ADDITION END
 	else if(IsWorking)
 		playsound(src, 'sound/effects/bubbles.ogg', 5, TRUE)
 	if(IsWorking)

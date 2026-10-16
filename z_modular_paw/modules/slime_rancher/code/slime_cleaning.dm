@@ -1,6 +1,7 @@
 /// nutrition a dissolved mess gives, same as a wanted item
 #define SLIME_CLEAN_NUTRITION 5
 
+/// Whether this is a mess a cleaner slime will eat.
 /mob/living/basic/slime/proc/can_dissolve(atom/movable/mess)
 	var/static/list/dissolvable_cache
 	if(isnull(dissolvable_cache))
@@ -38,12 +39,15 @@
 		return FALSE
 	return is_type_in_typecache(mess, dissolvable_cache) || HAS_TRAIT(mess, TRAIT_TRASH_ITEM)
 
+/// Sets cleaner_slime and resets the AI's cleaning state.
 /mob/living/basic/slime/proc/set_cleaner_slime(enabled)
 	cleaner_slime = !!enabled
 	if(isnull(ai_controller))
 		return
 	ai_controller.CancelActions()
 	ai_controller.clear_blackboard_key(BB_SLIME_CLEAN_TARGET)
+	ai_controller.clear_blackboard_key(BB_SLIME_ROAM_TARGET)
+	ai_controller.clear_blackboard_key(BB_SLIME_ROAM_PLAYER)
 	update_ai_movement_type()
 
 /mob/living/basic/slime/vv_edit_var(var_name, var_value)
@@ -54,6 +58,7 @@
 			return TRUE
 	return ..()
 
+/// Eats a mess for nutrition. Returns TRUE if it did.
 /mob/living/basic/slime/proc/try_dissolve(atom/movable/mess)
 	if(!cleaner_slime || !can_dissolve(mess))
 		return FALSE

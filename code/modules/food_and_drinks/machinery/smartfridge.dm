@@ -177,6 +177,11 @@
 /obj/machinery/smartfridge/update_overlays()
 	. = ..()
 
+	// PAW EDIT ADDITION START - SLIME_RANCHER - the screwdriver used to cut_overlays() and wipe the contents and light overlays
+	if(panel_open)
+		. += "[initial(icon_state)]-panel"
+	// PAW EDIT ADDITION END
+
 	var/list/shown_contents = contents - component_parts
 	if(visible_contents && shown_contents.len > 0)
 		var/contents_icon_state = "[initial(icon_state)]"
@@ -245,11 +250,14 @@
 
 /obj/machinery/smartfridge/attackby(obj/item/attacking_item, mob/living/user, params)
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, attacking_item))
+		/* // PAW EDIT REMOVAL START - SLIME_RANCHER
 		cut_overlays()
 		if(panel_open)
 			add_overlay("[initial(icon_state)]-panel")
 		else
 			cut_overlay("[initial(icon_state)]-panel")
+		*/ // PAW EDIT REMOVAL END
+		update_appearance() // PAW EDIT ADDITION - SLIME_RANCHER
 		SStgui.update_uis(src)
 		return
 
