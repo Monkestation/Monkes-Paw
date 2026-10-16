@@ -9,6 +9,7 @@
 /datum/status_effect/slime_leech
 	id = "slime_leech"
 	alert_type = /atom/movable/screen/alert/status_effect/slime_leech
+	/// The slime draining the owner.
 	var/mob/living/basic/slime/our_slime
 
 /datum/status_effect/slime_leech/on_creation(mob/living/new_owner, mob/living/basic/slime/our_slime)
@@ -20,7 +21,17 @@
 		return FALSE
 
 	RegisterSignals(our_slime, list(COMSIG_LIVING_DEATH, COMSIG_LIVING_SET_BUCKLED, COMSIG_QDELETING), PROC_REF(on_buckle_end))
+	// not COMSIG_LIVING_SET_BODY_POSITION, that fires before on_lying_down() gets to move the sprite
+	RegisterSignal(owner, COMSIG_LIVING_POST_UPDATE_TRANSFORM, PROC_REF(follow_owner_height))
+	follow_owner_height()
 	return ..()
+
+/// Keeps the slime on the owner's body when they flop over, since a lying sprite gets drawn lower.
+/datum/status_effect/slime_leech/proc/follow_owner_height(datum/source)
+	SIGNAL_HANDLER
+
+	var/lying_offset = (owner.body_position == LYING_DOWN && owner.rotate_on_lying) ? PIXEL_Y_OFFSET_LYING : 0
+	animate(our_slime, pixel_y = initial(our_slime.pixel_y) + lying_offset, time = UPDATE_TRANSFORM_ANIMATION_TIME, easing = (EASE_IN|EASE_OUT), flags = ANIMATION_PARALLEL)
 
 ///If the buckling ends
 /datum/status_effect/slime_leech/proc/on_buckle_end(datum/source, new_buckled)
@@ -41,6 +52,9 @@
 	qdel(src)
 
 /datum/status_effect/slime_leech/on_remove()
+	UnregisterSignal(owner, COMSIG_LIVING_POST_UPDATE_TRANSFORM)
+	if(!QDELETED(our_slime))
+		animate(our_slime, pixel_y = initial(our_slime.pixel_y), time = UPDATE_TRANSFORM_ANIMATION_TIME, easing = (EASE_IN|EASE_OUT), flags = ANIMATION_PARALLEL)
 	our_slime = null
 
 /datum/status_effect/slime_leech/tick(seconds_between_ticks)
@@ -76,7 +90,11 @@
 		our_slime.stop_feeding()
 		return
 
-	if(SPT_PROB(5, seconds_between_ticks) && owner.client)
+	if(isbasicmob(owner))
+		var/mob/living/basic/basic_owner = owner
+		drained *= basic_owner.slime_meal_multiplier
+
+	if(SPT_PROB(5, seconds_between_ticks) && owner?.client)
 		var/static/list/pain_lines
 		if(isnull(pain_lines))
 			pain_lines = list(

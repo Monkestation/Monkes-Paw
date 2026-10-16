@@ -25,19 +25,19 @@
 	var/bz_percentage = total_moles ? environment.moles[/datum/gas/bz] / total_moles : 0
 
 	if(bz_percentage >= 0.05 && bodytemperature < (T0C + 100))
-		if(!has_status_effect(/datum/status_effect/grouped/stasis))
+		if(!has_status_effect_from_source(/datum/status_effect/grouped/stasis, STASIS_SLIME_BZ))
 			to_chat(src, span_danger("Nerve gas in the air has put you in stasis!"))
 			apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_SLIME_BZ)
 			adjust_power_level(-SLIME_MAX_POWER)
 			ai_controller?.set_blackboard_key(BB_SLIME_RABID, FALSE)
-	else if(has_status_effect(/datum/status_effect/grouped/stasis))
+	else if(has_status_effect_from_source(/datum/status_effect/grouped/stasis, STASIS_SLIME_BZ))
 		to_chat(src, span_notice("You wake up from the stasis."))
 		remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SLIME_BZ)
 
 ///Handles the consumption of nutrition, and growth
 /mob/living/basic/slime/proc/handle_nutrition(seconds_per_tick = SSMOBS_DT)
 	if(hunger_disabled) // god as my witness, i will never go hungry again
-		set_nutrition(100)
+		set_nutrition(SLIME_STARTING_NUTRITION)
 		return
 
 	if(!stops_hunger && SPT_PROB(1.25, seconds_per_tick))

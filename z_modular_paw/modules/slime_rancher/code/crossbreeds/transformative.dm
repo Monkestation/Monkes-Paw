@@ -3,6 +3,8 @@
 	var/list/datum/slime_transformation/transformations
 	/// Every transformation's color mixed into one, for the warping core drawn inside us.
 	var/transformation_color
+	/// The warping core underlay we last drew, so regenerate_icons() can swap it out.
+	var/mutable_appearance/warping_core
 	/// Extra babies we make per split.
 	var/extra_babies = 0
 	/// A split leaves us an adult.
@@ -156,6 +158,8 @@
 	overlay_color = COLOR_SLIME_BLUE
 
 /datum/slime_transformation/blue/on_apply(mob/living/user)
+	var/datum/status_effect/slime_reproducing/windup = our_slime.has_status_effect(/datum/status_effect/slime_reproducing)
+	windup?.interrupt()
 	our_slime.blocks_reproduction = TRUE
 	our_slime.primed_split_cost = 0
 	our_slime.pending_ranch_mutation = null
@@ -212,6 +216,7 @@
 	if(environment?.moles[/datum/gas/plasma] < amount)
 		return
 	environment.moles[/datum/gas/plasma] -= amount
+	environment.assert_gas(/datum/gas/oxygen)
 	environment.moles[/datum/gas/oxygen] += amount
 	environment.garbage_collect()
 	source.adjustBruteLoss(-amount * heal_per_mole)
@@ -361,6 +366,9 @@
 
 /datum/slime_transformation/pink/on_apply(mob/living/user)
 	our_slime.cat_slime = TRUE
+	// 0.5% chance for a witch hat, because cute
+	if(!our_slime.equipped_hat && prob(0.5))
+		our_slime.equip_hat(new /obj/item/clothing/head/wizard/marisa)
 
 /obj/item/slimecross/transformative/oil
 	colour = SLIME_TYPE_OIL
@@ -377,7 +385,7 @@
 
 /datum/slime_transformation/oil/proc/on_set_buckled(mob/living/basic/slime/source, mob/living/meal)
 	SIGNAL_HANDLER
-	if(isliving(meal))
+	if(isliving(meal) && !isslime(meal))
 		meal.adjust_fire_stacks(fire_stacks)
 
 /obj/item/slimecross/transformative/black

@@ -9,6 +9,8 @@
 	icon = 'z_modular_paw/modules/slime_rancher/icons/slimes.dmi'
 	icon_state = "grey-baby"
 	pass_flags = PASSTABLE | PASSGRILLE
+	generic_canpass = FALSE
+	layer = MOB_BELOW_PIGGYBACK_LAYER
 	gender = NEUTER
 	faction = list(FACTION_SLIME, FACTION_NEUTRAL)
 
@@ -24,6 +26,7 @@
 	melee_damage_upper = 17
 	wound_bonus = -45
 	can_buckle_to = FALSE
+	can_be_held = TRUE
 
 	damage_coeff = list(BRUTE = 1, BURN = -1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1) //Healed by fire
 	unsuitable_cold_damage = 15
@@ -75,6 +78,7 @@
 	var/cat_slime = FALSE
 	/// How many damaging hits in a row a cat slime has put up with so far
 	var/cat_patience_hits = 0
+	/// world.time of the last damaging hit
 	var/cat_patience_last_hit = 0
 	/// Cleans messes and pests instead of hunting.
 	var/cleaner_slime = FALSE
@@ -93,6 +97,9 @@
 	var/crossbreed_modification
 	///How many extracts of the modtype have been applied.
 	var/applied_crossbreed_amount = 0
+
+	/// TRUE while our player is being asked whether someone can pick us up.
+	var/pickup_prompt_open = FALSE
 
 	/// Instructions you can give to slimes
 	var/static/list/pet_commands = list(
@@ -139,7 +146,8 @@
 	AddElement(/datum/element/strippable, GLOB.strippable_slime_items)
 
 	// TRAIT_CAREFUL_STEPS so we don't squash iceroaches and such. slimes are soft and squishy it makes sense.
-	add_traits(list(TRAIT_CANT_RIDE, TRAIT_VENTCRAWLER_ALWAYS, TRAIT_CAREFUL_STEPS, TRAIT_LIGHTWEIGHT), INNATE_TRAIT)
+	// TRAIT_NO_IMMOBILIZE is for slimes sitting on us - can_feed_on() refuses a slime that can't move, so they'd never leave for food
+	add_traits(list(TRAIT_CANT_RIDE, TRAIT_VENTCRAWLER_ALWAYS, TRAIT_CAREFUL_STEPS, TRAIT_LIGHTWEIGHT, TRAIT_NO_IMMOBILIZE), INNATE_TRAIT)
 
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(on_slime_pre_attack))
 	RegisterSignal(src, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_attack_hand))
@@ -149,7 +157,13 @@
 	RegisterSignal(src, COMSIG_SLIME_ATE_ITEM, PROC_REF(on_slime_happy_yay))
 	RegisterSignal(src, COMSIG_LIVING_BEFRIENDED, PROC_REF(on_befriended))
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
-	RegisterSignals(src, list(COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_CURRENT_PET_TARGET), COMSIG_AI_BLACKBOARD_KEY_SET(BB_CURRENT_PET_TARGET)), PROC_REF(on_blackboard_key_changed))
+	RegisterSignals(src, list(
+		COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_CURRENT_PET_TARGET),
+		COMSIG_AI_BLACKBOARD_KEY_SET(BB_CURRENT_PET_TARGET),
+		COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_SLIME_ROAM_TARGET),
+		COMSIG_AI_BLACKBOARD_KEY_SET(BB_SLIME_ROAM_TARGET),
+	), PROC_REF(on_blackboard_key_changed))
+	RegisterSignals(src, list(COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_SLIME_ROAM_PLAYER), COMSIG_AI_BLACKBOARD_KEY_SET(BB_SLIME_ROAM_PLAYER)), PROC_REF(on_seek_changed))
 
 	ai_controller.set_blackboard_key(BB_SLIME_EVOLVE, evolve_action)
 	ai_controller.set_blackboard_key(BB_SLIME_REPRODUCE, reproduce_action)
@@ -168,12 +182,34 @@
 	SIGNAL_HANDLER
 	update_ai_movement_type()
 
+/// Pet targets and cleaners use adaptive movement, and a cleaner wandering off somewhere goes straight to A*.
 /mob/living/basic/slime/proc/update_ai_movement_type()
 	var/picked_type = /datum/ai_movement/basic_avoidance
-	if(cleaner_slime || ai_controller.blackboard_key_exists(BB_CURRENT_PET_TARGET))
+	// the controller drops anything further than max_target_distance, which is 14 by default and would kill every long trip
+	var/leash = initial(ai_controller.max_target_distance)
+	if(ai_controller.blackboard_key_exists(BB_CURRENT_PET_TARGET))
+		// A* feels janky chasing someone who keeps moving, so this walks straight until it can't
+		picked_type = /datum/ai_movement/basic_avoidance/adaptive/follow
+		leash = SLIME_SEEK_PATH_LENGTH
+	else if(ai_controller.blackboard_key_exists(BB_SLIME_ROAM_TARGET))
+		picked_type = /datum/ai_movement/astar/slime
+		leash = SLIME_SEEK_PATH_LENGTH
+	else if(cleaner_slime)
 		picked_type = /datum/ai_movement/basic_avoidance/adaptive
-	if(!istype(ai_controller.ai_movement, picked_type))
-		ai_controller.change_ai_movement_type(picked_type)
+		leash = SLIME_SEEK_PATH_LENGTH
+	ai_controller.max_target_distance = leash
+
+	var/datum/ai_movement/current = ai_controller.ai_movement
+	if(current.type == picked_type)
+		return
+	// the adaptive pair swaps halves by itself, so its A* half still counts as picked
+	var/datum/ai_movement/basic_avoidance/adaptive/walk_half = SSai_movement.movement_types[picked_type]
+	if(istype(walk_half) && current.type == walk_half.fallback_type)
+		return
+	// the old datum would still think we're walking with it otherwise
+	if(current.moving_controllers[ai_controller])
+		current.stop_moving_towards(ai_controller)
+	ai_controller.change_ai_movement_type(picked_type)
 
 ///Random slime subtype
 /mob/living/basic/slime/random
@@ -217,18 +253,63 @@
 	return ..()
 
 /mob/living/basic/slime/regenerate_icons()
-	if(stealth_alpha && !isliving(buckled))
+	if(stealth_alpha && !is_latched())
 		alpha = stealth_alpha
 	else
 		alpha = slime_type.transparent ? SLIME_TRANSPARENCY_ALPHA : src::alpha
+	underlays -= warping_core
+	warping_core = null
+	if(transformation_color && stat != DEAD)
+		// an underlay rides along with our layer, so it stays under us even up on a slime stack
+		warping_core = mutable_appearance('z_modular_paw/modules/slime_rancher/icons/slimecrossing.dmi', "warping")
+		warping_core.color = transformation_color
+		underlays += warping_core
 	update_appearance(UPDATE_ICON)
 	return ..()
 
 /mob/living/basic/slime/set_buckled(new_buckled)
+	var/atom/movable/old_seat = buckled
 	. = ..()
+	if(buckled == old_seat)
+		return
+	if(isslime(old_seat))
+		start_stack_cooldown()
+	pixel_z = initial(pixel_z) + stack_pixel_z()
+	// whatever we just did, we moved out from under anyone sitting on us
+	dump_riders()
 	// not COMSIG_LIVING_SET_BUCKLED, that fires before buckled changes, so regenerate_icons() would still see the old meal
 	if(stealth_alpha)
 		regenerate_icons()
+
+/mob/living/basic/slime/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	// riders only follow a seat that walks. one that gets teleported, picked up or vacuumed leaves them behind, still buckled
+	if(isslime(buckled) && buckled.loc != loc)
+		hop_off_stack()
+	if(forced || !isturf(loc))
+		dump_riders()
+
+/// Not fighting, hunting, latched or getting hit, so people can walk through us.
+/mob/living/basic/slime/proc/is_calm()
+	if(is_latched() || (istate & ISTATE_HARM) || was_recently_attacked())
+		return FALSE
+	return !ai_controller?.blackboard[BB_SLIME_RABID] && !ai_controller?.blackboard[BB_BASIC_MOB_CURRENT_TARGET] && !ai_controller?.blackboard[BB_SLIME_EAT_TARGET]
+
+/// Whether we and other can share a tile, which takes both sides being out of combat.
+/mob/living/basic/slime/proc/can_slip_past(atom/movable/other)
+	if(!isliving(other) || !is_calm())
+		return FALSE
+	var/mob/living/other_living = other
+	if(isslime(other_living))
+		var/mob/living/basic/slime/other_slime = other_living
+		return other_slime.is_calm()
+	return !(other_living.istate & ISTATE_HARM) // i hate istates btw
+
+/mob/living/basic/slime/CanAllowThrough(atom/movable/mover, border_dir)
+	return ..() || can_slip_past(mover)
+
+/mob/living/basic/slime/CanPassThrough(atom/blocker, movement_dir, blocker_opinion)
+	return ..() || can_slip_past(blocker)
 
 /mob/living/basic/slime/update_icon_state()
 	icon_living = "[slime_type.color]-[life_stage]"
@@ -240,10 +321,6 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	if(transformation_color)
-		var/mutable_appearance/warping_core = mutable_appearance('z_modular_paw/modules/slime_rancher/icons/slimecrossing.dmi', "warping", MOB_BELOW_PIGGYBACK_LAYER)
-		warping_core.color = transformation_color
-		. += warping_core
 	if(current_mood && current_mood != SLIME_MOOD_NONE && !stat)
 		. += mutable_appearance(icon, "aslime-[current_mood]")
 	if(cat_slime)
@@ -265,6 +342,28 @@
 		var/mob/living/food = target_atom
 		if(can_feed_on(food))
 			start_feeding(food)
+
+/mob/living/basic/slime/mob_try_pickup(mob/living/user, instant = FALSE)
+	if(isnull(client))
+		if(!(user in ai_controller?.blackboard[BB_FRIENDS_LIST]))
+			to_chat(user, span_notice("[src] doesn't trust you enough to let you pick them up"))
+			balloon_alert(user, "not enough trust!")
+			return FALSE
+		return ..()
+
+	if(pickup_prompt_open)
+		return FALSE
+	pickup_prompt_open = TRUE
+	var/answer = tgui_alert(src, "[user] wants to pick you up. Let them?", "Pick up", list("Yes", "No"), timeout = 10 SECONDS)
+	pickup_prompt_open = FALSE
+	if(QDELETED(src) || QDELETED(user))
+		return FALSE
+	if(answer != "Yes")
+		balloon_alert(user, "doesn't want to be picked up!")
+		return FALSE
+	if(user.pulling != src)
+		return FALSE
+	return ..()
 
 ///Slimes can hop off mobs they have latched onto
 /mob/living/basic/slime/resist_buckle()
@@ -293,6 +392,8 @@
 
 ///Changes the slime's current life state
 /mob/living/basic/slime/proc/set_life_stage(new_life_stage = SLIME_LIFE_STAGE_BABY, initial = FALSE)
+	// how high they sit depends on our size, and so does who's allowed up there at all
+	dump_riders()
 	life_stage = new_life_stage
 	if(life_stage == SLIME_LIFE_STAGE_ADULT)
 		health /= 0.75

@@ -1,6 +1,7 @@
 /// How far (in path steps) a slime will walk to reach something it spotted
 #define SLIME_REACH_DISTANCE 10
 
+/// Brain for slimes.
 /datum/ai_controller/basic_controller/slime
 	blackboard = list(
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
@@ -23,6 +24,8 @@
 		/datum/ai_planning_subtree/slime_target/clean,
 		/datum/ai_planning_subtree/slime_target/nuzzle,
 		/datum/ai_planning_subtree/slime_target/bounce,
+		/datum/ai_planning_subtree/slime_target/roam,
+		/datum/ai_planning_subtree/slime_target/stack,
 	)
 	// idling cancels every action, which would unlatch a whole pen the moment the xenobiologist walks off
 	can_idle = FALSE
@@ -33,6 +36,10 @@
 		return FALSE
 	return ..()
 
+/datum/ai_controller/basic_controller/slime/get_access()
+	var/mob/living/basic/slime/slime_pawn = pawn
+	return slime_pawn.get_access()
+
 /// Ignores a target until duration runs out. Never shortens an existing, longer ignore.
 /datum/ai_controller/basic_controller/slime/proc/ignore_target(atom/target, duration)
 	var/expires_at = world.time + duration
@@ -40,6 +47,7 @@
 		return
 	set_blackboard_key_assoc_lazylist(BB_TEMPORARY_IGNORE_LIST, target, expires_at)
 
+/// Whether the target is still on the ignore list.
 /datum/ai_controller/basic_controller/slime/proc/is_ignoring(atom/target)
 	return LAZYACCESS(blackboard[BB_TEMPORARY_IGNORE_LIST], target) > world.time
 
@@ -54,6 +62,7 @@
 	ADD_TRAIT(src, TRAIT_AI_PAUSED, source)
 	ai_controller?.CancelActions()
 
+/// Removes this source's pause. The AI stays paused if anything else is still pausing it.
 /mob/living/basic/slime/proc/unpause_ai(source)
 	REMOVE_TRAIT(src, TRAIT_AI_PAUSED, source)
 
@@ -82,7 +91,7 @@
 /// yoinks a wanted item right out of an adjacent mob's hands. slimes don't chase people down for these, to be clear
 /mob/living/basic/slime/proc/try_snatch_item()
 	var/list/wanted_types = ai_controller.blackboard[BB_SLIME_WANTED_ITEMS]
-	if(buckled || !length(wanted_types))
+	if(is_latched() || !length(wanted_types))
 		return FALSE
 	for(var/mob/living/neighbor in oview(1, src))
 		for(var/obj/item/held in neighbor.held_items)
@@ -113,6 +122,9 @@
 		BB_SLIME_NUZZLE_TARGET,
 		BB_SLIME_BOUNCE_TARGET,
 		BB_SLIME_CLEAN_TARGET,
+		BB_SLIME_STACK_TARGET,
+		BB_SLIME_ROAM_TARGET,
+		BB_SLIME_ROAM_PLAYER,
 		BB_ACTIVE_PET_COMMAND,
 		BB_CURRENT_PET_TARGET,
 		BB_TEMPORARY_IGNORE_LIST,
@@ -157,6 +169,16 @@
 		return TRUE
 	// monkeys are humans here, so they're always on the menu
 	if(ishuman(candidate) || isalien(candidate))
+		return TRUE
+	var/static/list/livestock = typecacheof(list(
+		/mob/living/basic/cow,
+		/mob/living/basic/pig,
+		/mob/living/basic/sheep,
+		/mob/living/basic/goat,
+		/mob/living/basic/chicken,
+		/mob/living/basic/rabbit,
+	))
+	if(livestock[candidate.type])
 		return TRUE
 	// critters we still owe a mutation stay food even after their quota's done - a critter-only pen still has to feed us
 	var/list/wanted_mobs = controller.blackboard[BB_SLIME_WANTED_MOBS]
@@ -247,8 +269,8 @@
 /datum/ai_planning_subtree/slime_target/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(!should_scan(controller))
 		return
-	var/mob/living/slime_pawn = controller.pawn
-	if((scans_while_latched || !slime_pawn.buckled) && controller.behavior_cooldowns[GET_AI_BEHAVIOR(finding_behavior)] <= world.time)
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	if((scans_while_latched || !slime_pawn.is_latched()) && controller.behavior_cooldowns[GET_AI_BEHAVIOR(finding_behavior)] <= world.time)
 		controller.queue_behavior(finding_behavior, target_key)
 
 	var/atom/target = controller.blackboard[target_key]
@@ -283,8 +305,8 @@
 	acting_behavior = /datum/ai_behavior/slime_chase/eat_item
 
 /datum/ai_planning_subtree/slime_target/forage/should_scan(datum/ai_controller/controller)
-	var/mob/living/slime_pawn = controller.pawn
-	return !slime_pawn.buckled && slime_pawn.stat == CONSCIOUS
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	return !slime_pawn.is_latched() && slime_pawn.stat == CONSCIOUS
 
 /datum/ai_planning_subtree/slime_target/clean
 	target_key = BB_SLIME_CLEAN_TARGET
@@ -293,7 +315,7 @@
 
 /datum/ai_planning_subtree/slime_target/clean/should_scan(datum/ai_controller/controller)
 	var/mob/living/basic/slime/slime_pawn = controller.pawn
-	return slime_pawn.cleaner_slime && !slime_pawn.buckled && slime_pawn.stat == CONSCIOUS
+	return slime_pawn.cleaner_slime && !slime_pawn.is_latched() && slime_pawn.stat == CONSCIOUS
 
 /datum/ai_planning_subtree/slime_target/nuzzle
 	target_key = BB_SLIME_NUZZLE_TARGET
@@ -329,33 +351,39 @@
 
 /datum/ai_behavior/slime_find_target/perform(seconds_per_tick, datum/ai_controller/basic_controller/slime/controller, target_key)
 	. = ..()
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	// the fence is see-through, but nothing outside it is ever reachable
+	var/datum/slime_pen/pen = must_be_reachable ? slime_pawn.pen : null
 	var/atom/current = controller.blackboard[target_key]
-	if(!QDELETED(current) && !controller.is_ignoring(current) && is_valid_target(controller, current))
+	if(!QDELETED(current) && !controller.is_ignoring(current) && !(pen && !pen.turfs[get_turf(current)]) && is_valid_target(controller, current))
 		finish_action(controller, TRUE)
 		return
 	controller.clear_blackboard_key(target_key)
 
 	var/list/candidates = list()
 	for(var/atom/candidate as anything in get_candidates(controller))
-		if(controller.is_ignoring(candidate) || !is_valid_target(controller, candidate))
-			continue
-		candidates += candidate
+		if(is_candidate(controller, candidate, pen))
+			candidates += candidate
 	if(!length(candidates))
 		finish_action(controller, FALSE)
 		return
 
 	var/atom/picked = pick_target(controller, candidates)
-	var/mob/living/slime_pawn = controller.pawn
 	if(!must_be_reachable || slime_pawn.Adjacent(picked))
 		controller.set_blackboard_key(target_key, picked)
-	else if(get_dist(slime_pawn, picked) > 1)
+	else if(get_dist(slime_pawn, picked) > 1 || slime_pawn.z != picked.z)
 		// the path search is async, so the target only lands once it comes back
-		SSpathfinder.pathfind(slime_pawn, picked, max_distance = SLIME_REACH_DISTANCE, mintargetdist = 1, access = controller.get_access(), on_finish = list(CALLBACK(src, PROC_REF(on_path_found), controller, target_key, picked)))
+		request_path(controller, target_key, picked)
 	else
 		// right next to it, but a pen fence is in the way
 		controller.ignore_target(picked, SLIME_CHASE_GIVE_UP_TIME)
 	finish_action(controller, TRUE)
 
+/// Starts the path search that decides whether a candidate is reachable. on_path_found() gets the result.
+/datum/ai_behavior/slime_find_target/proc/request_path(datum/ai_controller/basic_controller/slime/controller, target_key, atom/candidate)
+	SSpathfinder.pathfind(controller.pawn, candidate, max_distance = SLIME_REACH_DISTANCE, mintargetdist = 1, access = controller.get_access(), on_finish = list(CALLBACK(src, PROC_REF(on_path_found), controller, target_key, candidate)))
+
+/// Runs when pathfinding finishes. We go for the target if the path actually gets us next to it.
 /datum/ai_behavior/slime_find_target/proc/on_path_found(datum/ai_controller/basic_controller/slime/controller, target_key, atom/candidate, list/path)
 	if(QDELETED(controller) || QDELETED(candidate) || controller.blackboard[target_key])
 		return
@@ -369,12 +397,30 @@
 		return
 	controller.set_blackboard_key(target_key, candidate)
 
+/// Whether a candidate isn't ignored, isn't outside our pen, and passes is_valid_target().
+/datum/ai_behavior/slime_find_target/proc/is_candidate(datum/ai_controller/basic_controller/slime/controller, atom/candidate, datum/slime_pen/pen)
+	if(controller.is_ignoring(candidate) || (pen && !pen.turfs[get_turf(candidate)]))
+		return FALSE
+	return is_valid_target(controller, candidate)
+
+/// Whether there's anything around we'd go for, without actually picking it.
+/datum/ai_behavior/slime_find_target/proc/has_candidates(datum/ai_controller/basic_controller/slime/controller)
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	var/datum/slime_pen/pen = must_be_reachable ? slime_pawn.pen : null
+	for(var/atom/candidate as anything in get_candidates(controller))
+		if(is_candidate(controller, candidate, pen))
+			return TRUE
+	return FALSE
+
+/// Everything nearby that could be a target.
 /datum/ai_behavior/slime_find_target/proc/get_candidates(datum/ai_controller/controller)
 	return list()
 
+/// Can this be our target? Also decides if we keep the one we've got.
 /datum/ai_behavior/slime_find_target/proc/is_valid_target(datum/ai_controller/controller, atom/target)
 	return FALSE
 
+/// Picks one of the possible targets. Random, unless a subtype says otherwise.
 /datum/ai_behavior/slime_find_target/proc/pick_target(datum/ai_controller/controller, list/candidates)
 	return pick(candidates)
 
@@ -390,6 +436,10 @@
 /datum/ai_behavior/slime_find_target/meal/is_valid_target(datum/ai_controller/controller, atom/target)
 	var/datum/targeting_strategy/strategy = GET_TARGETING_STRATEGY(controller.blackboard[BB_TARGETING_STRATEGY])
 	return strategy.can_attack(controller.pawn, target, scan_range)
+
+// stagger it out a bit so it feels more natural
+/datum/ai_behavior/slime_find_target/meal/get_cooldown(datum/ai_controller/cooldown_for)
+	return rand(1 SECONDS, 4 SECONDS)
 
 /datum/ai_behavior/slime_find_target/grudge
 	scan_range = 9
@@ -431,9 +481,22 @@
 /datum/ai_behavior/slime_find_target/mess/get_candidates(datum/ai_controller/controller)
 	var/mob/living/basic/slime/slime_pawn = controller.pawn
 	. = list()
+	var/list/messy_turfs = list()
+	var/other_cleaner_around = FALSE
 	for(var/atom/movable/candidate in oview(scan_range, slime_pawn))
 		if(slime_pawn.can_dissolve(candidate))
 			. += candidate
+			messy_turfs[candidate.loc] = TRUE
+		else if(isslime(candidate))
+			var/mob/living/basic/slime/other_slime = candidate
+			other_cleaner_around ||= other_slime.cleaner_slime
+
+	if(!controller.blackboard_key_exists(BB_SLIME_ROAM_PLAYER))
+		return
+	// off to find someone, so we walk past messes unless it's a proper disaster nobody else is around to handle
+	if(length(messy_turfs) < 15 || other_cleaner_around)
+		return list()
+	controller.clear_blackboard_key(BB_SLIME_ROAM_PLAYER)
 
 /datum/ai_behavior/slime_find_target/mess/pick_target(datum/ai_controller/controller, list/candidates)
 	return get_closest_atom(/atom/movable, candidates, controller.pawn)
@@ -456,6 +519,10 @@
 	var/mob/living/friend = target
 	if(!isliving(friend) || !friend.client || friend.stat != CONSCIOUS || friend.incapacitated())
 		return FALSE
+	// roaming cleaners have a station to clean, they only say hi in passing
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	if(slime_pawn.cleaner_slime && isnull(slime_pawn.pen) && get_dist(slime_pawn, friend) > 1)
+		return FALSE
 	return (friend in controller.blackboard[BB_FRIENDS_LIST]) && can_see(controller.pawn, friend, scan_range)
 
 /// anyone on their feet who's actually playing, friend or not. grudges are left alone, those get dealt with elsewhere
@@ -473,6 +540,9 @@
 	if(!isliving(person) || isslime(person) || !person.client || person.stat != CONSCIOUS || person.body_position != STANDING_UP)
 		return FALSE
 	if(person in controller.blackboard[BB_BASIC_MOB_RETALIATE_LIST])
+		return FALSE
+	var/mob/living/basic/slime/slime_pawn = controller.pawn
+	if(slime_pawn.cleaner_slime && isnull(slime_pawn.pen) && get_dist(slime_pawn, person) > 1)
 		return FALSE
 	return can_see(controller.pawn, person, scan_range)
 
@@ -538,6 +608,7 @@
 		slime_pawn.stop_feeding()
 	return ..()
 
+/// Whether the hunt should keep going after this target.
 /datum/ai_behavior/slime_chase/hunt/proc/target_still_valid(datum/ai_controller/controller, mob/living/target, target_key)
 	var/datum/targeting_strategy/strategy = GET_TARGETING_STRATEGY(controller.blackboard[BB_TARGETING_STRATEGY])
 	return strategy.can_attack(controller.pawn, target, controller.max_target_distance)
@@ -566,6 +637,7 @@
 	finish_action(controller, slime_pawn.eat_wanted_item(meal), target_key)
 
 /datum/ai_behavior/slime_chase/clean
+	action_cooldown = 0
 
 /datum/ai_behavior/slime_chase/clean/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()

@@ -1,3 +1,4 @@
+/// Do pen fences stop this thing? (slimes, monkeys, and basic mobs worth biomass)
 /proc/is_slime_pen_contained(atom/movable/mover)
 	if(isslime(mover) || ismonkeybasic(mover))
 		return TRUE
@@ -6,6 +7,7 @@
 	var/mob/living/basic/critter = mover
 	return critter.biomass_value > 0
 
+/// One edge of a pen's fence, keeps slimes and their snacks from wandering off
 /obj/structure/slime_pen_barrier
 	name = "containment field"
 	desc = "A shimmering mesh strung between two pen posts. Slimes bounce off it. You won't."
@@ -18,7 +20,9 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	move_resist = INFINITY
 	can_astar_pass = CANASTARPASS_ALWAYS_PROC
+	/// Adds the little connector sprite so the corner doesn't have a gap
 	var/top_row = FALSE
+	/// Color of this piece, as a hex string
 	var/barrier_color = SLIME_PEN_DEFAULT_COLOR
 
 /obj/structure/slime_pen_barrier/Initialize(mapload, new_dir, top_row = FALSE)
@@ -49,13 +53,13 @@
 
 /// Puts the sprite on the tile border and picks whether mobs draw in front of us or behind us.
 /obj/structure/slime_pen_barrier/proc/update_offsets()
-	SET_PLANE_IMPLICIT(src, dir == SOUTH ? GAME_PLANE_UPPER : GAME_PLANE)
+	SET_PLANE_IMPLICIT(src, (dir & (NORTH|SOUTH)) ? GAME_PLANE_UPPER : GAME_PLANE)
 	// the extra 2px keeps us level with the posts, which sit up off the tile line so they don't draw over the wall below
 	switch(dir)
 		if(NORTH)
 			pixel_w = 0
 			pixel_z = 15
-			layer = BELOW_MOB_LAYER
+			layer = ABOVE_MOB_LAYER
 		if(SOUTH)
 			pixel_w = 0
 			pixel_z = 2
@@ -75,6 +79,7 @@
 	sync_with_twin()
 	find_twin()?.sync_with_twin()
 
+/// Picks whether we or our twin gets drawn, and mixes our colors together
 /obj/structure/slime_pen_barrier/proc/sync_with_twin()
 	var/obj/structure/slime_pen_barrier/twin = find_twin()
 	// two pens sharing an edge would draw the same fence twice, so one of us hides - south always takes priority over north or east
@@ -138,6 +143,7 @@
 	leaving.Bump(src)
 	return COMPONENT_ATOM_BLOCK_EXIT
 
+/// Should the fence stop this thing from moving thru?
 /obj/structure/slime_pen_barrier/proc/should_block(atom/movable/mover)
 	if(!is_slime_pen_contained(mover))
 		return FALSE

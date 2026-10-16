@@ -1,3 +1,4 @@
+// PAW EDIT - SLIME_RANCHER - this file is unticked in tgstation.dme; replaced by z_modular_paw/modules/slime_rancher/code/movement/ai_movement_basic_adaptive.dm
 /datum/ai_movement/basic_avoidance/adaptive
 
 /datum/ai_movement/basic_avoidance/adaptive/post_move(datum/move_loop/source, succeeded)

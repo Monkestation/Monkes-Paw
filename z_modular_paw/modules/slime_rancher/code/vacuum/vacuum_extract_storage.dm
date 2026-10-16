@@ -1,13 +1,17 @@
+/// How many extracts a rating 1 bin holds, doubles with each rating
 #define VACUUM_BASE_EXTRACT_CAPACITY 10
 
+/// How many extracts the pack can hold, depends on its bin
 /obj/item/vacuum_pack/proc/extract_capacity()
 	return VACUUM_BASE_EXTRACT_CAPACITY * 2 ** (extract_bin.rating - 1)
 
+/// The extracts sitting in the pack rn
 /obj/item/vacuum_pack/proc/stored_extracts()
 	. = list()
 	for(var/obj/item/slime_extract/extract in contents)
 		. += extract
 
+/// Swaps the pack's matter bin with the one in your hand
 /obj/item/vacuum_pack/proc/swap_extract_bin(obj/item/stock_parts/matter_bin/new_bin, mob/living/user)
 	if(!user.transferItemToLoc(new_bin, src))
 		return ITEM_INTERACT_BLOCKING
@@ -18,6 +22,7 @@
 	balloon_alert(user, "holds [extract_capacity()] extracts")
 	return ITEM_INTERACT_SUCCESS
 
+/// Yeets every stored extract at an extract fridge
 /obj/item/vacuum_pack/proc/fire_extracts(obj/machinery/smartfridge/extract/fridge, mob/living/user)
 	if(!can_aim_at(fridge, user, feedback = TRUE))
 		return FALSE
@@ -37,6 +42,7 @@
 	)
 	return TRUE
 
+/// Dumps the extracts into a bag, a fridge, or just onto the floor
 /obj/item/vacuum_pack/proc/dump_extracts(atom/target, mob/living/user)
 	var/list/extracts = stored_extracts()
 	if(!length(extracts))
@@ -76,6 +82,7 @@
 	INVOKE_ASYNC(src, PROC_REF(take_extract), user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+/// Radial menu to grab one stored extract
 /obj/item/vacuum_pack/proc/take_extract(mob/living/user)
 	var/list/extracts = stored_extracts()
 	if(!length(extracts))

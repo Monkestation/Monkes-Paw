@@ -2,7 +2,7 @@
 	if(stat == DEAD)
 		return
 	pending_ranch_mutation = null
-	if(!gibbed && life_stage == SLIME_LIFE_STAGE_ADULT)
+	if(!gibbed && life_stage == SLIME_LIFE_STAGE_ADULT && !blocks_reproduction)
 		var/mob/living/basic/slime/new_slime = new(drop_location(), slime_type.type)
 
 		new_slime.ai_controller?.set_blackboard_key(BB_SLIME_RABID, TRUE)

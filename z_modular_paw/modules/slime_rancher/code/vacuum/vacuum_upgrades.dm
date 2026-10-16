@@ -22,6 +22,7 @@
 	pack = null
 	return ..()
 
+/// Runs right after the upgrade is installed, for ones that need a bit of setup.
 /datum/vacuum_upgrade/proc/on_install()
 	return
 
@@ -81,10 +82,8 @@
 /// Heals living occupants over elapsed time without reviving them.
 /datum/vacuum_upgrade/healing
 	name = "healing"
-	var/last_process // we'll do our own delta time! with blackjack! and hookers!
 
 /datum/vacuum_upgrade/healing/on_install()
-	last_process = world.time
 	START_PROCESSING(SSobj, src)
 
 /datum/vacuum_upgrade/healing/Destroy()
@@ -96,6 +95,7 @@
 		if(occupant.stat != DEAD)
 			occupant.heal_overall_damage(brute = 1 * seconds_per_tick, burn = 1 * seconds_per_tick)
 
+/// Use it on a pack to install an upgrade. Eats the disk.
 /obj/item/disk/vacuum_upgrade
 	name = "vacuum upgrade disk"
 	desc = "A one-use upgrade disk for a slime vacuum pack."

@@ -129,6 +129,7 @@
 
 	if(!isturf(target) && !isturf(target?.loc))
 		return NONE
+	target = get_turf(target)
 
 	if(!isopenturf(target) || isgroundlessturf(target))
 		to_chat(user, span_warning("you cannot draw a rune here!"))
@@ -434,6 +435,14 @@
 	if(blue_storage?.loc == rune_turf)
 		blue_storage.moveToNullspace() // Do not touch the storage please
 	return ..()
+
+/obj/effect/warped_rune/bluespace/attack_ghost(mob/dead/observer/user)
+	. = ..()
+	if(.)
+		return
+	var/obj/item/storage/backpack/holding/bluespace/blue_storage = storages_by_key[key_color]
+	if(!QDELETED(blue_storage))
+		blue_storage.atom_storage.open_storage(user)
 
 /obj/effect/warped_rune/bluespace/do_effect(mob/user)
 	var/obj/item/storage/backpack/holding/bluespace/blue_storage = storages_by_key[key_color]
@@ -767,7 +776,7 @@
 	. = ..()
 	if(. || istype(tool, /obj/item/slimecross/warping))
 		return
-	if(HasElement(tool, /datum/element/starborne))
+	if(HAS_TRAIT(tool, TRAIT_STARBORNE))
 		to_chat(user, span_warning("[tool] is already starborne. It cannot be enchanted further!"))
 		return ITEM_INTERACT_BLOCKING
 	if(isclothing(tool) || !tool.force || (tool.item_flags & (NOBLUDGEON | ABSTRACT)))
@@ -876,6 +885,13 @@
 /obj/effect/warped_rune/rainbowspace/proc/open_window()
 	if(room.window)
 		vis_contents += room.window
+
+/obj/effect/warped_rune/rainbowspace/attack_ghost(mob/dead/observer/user)
+	if(!room.exit_door)
+		return ..()
+	room.entry_runes[WEAKREF(user)] = WEAKREF(src)
+	user.abstract_move(get_turf(room.exit_door))
+	return TRUE
 
 /obj/effect/warped_rune/rainbowspace/on_entered(datum/source, atom/movable/arrived, atom/old_loc)
 	. = ..()

@@ -11,6 +11,7 @@
 			continue
 		buddy.add_grudge(attacker)
 
+/// Cat slimes let a few hits slide, this is TRUE once they've had enough
 /mob/living/basic/slime/proc/cat_patience_ran_out(atom/attacker, attack_flags)
 	if(!(attack_flags & ATTACKER_DAMAGING_ATTACK))
 		return FALSE

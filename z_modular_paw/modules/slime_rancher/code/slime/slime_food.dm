@@ -3,7 +3,9 @@
 	id = "slime_food"
 	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
+	/// Percent chance the slime befriends the feeder if it drains the owner to death.
 	var/befriend_chance = 30
+	/// The human who applied the pheromones.
 	var/mob/living/carbon/human/feeder
 
 /datum/status_effect/slime_food/on_creation(mob/living/new_owner, mob/living/carbon/human/feeder, befriend_chance = 100)

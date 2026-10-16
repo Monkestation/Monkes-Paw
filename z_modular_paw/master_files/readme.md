@@ -20,8 +20,14 @@ MASTER CODE FILES
 - `code/game/objects/items/storage/bags.dm` (SLIME_RANCHER)
 - `code/modules/food_and_drinks/machinery/smartfridge.dm` (SLIME_RANCHER)
 - `code/modules/mob/living/basic/basic.dm` (SLIME_RANCHER)
+- `code/modules/mob/living/basic/farm_animals/cow/_cow.dm` (SLIME_RANCHER)
+- `code/modules/mob/living/basic/farm_animals/goat/_goat.dm` (SLIME_RANCHER)
+- `code/modules/mob/living/basic/farm_animals/pig.dm` (SLIME_RANCHER)
+- `code/modules/mob/living/basic/farm_animals/rabbit.dm` (SLIME_RANCHER)
 - `code/modules/research/techweb/service_nodes.dm` (SLIME_RANCHER)
 - `code/modules/research/xenobiology/crossbreeding/__corecross.dm` (SLIME_RANCHER)
+- `monkestation/code/modules/ranching/chickens/_chicken.dm` (SLIME_RANCHER)
+- `monkestation/code/modules/ranching/sheep/_base.dm` (SLIME_RANCHER)
 
 MASTER GLOBAL VARS
 

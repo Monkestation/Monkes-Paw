@@ -1,3 +1,4 @@
+/// zMove flags that carry pulled and buckled things along.
 #define WARPED_ROOM_MOVE_FLAGS (ZMOVE_CHECK_PULLEDBY | ZMOVE_ALLOW_BUCKLED | ZMOVE_INCLUDE_PULLED)
 
 /// Lazylist of key color -> /datum/warped_room
@@ -6,9 +7,13 @@ GLOBAL_LIST(warped_rooms)
 /// One pocket room. Every rainbow warping rune with the same key color is a door to the same room.
 /datum/warped_room
 	var/key_color
+	/// The reserved block of turfs the room is loaded into.
 	var/datum/turf_reservation/reservation
+	/// The rune inside that leads back out.
 	var/obj/effect/warped_room_exit/exit_door
+	/// The doorway picture shown on the runes.
 	var/obj/effect/abstract/warped_window/window
+	/// Runes that open into this room.
 	var/list/obj/effect/warped_rune/rainbowspace/runes = list()
 	/// Weakref of everything that came in, to a weakref of the rune it came in by.
 	var/list/entry_runes = list()
@@ -20,6 +25,7 @@ GLOBAL_LIST(warped_rooms)
 	LAZYSET(GLOB.warped_rooms, key_color, src)
 	INVOKE_ASYNC(src, PROC_REF(build))
 
+/// Loads the room template, paints it, and places the exit.
 /datum/warped_room/proc/build()
 	var/datum/map_template/warped_room/template = new
 	reservation = SSmapping.request_turf_block_reservation(template.width, template.height, 1)
@@ -47,6 +53,7 @@ GLOBAL_LIST(warped_rooms)
 	for(var/obj/effect/warped_rune/rainbowspace/rune as anything in runes)
 		rune.open_window()
 
+/// Tints the target toward the room's color. Strength is 0 to 1.
 /datum/warped_room/proc/paint(atom/target, strength = 1)
 	var/datum/slime_type/key_type = GLOB.slime_colors_to_types[key_color]
 	var/effect_type = key_type::visual_effect
@@ -73,6 +80,7 @@ GLOBAL_LIST(warped_rooms)
 			tint += strength * brightness_weights[from_channel] * key_rgb[to_channel] / 255 + (from_channel == to_channel ? 1 - strength : 0)
 	target.add_atom_colour(tint, FIXED_COLOUR_PRIORITY)
 
+/// Returns the swirl overlay drawn on the exit rune.
 /datum/warped_room/proc/swirl()
 	var/datum/slime_type/key_type = GLOB.slime_colors_to_types[key_color]
 	var/mutable_appearance/swirl = mutable_appearance('z_modular_paw/modules/slime_rancher/icons/warped_portal.dmi', key_type::visual_effect ? "swirl_[key_color]" : "swirl")
@@ -82,6 +90,7 @@ GLOBAL_LIST(warped_rooms)
 	swirl.pixel_z = -8
 	return swirl
 
+/// Whether this arrival on the exit rune should be sent back out.
 /datum/warped_room/proc/lets_through(atom/movable/arrived, atom/old_loc, turf/door_turf)
 	if(!isliving(arrived))
 		return FALSE
@@ -93,6 +102,7 @@ GLOBAL_LIST(warped_rooms)
 		return FALSE
 	return TRUE
 
+/// Moves the traveler and anyone pulled or buckled with them into the room.
 /datum/warped_room/proc/send_in(mob/living/traveler, obj/effect/warped_rune/rainbowspace/entry_rune)
 	if(!exit_door || QDELETED(traveler) || QDELETED(entry_rune) || traveler.loc != entry_rune.rune_turf)
 		return
@@ -101,18 +111,62 @@ GLOBAL_LIST(warped_rooms)
 	for(var/atom/movable/party_member as anything in lead.get_z_move_affected(WARPED_ROOM_MOVE_FLAGS))
 		entry_runes[WEAKREF(party_member)] = entry_rune_ref
 	playsound(entry_rune, entry_rune.dir_sound, 20, TRUE)
-	traveler.zMove(target = get_turf(exit_door), z_move_flags = WARPED_ROOM_MOVE_FLAGS)
+	lead.zMove(target = get_turf(exit_door), z_move_flags = WARPED_ROOM_MOVE_FLAGS)
 
+/// Moves the traveler out through the rune they came in by.
 /datum/warped_room/proc/send_out(mob/living/traveler)
 	if(!exit_door || QDELETED(traveler) || traveler.loc != exit_door.loc)
 		return
+	playsound(exit_door, 'sound/effects/phasein.ogg', 20, TRUE)
+	var/atom/movable/lead = traveler.buckled || traveler
+	lead.zMove(target = way_out(traveler), z_move_flags = WARPED_ROOM_MOVE_FLAGS)
+
+/// Where this traveler comes out: the rune they came in by, else any rune, else somewhere safe on the station.
+/datum/warped_room/proc/way_out(atom/movable/traveler) as /turf
 	var/datum/weakref/entry_rune_ref = entry_runes[WEAKREF(traveler)]
 	var/obj/effect/warped_rune/rainbowspace/way_back = entry_rune_ref?.resolve()
 	if(!way_back && length(runes))
 		way_back = runes[1]
-	var/turf/destination = way_back?.rune_turf || get_safe_random_station_turf()
-	playsound(exit_door, 'sound/effects/phasein.ogg', 20, TRUE)
-	traveler.zMove(target = destination, z_move_flags = WARPED_ROOM_MOVE_FLAGS)
+	return way_back?.rune_turf || get_safe_random_station_turf()
+
+/// Z levels this room's runes are on. If a rune is inside another room, that room's runes count too.
+/datum/warped_room/proc/rune_levels(list/seen_rooms = list()) as /list
+	var/list/levels = list()
+	seen_rooms += src
+	for(var/obj/effect/warped_rune/rainbowspace/rune as anything in runes)
+		var/datum/warped_room/outer_room = get_warped_room(rune.rune_turf)
+		if(!outer_room)
+			levels |= rune.rune_turf.z
+		else if(!(outer_room in seen_rooms))
+			levels |= outer_room.rune_levels(seen_rooms)
+	return levels
+
+/// The warped room this turf is inside, or null.
+/proc/get_warped_room(turf/inside) as /datum/warped_room
+	var/datum/turf_reservation/reservation = SSmapping.get_reservation_from_turf(inside)
+	if(!reservation)
+		return null
+	for(var/key_color, value in GLOB.warped_rooms)
+		var/datum/warped_room/room = value
+		if(room.reservation == reservation)
+			return room
+	return null
+
+/proc/get_telecomms_levels(turf/position) as /list
+	var/list/levels = SSmapping.get_connected_levels(position)
+	var/datum/warped_room/room = get_warped_room(position)
+	if(!room)
+		return levels
+	levels = levels.Copy()
+	for(var/rune_level in room.rune_levels())
+		levels |= SSmapping.get_connected_levels(rune_level)
+	return levels
+
+/proc/warped_room_in_levels(turf/position, list/levels)
+	var/datum/warped_room/room = get_warped_room(position)
+	if(!room)
+		return FALSE
+	return length(room.rune_levels() & levels) > 0
 
 /datum/map_template/warped_room
 	name = "Warped Room"
@@ -135,6 +189,7 @@ GLOBAL_LIST(warped_rooms)
 	move_resist = INFINITY
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	/// The room this rune leads out of.
 	var/datum/warped_room/room
 
 /obj/effect/warped_room_exit/Initialize(mapload, datum/warped_room/room)
@@ -159,6 +214,12 @@ GLOBAL_LIST(warped_rooms)
 	room = null
 	return ..()
 
+/obj/effect/warped_room_exit/attack_ghost(mob/dead/observer/user)
+	if(!room)
+		return ..()
+	user.abstract_move(room.way_out(user))
+	return TRUE
+
 /obj/effect/warped_room_exit/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc)
 	SIGNAL_HANDLER
 	room?.window?.show(arrived)
@@ -174,7 +235,9 @@ GLOBAL_LIST(warped_rooms)
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = KEEP_TOGETHER
 	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
+	/// Original atom -> the copy of it shown in the window.
 	var/list/copies = list()
+	/// If the original sends any of these signals, we redraw its copy.
 	var/static/list/refresh_signals = list(
 		COMSIG_ATOM_POST_DIR_CHANGE,
 		COMSIG_ATOM_UPDATED_ICON,
@@ -197,12 +260,14 @@ GLOBAL_LIST(warped_rooms)
 	RegisterSignal(original, COMSIG_QDELETING, PROC_REF(hide))
 	refresh(original)
 
+/// Redraws the original's copy from its current look.
 /obj/effect/abstract/warped_window/proc/refresh(atom/original)
 	SIGNAL_HANDLER
 	var/obj/effect/abstract/copy = copies[original]
 	copy.appearance = copy_appearance_filter_overlays(original.appearance, recursion = 1)
 	copy.vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
 
+/// Removes the original's copy and stops watching it.
 /obj/effect/abstract/warped_window/proc/hide(atom/original)
 	SIGNAL_HANDLER
 	var/obj/effect/abstract/copy = copies[original]
