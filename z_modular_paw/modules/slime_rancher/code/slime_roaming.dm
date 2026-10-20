@@ -13,7 +13,13 @@
 
 /datum/ai_planning_subtree/slime_target/roam/should_scan(datum/ai_controller/controller)
 	var/mob/living/basic/slime/slime_pawn = controller.pawn
-	return slime_pawn.cleaner_slime && isnull(slime_pawn.pen) && !slime_pawn.is_latched() && slime_pawn.stat == CONSCIOUS
+	if(!slime_pawn.cleaner_slime || !isnull(slime_pawn.pen) || slime_pawn.is_latched() || slime_pawn.stat != CONSCIOUS)
+		return FALSE
+	var/datum/ai_behavior/slime_find_target/mess_finder = GET_AI_BEHAVIOR(/datum/ai_behavior/slime_find_target/mess)
+	if(mess_finder.has_candidates(controller))
+		controller.clear_blackboard_key(target_key)
+		return FALSE
+	return TRUE
 
 /// Picks the next spot to wander to. Usually somewhere we haven't been lately, now and then towards a player.
 /datum/ai_behavior/slime_find_target/roam
@@ -98,8 +104,11 @@
 	return !controller.is_ignoring(get_area(destination))
 
 /datum/ai_behavior/slime_find_target/roam/request_path(datum/ai_controller/basic_controller/slime/controller, target_key, atom/candidate)
-	if(!SSpathfinder.astar_pathfind(controller.pawn, candidate, max_distance = SLIME_SEEK_PATH_LENGTH, access = controller.get_access(), on_finish = list(CALLBACK(src, PROC_REF(on_path_found), controller, target_key, candidate))))
-		controller.ignore_target(candidate, SLIME_CHASE_GIVE_UP_TIME)
+	if(SSpathfinder.astar_pathfind(controller.pawn, candidate, max_distance = SLIME_SEEK_PATH_LENGTH, access = controller.get_access(), on_finish = list(CALLBACK(src, PROC_REF(on_path_found), controller, target_key, candidate))))
+		return
+	controller.ignore_target(candidate, SLIME_CHASE_GIVE_UP_TIME)
+	// refused before searching means they're too far off, same as on_path_found finding nothing
+	controller.clear_blackboard_key(BB_SLIME_ROAM_PLAYER)
 
 /datum/ai_behavior/slime_find_target/roam/on_path_found(datum/ai_controller/basic_controller/slime/controller, target_key, atom/candidate, list/path)
 	// no path means they're out of reach, so we stop looking instead of standing around for the rest of the minute
