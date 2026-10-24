@@ -1,0 +1,51 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"fy" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/hallway/primary/starboard)
+"mm" = (
+/obj/effect/turf_decal/arrows/red{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/purple/half,
+/obj/effect/landmark/navigate_destination/research,
+/turf/open/floor/iron/half,
+/area/station/hallway/primary/starboard)
+"wZ" = (
+/obj/structure/railing,
+/turf/open/floor/iron,
+/area/station/hallway/primary/starboard)
+"Ad" = (
+/obj/structure/railing,
+/obj/item/kirbyplants/random,
+/turf/open/floor/iron,
+/area/station/hallway/primary/starboard)
+"Cv" = (
+/obj/effect/turf_decal/tile/purple/half,
+/turf/open/floor/iron/half,
+/area/station/hallway/primary/starboard)
+"Oh" = (
+/turf/open/floor/iron,
+/area/station/hallway/primary/starboard)
+"UB" = (
+/obj/effect/turf_decal/tile/purple/half/contrasted,
+/turf/open/floor/iron,
+/area/station/hallway/primary/starboard)
+
+(1,1,1) = {"
+fy
+wZ
+UB
+"}
+(2,1,1) = {"
+Oh
+wZ
+mm
+"}
+(3,1,1) = {"
+Oh
+Ad
+Cv
+"}

@@ -1,126 +1,12 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
+"aP" = (
 /turf/template_noop,
 /area/template_noop)
-"b" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"d" = (
-/obj/structure/chair/comfy/black,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/landmark/start/xenobiologist,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"e" = (
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"g" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/table/glass,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"i" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/table/glass,
-/obj/item/storage/box/monkeycubes,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"j" = (
-/obj/structure/cable,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobiomain";
-	name = "Containment Blast Door"
-	},
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/science/xenobiology)
-"m" = (
-/turf/open/openspace,
-/area/station/science/xenobiology)
-"n" = (
-/turf/closed/wall,
-/area/station/science/xenobiology)
-"p" = (
-/obj/structure/chair/comfy/black{
-	dir = 1
-	},
-/obj/effect/landmark/start/xenobiologist,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"q" = (
-/obj/structure/rack,
-/obj/item/wirecutters,
-/obj/item/screwdriver,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"r" = (
-/obj/structure/lattice/catwalk,
-/obj/machinery/firealarm/directional/south,
-/obj/machinery/light/directional/south,
-/turf/open/openspace,
-/area/station/science/xenobiology)
-"t" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"u" = (
+"bz" = (
 /obj/structure/lattice/catwalk,
 /turf/open/openspace,
 /area/station/science/xenobiology)
-"v" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/effect/landmark/event_spawn,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"x" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"z" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"B" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/machinery/smartfridge/extract/preloaded,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"D" = (
-/obj/machinery/light/directional/east,
-/turf/open/openspace,
-/area/station/science/xenobiology)
-"E" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobiomain";
-	name = "Containment Blast Door"
-	},
-/turf/open/floor/plating,
-/area/station/science/xenobiology)
-"G" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/openspace,
-/area/station/science/xenobiology)
-"I" = (
+"cv" = (
 /obj/structure/table/glass,
 /obj/item/biopsy_tool{
 	pixel_x = -10;
@@ -133,22 +19,89 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"L" = (
-/obj/structure/railing,
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"M" = (
-/obj/structure/window/reinforced/spawner/directional/east,
+"dT" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/monkeycubes,
+/obj/machinery/reagentgrinder{
+	desc = "Used to grind things up into raw materials and liquids.";
+	pixel_y = 5
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"N" = (
-/obj/effect/landmark/event_spawn,
+"hH" = (
+/turf/open/openspace,
+/area/station/science/xenobiology)
+"kI" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
-"O" = (
+"ll" = (
+/obj/machinery/chem_master,
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"mp" = (
+/obj/machinery/light/directional/east,
+/turf/open/openspace,
+/area/station/science/xenobiology)
+"nI" = (
+/obj/structure/rack,
+/obj/item/wirecutters,
+/obj/item/screwdriver,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"oD" = (
+/obj/structure/cable,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobiomain";
+	name = "Containment Blast Door"
+	},
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/science/xenobiology)
+"pA" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/rack,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"pN" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"pO" = (
+/turf/closed/wall/r_wall,
+/area/station/science/xenobiology)
+"qz" = (
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"qN" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/machinery/smartfridge/extract/preloaded,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"rD" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Db" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"ED" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
@@ -158,11 +111,106 @@
 /obj/effect/mapping_helpers/apc/full_charge,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
-"R" = (
+"EE" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/table/glass,
+/obj/item/storage/box/monkeycubes,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"ET" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/landmark/event_spawn,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Fw" = (
+/obj/effect/landmark/event_spawn,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Gk" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobiomain";
+	name = "Containment Blast Door"
+	},
+/turf/open/floor/plating,
+/area/station/science/xenobiology)
+"Ik" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"MN" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Nl" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/station/science/xenobiology)
+"Nq" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/firealarm/directional/south,
+/obj/machinery/light/directional/south,
+/turf/open/openspace,
+/area/station/science/xenobiology)
+"NB" = (
+/obj/structure/railing,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"PN" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/table/glass,
+/obj/item/storage/box/monkeycubes,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"SS" = (
+/turf/closed/wall,
+/area/station/science/xenobiology)
+"Ti" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/table/glass,
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Uo" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/machinery/smartfridge/extract/preloaded,
+/obj/structure/window/reinforced/spawner/directional/south,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"VA" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/station/science/xenobiology)
+"Wf" = (
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Xa" = (
 /obj/structure/table/glass,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"S" = (
+"Xb" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/table/glass,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"XJ" = (
 /obj/structure/table/glass,
 /obj/item/reagent_containers/cup/beaker/large{
 	pixel_x = -3;
@@ -176,234 +224,250 @@
 /obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"T" = (
-/obj/structure/cable,
+"XX" = (
+/obj/structure/chair/comfy/black,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"ZI" = (
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
-"W" = (
-/turf/closed/wall/r_wall,
-/area/station/science/xenobiology)
-"X" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/machinery/smartfridge/extract/preloaded,
-/obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Y" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Z" = (
-/obj/machinery/chem_master,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/iron,
+"ZX" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 
 (1,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-Z
-B
-i
-a
-a
-a
-a
-a
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+VA
+VA
+VA
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
 "}
 (2,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-Y
-R
-p
-a
-a
-a
-a
-a
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+pA
+Ti
+dT
+ll
+qN
+EE
+aP
+aP
+aP
+aP
+aP
 "}
 (3,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-T
-T
-T
-a
-a
-a
-T
-T
-T
-a
-a
-N
-q
-j
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+ZI
+qz
+qz
+Ik
+Xa
+pN
+aP
+aP
+aP
+aP
+aP
 "}
 (4,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-d
-g
-I
-a
-a
-a
-a
-a
-a
-a
-a
-x
-z
-E
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+Wf
+Wf
+Wf
+aP
+aP
+aP
+Wf
+Wf
+Wf
+aP
+aP
+Fw
+nI
+oD
 "}
 (5,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-M
-X
-S
-a
-a
-a
-a
-a
-a
-a
-a
-u
-r
-W
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+XX
+Xb
+cv
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+MN
+rD
+Gk
 "}
 (6,1,1) = {"
-b
-e
-G
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+PN
+Uo
+XJ
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+bz
+Nq
+pO
 "}
 (7,1,1) = {"
-v
-L
-m
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+kI
+ZX
+Nl
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
 "}
 (8,1,1) = {"
-b
-L
-D
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+ET
+NB
+hH
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
 "}
 (9,1,1) = {"
-t
-O
-n
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+kI
+NB
+mp
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+"}
+(10,1,1) = {"
+Db
+ED
+SS
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
+aP
 "}

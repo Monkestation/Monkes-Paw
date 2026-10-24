@@ -1,0 +1,79 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"jI" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+"jQ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+"tM" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 1;
+	id = "rnd";
+	name = "Research Lab Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/science/lab)
+"tQ" = (
+/turf/closed/wall/r_wall,
+/area/station/science/lab)
+"wW" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/item/kirbyplants/random,
+/obj/machinery/light/directional/south,
+/obj/machinery/atm/directional/south,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+"Eq" = (
+/obj/effect/turf_decal/tile/purple{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+"OU" = (
+/obj/effect/turf_decal/tile/purple/anticorner/contrasted,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+"TI" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 1;
+	id = "rnd";
+	name = "Research Lab Shutters"
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/desk_bell/departmental/science{
+	pixel_x = -7;
+	pixel_y = -1
+	},
+/obj/machinery/door/window/right/directional/south{
+	name = "Research Lab Desk";
+	req_access = list("science")
+	},
+/turf/open/floor/iron/white,
+/area/station/science/lab)
+"VQ" = (
+/obj/effect/turf_decal/trimline/purple/filled/warning,
+/obj/structure/chair/stool/directional/south,
+/turf/open/floor/iron/white,
+/area/station/science/lobby)
+
+(1,1,1) = {"
+OU
+wW
+tQ
+"}
+(2,1,1) = {"
+Eq
+jI
+tM
+"}
+(3,1,1) = {"
+jQ
+VQ
+TI
+"}

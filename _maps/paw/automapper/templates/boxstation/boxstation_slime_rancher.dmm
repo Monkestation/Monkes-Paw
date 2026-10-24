@@ -1,0 +1,82 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"hi" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/stripes/box,
+/obj/machinery/destructive_scanner,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
+"lb" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/door/firedoor,
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/right/directional/south{
+	name = "Reception"
+	},
+/obj/machinery/door/window/right/directional/north{
+	name = "RaD Desk";
+	req_access = list("science")
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "rad_shutters";
+	name = "RaD Shutters"
+	},
+/obj/structure/desk_bell/departmental/science{
+	pixel_x = 6
+	},
+/turf/open/floor/iron/dark/textured,
+/area/station/science/lab)
+"sS" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
+"wB" = (
+/obj/effect/turf_decal/trimline/purple/warning,
+/obj/effect/turf_decal/trimline/purple/filled/warning{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
+"BZ" = (
+/turf/closed/wall/r_wall,
+/area/station/science/lab)
+"Dx" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "rad_shutters";
+	name = "RaD Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/science/lab)
+"TD" = (
+/obj/effect/turf_decal/trimline/purple/line,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
+"VI" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
+
+(1,1,1) = {"
+lb
+sS
+wB
+"}
+(2,1,1) = {"
+Dx
+VI
+TD
+"}
+(3,1,1) = {"
+BZ
+hi
+TD
+"}

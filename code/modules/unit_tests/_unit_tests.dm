@@ -167,7 +167,6 @@
 #include "leash.dm"
 #include "lesserform.dm"
 #include "limbsanity.dm"
-#include "linked_xenobio_pens.dm"
 #include "load_map_security.dm"
 #include "loadout_duplicates.dm"
 #include "lootpanel.dm"
@@ -229,6 +228,7 @@
 #include "serving_tray.dm"
 #include "simple_animal_freeze.dm"
 #include "siunit.dm"
+#include "slime_ranching.dm"
 #include "slips.dm"
 #include "smes_connections.dm"
 #include "spawn_humans.dm"
@@ -274,7 +274,6 @@
 #include "worn_icons.dm"
 // PAW EDIT START
 #include "~paw\automapper.dm"
-#include "~paw\slime_ranching.dm"
 // PAW EDIT END
 // END_INCLUDE
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter

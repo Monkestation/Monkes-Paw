@@ -269,44 +269,13 @@
 	closed = null
 	return ..()
 
-// PAW EDIT ADDITION START - SLIME_RANCHER
 /// A* only steps in cardinals, so its paths come out as long straight runs with hard corners.
 /// This pulls each stretch tight: from every node, keep stretching a straight line further along the path (up to 20 nodes)
 /// until one won't fit, then walk the longest one that did.
-// PAW EDIT ADDITION END
 /datum/pathfind/astar/proc/smooth_path_diagonals(list/input_path)
 	if(!input_path || length(input_path) < 3)
 		return input_path
 
-	/* // PAW EDIT REMOVAL START - SLIME_RANCHER
-	var/list/smoothed = list()
-	var/i = 1
-
-	while(i <= length(input_path))
-		var/turf/current = input_path[i]
-		smoothed += current
-
-		if(i + 2 > length(input_path))
-			i++
-			continue
-
-		var/turf/next = input_path[i + 1]
-		var/turf/after_next = input_path[i + 2]
-
-		var/dir1 = get_dir(current, next)
-		var/dir2 = get_dir(next, after_next)
-
-		if(!ISDIAGONALDIR(dir1) && !ISDIAGONALDIR(dir2) && dir1 != dir2 && dir1 != REVERSE_DIR(dir2))
-			var/diagonal_dir = dir1 | dir2
-			var/turf/diagonal_target = get_step(current, diagonal_dir)
-			if(diagonal_target == after_next)
-				if(can_move_diagonal(current, after_next, pass_info))
-					i += 2
-					continue
-
-		i++
-	*/ // PAW EDIT REMOVAL END
-	// PAW EDIT ADDITION START - SLIME_RANCHER
 	var/list/smoothed = list(input_path[1])
 	var/last = length(input_path)
 	var/i = 1
@@ -330,11 +299,9 @@
 		else
 			i++
 			smoothed += input_path[i]
-	// PAW EDIT ADDITION END
 
 	return smoothed
 
-// PAW EDIT ADDITION START - SLIME_RANCHER
 /// The turfs on a straight line from start to end (end included, start not), or null if anything's in the way.
 /// Diagonal and straight steps are spread evenly, so it doesn't come out as a diagonal bit then a straight bit.
 /datum/pathfind/astar/proc/straight_walk(turf/start, turf/end)
@@ -352,7 +319,6 @@
 		steps += next
 		current = next
 	return steps
-// PAW EDIT ADDITION END
 
 /datum/pathfind/astar/proc/can_move_diagonal(turf/from, turf/end, datum/can_pass_info/pass_info)
 	if(!from || !end)

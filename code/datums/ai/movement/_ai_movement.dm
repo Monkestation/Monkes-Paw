@@ -24,11 +24,9 @@
 	if(controller.consecutive_pathing_attempts >= max_pathing_attempts)
 		controller.CancelActions()
 
-// PAW EDIT ADDITION START - SLIME_RANCHER
 /// Whether target is close enough that we can stop walking and act on it
 /datum/ai_movement/proc/close_enough(atom/pawn, atom/target, distance)
 	return get_dist(pawn, target) <= distance
-// PAW EDIT ADDITION END
 
 /datum/ai_movement/proc/reset_pathing_failures(datum/ai_controller/controller)
 	controller.consecutive_pathing_attempts = 0

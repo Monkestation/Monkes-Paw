@@ -43,6 +43,30 @@ required_map = "map_files/Blueshift/Blueshift.dmm"
 coordinates = [115, 65, 2]
 trait_name = "Station"
 
+# blueshift_slime_rancher_2
+[templates.blueshift_slime_rancher_2]
+map_files = ["blueshift_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/blueshift/"
+required_map = "map_files/Blueshift/Blueshift.dmm"
+coordinates = [122, 106, 2]
+trait_name = "Station"
+
+# boxstation_slime_rancher
+[templates.boxstation_slime_rancher]
+map_files = ["boxstation_slime_rancher.dmm"]
+directory = "_maps/paw/automapper/templates/boxstation/"
+required_map = "map_files/BoxStation/BoxStation.dmm"
+coordinates = [138, 130, 1]
+trait_name = "Station"
+
+# boxstation_slime_rancher_2
+[templates.boxstation_slime_rancher_2]
+map_files = ["boxstation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/boxstation/"
+required_map = "map_files/BoxStation/BoxStation.dmm"
+coordinates = [163, 173, 1]
+trait_name = "Station"
+
 # deltastation2_slime_rancher
 [templates.deltastation2_slime_rancher]
 map_files = ["deltastation2_slime_rancher.dmm"]
@@ -51,12 +75,20 @@ required_map = "map_files/Deltastation/DeltaStation2.dmm"
 coordinates = [80, 89, 1]
 trait_name = "Station"
 
+# deltastation2_slime_rancher_2
+[templates.deltastation2_slime_rancher_2]
+map_files = ["deltastation2_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/deltastation2/"
+required_map = "map_files/Deltastation/DeltaStation2.dmm"
+coordinates = [133, 101, 1]
+trait_name = "Station"
+
 # graveyard_slime_rancher
 [templates.graveyard_slime_rancher]
 map_files = ["graveyard_slime_rancher.dmm"]
 directory = "_maps/paw/automapper/templates/graveyard/"
 required_map = "map_files/Graveyard/Graveyard.dmm"
-coordinates = [213, 67, 1]
+coordinates = [208, 67, 1]
 trait_name = "Station"
 
 # heliostation_slime_rancher
@@ -64,12 +96,52 @@ trait_name = "Station"
 map_files = ["heliostation_slime_rancher.dmm"]
 directory = "_maps/paw/automapper/templates/heliostation/"
 required_map = "map_files/Heliostation/Heliostation.dmm"
-coordinates = [164, 79, 1]
+coordinates = [161, 67, 1]
+trait_name = "Station"
+
+# heliostation_slime_rancher_2
+[templates.heliostation_slime_rancher_2]
+map_files = ["heliostation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/heliostation/"
+required_map = "map_files/Heliostation/Heliostation.dmm"
+coordinates = [185, 121, 1]
+trait_name = "Station"
+
+# iceboxstation_slime_rancher
+[templates.iceboxstation_slime_rancher]
+map_files = ["iceboxstation_slime_rancher.dmm"]
+directory = "_maps/paw/automapper/templates/iceboxstation/"
+required_map = "map_files/IceBoxStation/IceBoxStation.dmm"
+coordinates = [160, 80, 2]
+trait_name = "Station"
+
+# iceboxstation_slime_rancher_2
+[templates.iceboxstation_slime_rancher_2]
+map_files = ["iceboxstation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/iceboxstation/"
+required_map = "map_files/IceBoxStation/IceBoxStation.dmm"
+coordinates = [168, 80, 3]
+trait_name = "Station"
+
+# iceboxstation_slime_rancher_3
+[templates.iceboxstation_slime_rancher_3]
+map_files = ["iceboxstation_slime_rancher_3.dmm"]
+directory = "_maps/paw/automapper/templates/iceboxstation/"
+required_map = "map_files/IceBoxStation/IceBoxStation.dmm"
+coordinates = [185, 122, 3]
 trait_name = "Station"
 
 # kilostation_slime_rancher
 [templates.kilostation_slime_rancher]
 map_files = ["kilostation_slime_rancher.dmm"]
+directory = "_maps/paw/automapper/templates/kilostation/"
+required_map = "map_files/KiloStation/KiloStation.dmm"
+coordinates = [142, 136, 1]
+trait_name = "Station"
+
+# kilostation_slime_rancher_2
+[templates.kilostation_slime_rancher_2]
+map_files = ["kilostation_slime_rancher_2.dmm"]
 directory = "_maps/paw/automapper/templates/kilostation/"
 required_map = "map_files/KiloStation/KiloStation.dmm"
 coordinates = [139, 148, 1]
@@ -83,12 +155,28 @@ required_map = "map_files/LeadPoisoningStation/LeadPoisoningStation.dmm"
 coordinates = [52, 165, 1]
 trait_name = "Station"
 
+# leadpoisoningstation_slime_rancher_2
+[templates.leadpoisoningstation_slime_rancher_2]
+map_files = ["leadpoisoningstation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/leadpoisoningstation/"
+required_map = "map_files/LeadPoisoningStation/LeadPoisoningStation.dmm"
+coordinates = [80, 163, 2]
+trait_name = "Station"
+
 # metastation_slime_rancher
 [templates.metastation_slime_rancher]
 map_files = ["metastation_slime_rancher.dmm"]
 directory = "_maps/paw/automapper/templates/metastation/"
 required_map = "map_files/MetaStation/MetaStation.dmm"
-coordinates = [168, 74, 1]
+coordinates = [163, 74, 1]
+trait_name = "Station"
+
+# metastation_slime_rancher_2
+[templates.metastation_slime_rancher_2]
+map_files = ["metastation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/metastation/"
+required_map = "map_files/MetaStation/MetaStation.dmm"
+coordinates = [117, 108, 1]
 trait_name = "Station"
 
 # oshan_slime_rancher
@@ -97,6 +185,14 @@ map_files = ["oshan_slime_rancher.dmm"]
 directory = "_maps/paw/automapper/templates/oshan/"
 required_map = "map_files/Oshan/Oshan.dmm"
 coordinates = [166, 134, 1]
+trait_name = "Station"
+
+# oshan_slime_rancher_2
+[templates.oshan_slime_rancher_2]
+map_files = ["oshan_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/oshan/"
+required_map = "map_files/Oshan/Oshan.dmm"
+coordinates = [137, 139, 1]
 trait_name = "Station"
 
 # pubbystation_slime_rancher
@@ -128,21 +224,13 @@ trait_name = "Station"
 map_files = ["tramstation_slime_rancher.dmm"]
 directory = "_maps/paw/automapper/templates/tramstation/"
 required_map = "map_files/tramstation/tramstation.dmm"
-coordinates = [168, 63, 1]
+coordinates = [167, 62, 1]
 trait_name = "Station"
 
-# iceboxstation_slime_rancher
-[templates.iceboxstation_slime_rancher]
-map_files = ["iceboxstation_slime_rancher.dmm"]
-directory = "_maps/paw/automapper/templates/iceboxstation/"
-required_map = "map_files/IceBoxStation/IceBoxStation.dmm"
-coordinates = [157, 80, 2]
-trait_name = "Station"
-
-# iceboxstation_slime_rancher_2
-[templates.iceboxstation_slime_rancher_2]
-map_files = ["iceboxstation_slime_rancher_2.dmm"]
-directory = "_maps/paw/automapper/templates/iceboxstation/"
-required_map = "map_files/IceBoxStation/IceBoxStation.dmm"
-coordinates = [169, 80, 3]
+# tramstation_slime_rancher_2
+[templates.tramstation_slime_rancher_2]
+map_files = ["tramstation_slime_rancher_2.dmm"]
+directory = "_maps/paw/automapper/templates/tramstation/"
+required_map = "map_files/tramstation/tramstation.dmm"
+coordinates = [169, 72, 2]
 trait_name = "Station"
