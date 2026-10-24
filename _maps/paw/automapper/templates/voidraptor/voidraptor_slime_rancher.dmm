@@ -499,6 +499,18 @@
 /obj/effect/turf_decal/tile/green/fourcorners,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
+"to" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/holopad,
+/obj/effect/turf_decal/bot,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/textured_large,
+/area/station/science/xenobiology)
 "uF" = (
 /obj/machinery/light/floor/has_bulb,
 /obj/effect/turf_decal/tile/purple/fourcorners,
@@ -548,6 +560,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/turf/open/floor/iron/white/textured_large,
+/area/station/science/xenobiology)
+"wU" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron/white/textured_large,
 /area/station/science/xenobiology)
 "yg" = (
@@ -897,9 +918,6 @@
 /area/station/science/xenobiology)
 "Od" = (
 /obj/structure/table/glass,
-/obj/item/stack/sheet/mineral/plasma{
-	pixel_y = 4
-	},
 /obj/item/reagent_containers/cup/beaker{
 	pixel_x = 8;
 	pixel_y = 2
@@ -912,6 +930,7 @@
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
 	},
+/obj/item/stack/sheet/mineral/plasma/five,
 /turf/open/floor/iron/white/textured_edge,
 /area/station/science/xenobiology)
 "Of" = (
@@ -1290,7 +1309,7 @@ Za
 Tv
 in
 FY
-do
+wU
 Um
 Ob
 gb
@@ -1313,7 +1332,7 @@ Kn
 JQ
 in
 Od
-do
+wU
 Su
 eq
 gb
@@ -1336,7 +1355,7 @@ gr
 ny
 sf
 oX
-do
+to
 rv
 uP
 pV

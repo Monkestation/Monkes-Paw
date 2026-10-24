@@ -250,6 +250,19 @@
 /obj/structure/liquid_barrier,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
+"eh" = (
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/structure/table/glass,
+/obj/item/storage/box/monkeycubes{
+	pixel_x = -5;
+	pixel_y = 1
+	},
+/obj/item/knife/kitchen,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "eL" = (
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
@@ -360,6 +373,12 @@
 	dir = 1
 	},
 /area/station/science/xenobiology)
+"hW" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "hY" = (
 /obj/effect/turf_decal/tile/dark_purple/opposingcorners,
 /obj/structure/chair/office{
@@ -1140,6 +1159,30 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"Br" = (
+/obj/item/storage/box/petridish{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/obj/item/storage/box/petridish{
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/dark_blue{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 8
+	},
+/turf/open/floor/iron/white/side,
+/area/station/science/xenobiology)
 "BA" = (
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 5
@@ -1636,6 +1679,23 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"MN" = (
+/obj/effect/turf_decal/arrows/white{
+	color = "#0000FF";
+	pixel_y = 15
+	},
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/tile/dark_blue{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 8
+	},
+/obj/structure/cable,
+/turf/open/floor/iron/white/side,
+/area/station/science/xenobiology)
 "Nf" = (
 /obj/machinery/smartfridge/extract/preloaded,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -1791,6 +1851,19 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"Qr" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/liquid_barrier,
+/obj/structure/cable,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "QQ" = (
 /obj/effect/turf_decal/tile/dark_purple/opposingcorners,
 /obj/item/broken_bottle{
@@ -1833,6 +1906,26 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"RU" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/tile/dark_blue{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/storage/box/beakers{
+	pixel_x = 6;
+	pixel_y = 10
+	},
+/obj/item/storage/box/syringes{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/wrench,
+/obj/structure/disposalpipe/segment{
+	dir = 8
+	},
+/turf/open/floor/iron/white/side,
+/area/station/science/xenobiology)
 "Sc" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/effect/turf_decal/siding/wood{
@@ -1871,6 +1964,18 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"Sy" = (
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/structure/table/glass,
+/obj/item/reagent_containers/dropper{
+	pixel_y = -4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "SA" = (
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 8
@@ -2080,6 +2185,13 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"Wl" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "WB" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
 /obj/effect/turf_decal/siding/wood{
@@ -2190,6 +2302,21 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
+"Yz" = (
+/obj/structure/table/glass,
+/obj/item/biopsy_tool{
+	pixel_x = 8;
+	pixel_y = 2
+	},
+/obj/item/book/manual/wiki/cytology{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/station/science/cytology)
 "YF" = (
 /obj/effect/turf_decal/tile/green/fourcorners,
 /obj/effect/turf_decal/siding/wood{
@@ -2845,9 +2972,9 @@ xV
 gX
 gX
 gX
-gX
-gX
-gX
+MN
+Qr
+Wl
 gX
 gX
 "}
@@ -2870,9 +2997,9 @@ xV
 gX
 gX
 gX
-gX
-gX
-gX
+RU
+Sy
+hW
 gX
 gX
 "}
@@ -2895,9 +3022,9 @@ Ix
 gX
 gX
 gX
-gX
-gX
-gX
+Br
+eh
+Yz
 gX
 gX
 "}

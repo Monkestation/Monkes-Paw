@@ -1,0 +1,47 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"es" = (
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/checker,
+/area/station/hallway/primary/central)
+"jr" = (
+/turf/closed/wall,
+/area/station/security/checkpoint/science/research)
+"va" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/purple/line,
+/turf/open/floor/iron/dark/textured,
+/area/station/hallway/primary/central)
+"BZ" = (
+/obj/structure/extinguisher_cabinet/directional/east,
+/obj/machinery/light/directional/east,
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/open/floor/iron/checker,
+/area/station/hallway/primary/central)
+"En" = (
+/obj/effect/turf_decal/trimline/purple/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron/dark/textured,
+/area/station/hallway/primary/central)
+"UC" = (
+/turf/open/floor/iron/checker,
+/area/station/hallway/primary/central)
+
+(1,1,1) = {"
+jr
+es
+En
+"}
+(2,1,1) = {"
+jr
+UC
+En
+"}
+(3,1,1) = {"
+jr
+BZ
+va
+"}

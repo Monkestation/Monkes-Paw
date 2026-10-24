@@ -224,12 +224,6 @@
 /obj/structure/liquid_barrier,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"kM" = (
-/obj/effect/turf_decal/tile/purple/half/contrasted{
-	dir = 1
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
 "kX" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/structure/slime_pen_post/premade{
@@ -304,9 +298,6 @@
 /area/station/science/xenobiology)
 "nP" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
-/obj/effect/turf_decal/tile/purple/half/contrasted{
-	dir = 1
-	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
 "oA" = (
@@ -656,7 +647,6 @@
 /turf/open/floor/iron/dark,
 /area/station/science/xenobiology)
 "HS" = (
-/obj/effect/turf_decal/tile/purple/half/contrasted,
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
 "Is" = (
@@ -793,7 +783,6 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/purple/half/contrasted,
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
 "QA" = (
@@ -806,12 +795,10 @@
 	},
 /obj/machinery/reagentgrinder,
 /obj/structure/table,
-/obj/item/stack/sheet/mineral/plasma{
-	pixel_y = 4
-	},
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
+/obj/item/stack/sheet/mineral/plasma/five,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "RY" = (
@@ -1057,7 +1044,7 @@ uj
 uj
 GW
 sW
-kM
+HS
 Uu
 PJ
 sH
@@ -1074,7 +1061,7 @@ fL
 fL
 im
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1091,7 +1078,7 @@ af
 LA
 Tz
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1125,7 +1112,7 @@ VE
 VE
 WG
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1142,7 +1129,7 @@ gk
 gk
 zT
 tC
-kM
+HS
 lk
 HS
 Jo
@@ -1159,7 +1146,7 @@ le
 Cz
 vM
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1176,7 +1163,7 @@ oY
 oY
 hp
 sW
-kM
+HS
 Uu
 PJ
 sH
@@ -1193,7 +1180,7 @@ Pw
 Pw
 hW
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1210,7 +1197,7 @@ uj
 uj
 GW
 tC
-kM
+HS
 Uu
 HS
 wS
@@ -1244,7 +1231,7 @@ LA
 LA
 Tz
 sW
-kM
+HS
 Uu
 HS
 sH

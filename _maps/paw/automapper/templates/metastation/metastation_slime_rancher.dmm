@@ -1,78 +1,5 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"bz" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"bN" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment,
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"bX" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"ch" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/structure/sign/warning/electric_shock,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio8";
-	name = "Xenobio Pen 8 Blast Door"
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"cD" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/window/reinforced/spawner/directional/north,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"dA" = (
-/obj/structure/table,
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/machinery/button/door{
-	id = "xenobio6";
-	layer = 3.3;
-	name = "Xenobio Pen 6 Blast Doors";
-	pixel_y = 1;
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"dC" = (
-/mob/living/basic/slime,
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"dJ" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 2
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"dR" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 1
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"ea" = (
+"ar" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/firealarm/directional/west,
@@ -81,130 +8,31 @@
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"eB" = (
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
+"as" = (
+/turf/closed/wall/r_wall,
+/area/station/science/cytology)
+"aE" = (
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 8
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"eU" = (
-/obj/machinery/door/window/left/directional/north{
-	dir = 8;
-	name = "Containment Pen #6";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio6";
-	name = "Xenobio Pen 6 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"eW" = (
-/obj/machinery/light/directional/south,
-/obj/machinery/camera/autoname/directional/south{
-	network = list("ss13","rd","xeno")
-	},
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 10
-	},
-/obj/effect/mapping_helpers/slime_pen_color/blue,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"eZ" = (
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 8;
-	icon_state = "right";
-	name = "Containment Pen #5";
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"gt" = (
+"aX" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/lattice,
 /turf/open/space/basic,
-/area/space)
-"gG" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"gJ" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"gL" = (
-/obj/machinery/light/directional/west,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"gP" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"gY" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 2
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"hI" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "XenoPens";
-	name = "Xenobiology Lockdown"
-	},
-/obj/machinery/door/firedoor,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"hU" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/closet{
-	anchored = 1;
-	can_be_unanchored = 1;
-	name = "Cold protection gear"
-	},
-/obj/item/clothing/shoes/winterboots,
-/obj/item/clothing/shoes/winterboots,
-/obj/item/clothing/suit/hooded/wintercoat/science,
-/obj/item/clothing/suit/hooded/wintercoat/science,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"iu" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 10
-	},
-/obj/effect/mapping_helpers/slime_pen_color/purple,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"jf" = (
-/obj/effect/turf_decal/trimline/purple/filled/corner{
+/area/space/nearstation)
+"bg" = (
+/turf/closed/wall/r_wall,
+/area/station/science/xenobiology/hallway)
+"bQ" = (
+/obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/turf/open/floor/stone,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
 /area/station/science/xenobiology)
-"ju" = (
+"bX" = (
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/tile/green/fourcorners,
 /obj/structure/slime_pen_post/premade{
@@ -218,394 +46,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"jz" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/sign/xenobio_guide/directional/west,
-/obj/machinery/camera/autoname/directional/west{
-	network = list("ss13","rd","xeno")
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"jG" = (
-/obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/effect/turf_decal/bot_white,
-/obj/structure/cable,
-/obj/effect/turf_decal/bot_white,
-/obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/structure/table/glass,
-/obj/item/slime_rancher_scanner{
-	pixel_x = -7
-	},
-/obj/item/slime_rancher_scanner{
-	pixel_x = 7
-	},
-/obj/item/toy/plush/slimeplushie{
-	desc = "An adorable stuffed toy that resembles a slime. A faded purple flower is embroidered beneath one of its many patches, alongside several tiny slips of paper that look suspiciously like overdue notices.";
-	pixel_y = 8;
-	name = "Tara"
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"jL" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/firedoor,
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "XenoPens";
-	name = "Xenobiology Lockdown"
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"ke" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"kl" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"kx" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"ky" = (
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"kY" = (
-/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
-	dir = 4
-	},
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space/nearstation)
-"lJ" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 6
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"mu" = (
-/turf/template_noop,
-/area/template_noop)
-"my" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 9
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"mG" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/broken_floor,
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/maintenance/department/science/xenobiology)
-"nz" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/south,
-/obj/machinery/chem_master,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"nR" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"nX" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"oJ" = (
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 8
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"oV" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"ph" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/effect/turf_decal/bot_white,
-/obj/machinery/disposal/bin,
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
-/obj/machinery/light_switch/directional/south,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"pm" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 9
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"pz" = (
-/turf/closed/wall/r_wall,
-/area/station/science/xenobiology)
-"qJ" = (
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 4;
-	icon_state = "right";
-	name = "Containment Pen #1";
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"qL" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space/nearstation)
-"rj" = (
-/turf/closed/wall/r_wall,
-/area/station/maintenance/department/science/xenobiology)
-"rm" = (
-/mob/living/basic/slime,
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"rx" = (
+"ck" = (
 /obj/effect/turf_decal/trimline/purple/filled/line,
 /obj/machinery/chem_heater/withbuffer,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"sd" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"su" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 10
-	},
-/obj/effect/mapping_helpers/slime_pen_color/green,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"sz" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"tu" = (
-/obj/machinery/door/window/left/directional/north{
-	dir = 8;
-	name = "Containment Pen #3";
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"tA" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/table,
-/obj/machinery/button/door{
-	id = "xenobio8";
-	layer = 3.3;
-	name = "Xenobio Pen 8 Blast Doors";
-	pixel_y = 4;
-	req_access = list("xenobiology")
-	},
-/obj/item/reagent_containers/spray/cleaner{
-	pixel_x = 10;
-	pixel_y = -1
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"tG" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 8;
-	icon_state = "right";
-	name = "Containment Pen #4";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio4";
-	name = "Xenobio Pen 4 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"tZ" = (
-/obj/structure/sign/xenobio_guide/directional/east,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"uc" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/firedoor,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "XenoPens";
-	name = "Xenobiology Lockdown"
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"uU" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 10
-	},
-/obj/effect/mapping_helpers/slime_pen_color/blue,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"uW" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"vr" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 6
-	},
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"vD" = (
-/obj/machinery/camera/autoname/directional/east,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"wr" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"xk" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"xp" = (
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space/nearstation)
-"xG" = (
-/obj/machinery/door/window/left/directional/north{
-	dir = 8;
-	name = "Containment Pen #4";
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"xS" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/door/airlock/hatch{
-	name = "Xenobiology Maintenance"
-	},
-/obj/effect/mapping_helpers/airlock/access/all/science/xenobio,
-/obj/structure/liquid_barrier,
-/turf/open/floor/plating,
-/area/station/maintenance/department/science/xenobiology)
-"xX" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"yn" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"zc" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"Au" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"AO" = (
+"cD" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/structure/slime_pen_post/premade{
 	dir = 5
@@ -618,407 +64,60 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"AY" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"BL" = (
-/obj/machinery/firealarm/directional/east,
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"BT" = (
-/obj/machinery/shower/directional/north,
-/obj/item/radio/intercom/directional/south,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"BY" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio1";
-	name = "Xenobio Pen 1 Blast Door"
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Cq" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/window/left/directional/north{
-	dir = 4;
-	name = "Containment Pen #1";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio1";
-	name = "Xenobio Pen 1 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"CC" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 9
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"DE" = (
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"DI" = (
-/obj/structure/disposaloutlet,
-/obj/structure/disposalpipe/trunk{
-	dir = 4
-	},
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
-"DO" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio8";
-	name = "Xenobio Pen 8 Blast Door"
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Eb" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Eg" = (
-/obj/effect/turf_decal/delivery,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/closed/wall/r_wall,
-/area/station/science/xenobiology)
-"Ei" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Fn" = (
-/obj/effect/turf_decal/trimline/purple/filled/corner{
-	dir = 8
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"Gv" = (
-/obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/effect/turf_decal/bot_white,
-/obj/structure/rack,
-/obj/item/storage/box/gloves{
-	pixel_x = -6
-	},
-/obj/item/storage/box/masks{
-	pixel_x = 6
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"GK" = (
+"cJ" = (
 /obj/effect/mapping_helpers/apc/cell_10k,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/effect/mapping_helpers/apc/full_charge,
 /obj/structure/cable,
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"Hj" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"Hy" = (
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 2
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"Ic" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/door/airlock/hatch{
-	name = "Xenobiology Maintenance"
-	},
-/obj/effect/mapping_helpers/airlock/access/all/science/xenobio,
-/obj/structure/liquid_barrier,
-/turf/open/floor/plating,
-/area/station/maintenance/department/science/xenobiology)
-"Id" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"IA" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "XenoPens";
-	name = "Xenobiology Lockdown"
-	},
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"Jb" = (
-/obj/structure/window/reinforced/spawner/directional/north,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Ju" = (
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/table,
-/obj/machinery/button/door{
-	id = "xenobio4";
-	layer = 3.3;
-	name = "Xenobio Pen 4 Blast Doors";
-	pixel_y = 4;
-	req_access = list("xenobiology");
-	sync_doors = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Kh" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/table,
-/obj/machinery/button/door{
-	id = "xenobio5";
-	layer = 3.3;
-	name = "Xenobio Pen 5 Blast Doors";
-	pixel_y = 4;
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Ki" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/obj/effect/landmark/start/xenobiologist,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"Kj" = (
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"Lk" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/structure/sign/warning/electric_shock,
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio1";
-	name = "Xenobio Pen 1 Blast Door"
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Lu" = (
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 8;
-	icon_state = "right";
-	name = "Containment Pen #3";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio3";
-	name = "Xenobio Pen 3 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"LG" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/north,
-/obj/structure/table/glass,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Mf" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/station/science/xenobiology)
-"MU" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/maintenance/department/science/xenobiology)
-"MW" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Nl" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Nm" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
+"cN" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/structure/slime_pen_post/premade{
-	dir = 6
+	dir = 9
 	},
 /obj/effect/turf_decal/siding/wood{
-	dir = 2
+	dir = 1
 	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"NG" = (
-/obj/structure/sign/warning/biohazard/directional/east,
-/turf/open/space/basic,
-/area/space)
-"NM" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Oi" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/table,
-/obj/machinery/button/door{
-	id = "xenobio1";
-	layer = 3.3;
-	name = "Xenobio Pen 1 Blast Doors";
-	pixel_y = 1;
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Or" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"ON" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 4;
-	icon_state = "right";
-	name = "Containment Pen #8";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio8";
-	name = "Xenobio Pen 8 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"OY" = (
-/mob/living/basic/slime,
-/obj/effect/turf_decal/tile/green/fourcorners,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"Pa" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
+"cO" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Xenobiology Lab - Pen #1";
+	network = list("ss13","rd","xeno")
 	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Pb" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/landmark/start/xenobiologist,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"Px" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
 /obj/structure/slime_pen_post/premade{
-	dir = 5
+	dir = 10
 	},
 /obj/effect/turf_decal/siding/wood{
-	dir = 1
+	dir = 10
 	},
+/obj/effect/mapping_helpers/slime_pen_color/purple,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"di" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 4
+	dir = 8
 	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"Py" = (
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot_white,
-/obj/structure/cable,
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot_white,
-/obj/machinery/biomass_recycler,
-/obj/item/stack/biomass/twenty,
+"dw" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/tile/green/fourcorners,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"PU" = (
-/obj/machinery/light/floor/has_bulb,
-/obj/effect/turf_decal/trimline/purple/filled/corner{
+"dF" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"PY" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/window/left/directional/north{
-	dir = 8;
-	name = "Containment Pen #5";
-	req_access = list("xenobiology")
-	},
-/obj/machinery/door/poddoor/preopen{
-	id = "xenobio5";
-	name = "Xenobio Pen 5 Blast Door"
-	},
-/obj/structure/liquid_barrier,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Qs" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"Qu" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"QA" = (
-/turf/closed/wall,
-/area/station/maintenance/department/science/xenobiology)
-"QJ" = (
+"dY" = (
 /obj/structure/table,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
@@ -1028,85 +127,9 @@
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 8
 	},
-/turf/open/floor/iron,
+/turf/open/floor/stone,
 /area/station/science/xenobiology)
-"QT" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/table,
-/obj/machinery/button/door{
-	id = "xenobio3";
-	layer = 3.3;
-	name = "Xenobio Pen 3 Blast Doors";
-	pixel_y = 4;
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"Rg" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/reagent_dispensers/watertank,
-/obj/item/extinguisher{
-	pixel_x = 4;
-	pixel_y = 3
-	},
-/obj/item/extinguisher,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"RQ" = (
-/obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 6
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"RW" = (
-/obj/effect/turf_decal/trimline/purple/filled/line{
-	dir = 1
-	},
-/obj/machinery/extract_compressor,
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"SV" = (
-/obj/structure/lattice,
-/obj/effect/spawner/random/structure/grille,
-/turf/open/space/basic,
-/area/space/nearstation)
-"TA" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/science/xenobiology)
-"TB" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "XenoPens";
-	name = "Xenobiology Lockdown"
-	},
-/obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
-"TL" = (
-/obj/machinery/door/window/left/directional/north{
-	dir = 4;
-	name = "Containment Pen #8";
-	req_access = list("xenobiology")
-	},
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
-"UD" = (
+"ei" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
@@ -1115,53 +138,66 @@
 /obj/machinery/smartfridge/extract/preloaded,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"UK" = (
-/obj/machinery/light/directional/north,
-/obj/effect/turf_decal/tile/purple/fourcorners,
+"eu" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"ez" = (
 /obj/structure/slime_pen_post/premade{
-	dir = 9
+	dir = 5
 	},
 /obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"eA" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/landmark/start/xenobiologist,
+/obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
 	},
+/obj/structure/chair/sofa/corp,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"eD" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"VH" = (
-/obj/machinery/light/directional/south,
+"eQ" = (
+/turf/template_noop,
+/area/template_noop)
+"fI" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 6
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 2
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
+/obj/effect/turf_decal/siding/wood,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"WG" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/lattice,
+"fW" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"gz" = (
+/obj/machinery/atmospherics/components/binary/pump,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"gD" = (
+/obj/structure/sign/warning/biohazard/directional/east,
 /turf/open/space/basic,
-/area/space/nearstation)
-"Xf" = (
-/obj/effect/turf_decal/tile/green/fourcorners,
-/obj/structure/slime_pen_post/premade{
-	dir = 5
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
+/area/space)
+"gT" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"Xz" = (
+"gW" = (
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
 	},
@@ -1187,7 +223,79 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"XC" = (
+"ha" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"hg" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/effect/mapping_helpers/slime_pen_color/blue,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"hp" = (
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/science/xenobiology)
+"hT" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"hV" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 2
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"hX" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"ia" = (
+/obj/structure/cable,
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/science/xenobiology)
+"ip" = (
+/obj/machinery/light/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"iE" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 2
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"iM" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/preopen{
+	id = "Xenolab";
+	name = "Test Chamber Blast Door"
+	},
+/obj/structure/cable,
+/obj/structure/sign/warning/electric_shock,
+/turf/open/floor/engine,
+/area/station/science/xenobiology/cell)
+"iN" = (
 /obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","rd","xeno")
 	},
@@ -1203,579 +311,2090 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"XQ" = (
-/obj/effect/turf_decal/trimline/purple/filled/line{
+"iV" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/slime_pen_color/purple,
+/obj/effect/turf_decal/siding/wood{
 	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"iW" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"jg" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"js" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"lm" = (
+/obj/machinery/door/poddoor/preopen{
+	id = "Xenolab";
+	name = "Test Chamber Blast Door"
+	},
+/obj/effect/turf_decal/bot,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
+/obj/machinery/door/window/left/directional/south{
+	dir = 4;
+	name = "Maximum Security Test Chamber";
+	req_access = list("xenobiology")
+	},
+/obj/structure/liquid_barrier,
+/turf/open/floor/engine,
+/area/station/science/xenobiology/cell)
+"lG" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/camera/autoname/directional/west{
+	network = list("ss13","rd","xeno")
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"XU" = (
-/obj/machinery/light/directional/west,
-/obj/machinery/camera/autoname/directional/west,
+"mm" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"Yc" = (
-/obj/structure/cable,
-/turf/closed/wall/r_wall,
-/area/station/maintenance/department/science/xenobiology)
-"Yl" = (
-/obj/structure/sign/warning/biohazard,
-/turf/closed/wall,
+"mp" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
 /area/station/science/xenobiology)
-"Zj" = (
+"mL" = (
+/obj/structure/chair/office/light{
+	dir = 1
+	},
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 8
 	},
 /turf/open/floor/stone,
 /area/station/science/xenobiology)
-"ZL" = (
-/obj/machinery/door/window/left/directional/north{
-	base_state = "right";
-	dir = 8;
-	icon_state = "right";
-	name = "Containment Pen #6";
-	req_access = list("xenobiology")
+"mR" = (
+/obj/structure/lattice,
+/obj/effect/spawner/random/structure/grille,
+/turf/open/space/basic,
+/area/space/nearstation)
+"mV" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"mX" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"nh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/maintenance/department/science/xenobiology)
+"nl" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"nx" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/machinery/door/poddoor/preopen{
+	id = "Xenolab";
+	name = "Test Chamber Blast Door"
+	},
+/turf/open/floor/engine,
+/area/station/science/xenobiology/cell)
+"nI" = (
+/obj/structure/chair/sofa/corp/left,
+/obj/effect/landmark/start/xenobiologist,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"nK" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"nM" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"oa" = (
+/obj/machinery/light/directional/south,
+/obj/machinery/camera/autoname/directional/south{
+	network = list("ss13","rd","xeno")
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/slime_pen_color/blue,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"oz" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"oD" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/slime_pen_color/blue,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"oN" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"oS" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/structure/sign/warning/electric_shock,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobio1";
+	name = "Xenobio Pen 1 Blast Door"
 	},
 /turf/open/floor/engine,
 /area/station/science/xenobiology)
+"pj" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobio1";
+	name = "Xenobio Pen 1 Blast Door"
+	},
+/turf/open/floor/engine,
+/area/station/science/xenobiology)
+"pI" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"pL" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"qb" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/structure/chair/sofa/corp/right,
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"qy" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/door/airlock/hatch{
+	name = "Xenobiology Maintenance"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/science/xenobio,
+/obj/structure/liquid_barrier,
+/turf/open/floor/plating,
+/area/station/maintenance/department/science/xenobiology)
+"qH" = (
+/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
+	dir = 4
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"qK" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/station/science/xenobiology/cell)
+"rc" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"rk" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"rr" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"rE" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"rG" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"rU" = (
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"sk" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"sn" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"sW" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"td" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"te" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/door/airlock/hatch{
+	name = "Xenobiology Maintenance"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/science/xenobio,
+/obj/structure/liquid_barrier,
+/turf/open/floor/plating,
+/area/station/maintenance/department/science/xenobiology)
+"tA" = (
+/obj/structure/sign/warning/biohazard,
+/turf/closed/wall,
+/area/station/science/xenobiology)
+"ud" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/bot_white,
+/obj/structure/rack,
+/obj/item/storage/box/gloves{
+	pixel_x = -6
+	},
+/obj/item/storage/box/masks{
+	pixel_x = 6
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"uh" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"ul" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"uw" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "XenoPens";
+	name = "Xenobiology Lockdown"
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"uD" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobio8";
+	name = "Xenobio Pen 8 Blast Door"
+	},
+/turf/open/floor/engine,
+/area/station/science/xenobiology)
+"vk" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"vO" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/machinery/biomass_recycler,
+/obj/item/stack/biomass/twenty,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"vU" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "XenoPens";
+	name = "Xenobiology Lockdown"
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"wk" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"ws" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"wu" = (
+/obj/effect/turf_decal/trimline/purple/filled/corner,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"xj" = (
+/obj/machinery/light/directional/south,
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"yq" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"ys" = (
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"yF" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"yM" = (
+/mob/living/basic/slime,
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"yZ" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/structure/chair/sofa/corp,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"ze" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/slime_pen_color/green,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"zB" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/bot_white,
+/obj/structure/cable,
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/structure/table/glass,
+/obj/item/slime_rancher_scanner{
+	pixel_x = -7
+	},
+/obj/item/slime_rancher_scanner{
+	pixel_x = 7
+	},
+/obj/item/toy/plush/slimeplushie{
+	desc = "An adorable stuffed toy that resembles a slime. A faded purple flower is embroidered beneath one of its many patches, alongside several tiny slips of paper that look suspiciously like overdue notices.";
+	pixel_y = 8;
+	name = "Tara"
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"zC" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"zM" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"zT" = (
+/obj/machinery/holopad,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Ap" = (
+/obj/machinery/door/poddoor/preopen{
+	id = "Xenolab";
+	name = "Test Chamber Blast Door"
+	},
+/obj/structure/cable,
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/engine,
+/area/station/science/xenobiology/cell)
+"AH" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/obj/machinery/light/small/directional/north,
+/obj/structure/closet{
+	anchored = 1;
+	can_be_unanchored = 1;
+	name = "Cold protection gear"
+	},
+/obj/item/clothing/suit/hooded/wintercoat/science,
+/obj/item/clothing/suit/hooded/wintercoat/science,
+/obj/item/clothing/shoes/winterboots,
+/obj/item/clothing/shoes/winterboots,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"AR" = (
+/obj/machinery/light/directional/north,
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"AV" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Bc" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Bq" = (
+/mob/living/basic/slime,
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Br" = (
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Bu" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"By" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"BV" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/slime_pen_color/purple,
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Cl" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"DD" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Ew" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"EH" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "XenoPens";
+	name = "Xenobiology Lockdown"
+	},
+/obj/machinery/door/firedoor,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Fe" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Ff" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Fv" = (
+/obj/machinery/button/ignition{
+	id = "Xenobio";
+	pixel_x = -4;
+	pixel_y = -3
+	},
+/obj/machinery/button/door/directional/north{
+	id = "Xenolab";
+	name = "Test Chamber Blast Doors";
+	pixel_x = 6;
+	pixel_y = -2;
+	req_access = list("xenobiology")
+	},
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/computer/security/telescreen{
+	name = "Test Chamber Monitor";
+	network = list("xeno");
+	pixel_y = 9
+	},
+/obj/item/radio/intercom/directional/north,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 8
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"FF" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/cup/beaker{
+	pixel_x = 8;
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/dropper,
+/obj/item/reagent_containers/cup/beaker/large{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/structure/cable,
+/obj/machinery/light_switch/directional/west,
+/obj/effect/turf_decal/tile/purple/half/contrasted{
+	dir = 8
+	},
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"Gd" = (
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Ge" = (
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"Gn" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Gp" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"GJ" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 2
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"GT" = (
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"GW" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 8
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"GZ" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible,
+/obj/machinery/light/directional/north,
+/obj/effect/turf_decal/box,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/camera/autoname/directional/north,
+/obj/machinery/button/door{
+	id = "XenoPens";
+	layer = 3.3;
+	name = "Xenobiology Lockdown";
+	pixel_y = 24;
+	req_access = list("xenobiology")
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Hf" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 8
+	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Hh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Ia" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Ix" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"IV" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Ju" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"JS" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Ke" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/structure/sign/warning/electric_shock,
+/obj/machinery/door/poddoor/preopen{
+	id = "xenobio8";
+	name = "Xenobio Pen 8 Blast Door"
+	},
+/turf/open/floor/engine,
+/area/station/science/xenobiology)
+"Kq" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/landmark/start/xenobiologist,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"KQ" = (
+/mob/living/basic/slime,
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Li" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Lw" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Ma" = (
+/obj/machinery/light/directional/west,
+/obj/machinery/camera/autoname/directional/west,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"MB" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"MK" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/maintenance/department/science/xenobiology)
+"MR" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"MU" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "XenoPens";
+	name = "Xenobiology Lockdown"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"Nm" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Nt" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/mapping_helpers/slime_pen_color/green,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Nw" = (
+/obj/structure/disposaloutlet,
+/obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
+"Nx" = (
+/obj/structure/chair/office/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/purple,
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"Nz" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/bot_white,
+/obj/machinery/disposal/bin,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/obj/machinery/light_switch/directional/south,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Og" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"OQ" = (
+/obj/effect/turf_decal/delivery,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/science/xenobiology)
+"OV" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 2
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Pk" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/preopen{
+	id = "Xenolab";
+	name = "Test Chamber Blast Door"
+	},
+/obj/structure/cable,
+/turf/open/floor/engine,
+/area/station/science/xenobiology/cell)
+"Pm" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/effect/turf_decal/bot,
+/obj/machinery/light/small/directional/south,
+/obj/machinery/chem_master,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"PI" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Qq" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"QK" = (
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"QX" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/light/directional/south,
+/obj/effect/turf_decal/box,
+/obj/machinery/camera/autoname/directional/south,
+/obj/machinery/firealarm/directional/south,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Rs" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"RJ" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/engine,
+/area/station/science/xenobiology)
+"RL" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Sc" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Se" = (
+/obj/structure/slime_pen_post/premade{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"So" = (
+/obj/item/radio/intercom/directional/south,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"SH" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"ST" = (
+/turf/closed/wall,
+/area/station/science/xenobiology/hallway)
+"Ts" = (
+/obj/structure/table/glass,
+/obj/item/radio/intercom/directional/west,
+/obj/structure/microscope,
+/obj/machinery/camera/directional/west{
+	c_tag = "Xenobiology Lab - Fore";
+	network = list("ss13","rd","xeno")
+	},
+/obj/machinery/light/directional/west,
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/purple/half/contrasted{
+	dir = 8
+	},
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"Tx" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 2
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"TC" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Xenobiology Lab - Pen #1";
+	network = list("ss13","rd","xeno")
+	},
+/obj/structure/slime_pen_post/premade{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/effect/mapping_helpers/slime_pen_color/blue,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"TX" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/science/xenobiology)
+"TZ" = (
+/obj/structure/rack,
+/obj/item/wrench,
+/obj/item/crowbar/red,
+/obj/machinery/light_switch/directional/south,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 8
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"UO" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Vn" = (
+/turf/closed/wall/r_wall,
+/area/station/science/xenobiology)
+"Vr" = (
+/obj/structure/cable,
+/obj/machinery/station_map/engineering/directional/west,
+/obj/machinery/vending/wardrobe/xeno_wardrobe,
+/turf/open/floor/iron/white,
+/area/station/science/cytology)
+"VB" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"VM" = (
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Wa" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/machinery/extract_compressor,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Wm" = (
+/turf/closed/wall,
+/area/station/maintenance/department/science/xenobiology)
+"WD" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 2
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Xa" = (
+/obj/effect/turf_decal/tile/purple/fourcorners,
+/obj/structure/slime_pen_post/premade{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Xl" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment,
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/trimline/purple/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Xn" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Xt" = (
+/turf/open/space/basic,
+/area/space)
+"YE" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"YF" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/station/science/xenobiology)
+"Zc" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/iron,
+/area/station/science/xenobiology)
+"Zs" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 
 (1,1,1) = {"
-mu
-mu
-mu
-mu
-mu
-mu
-mu
-pz
-UD
-nX
-mu
-mu
-mu
-mu
-mu
-gG
-ph
-pz
-mu
-mu
-mu
-mu
-mu
-mu
-mu
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+as
+as
+bg
+ST
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}
 (2,1,1) = {"
-mu
-mu
-mu
-mu
-mu
-mu
-mu
-BY
-Py
-bX
-mu
-mu
-mu
-mu
-mu
-Qu
-jG
-DO
-mu
-mu
-mu
-mu
-mu
-mu
-mu
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+Ts
+FF
+Vr
+rU
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}
 (3,1,1) = {"
-mu
-mu
-mu
-mu
-mu
-mu
-mu
-Lk
-Xz
-nX
-mu
-mu
-mu
-mu
-mu
-Pb
-Gv
-ch
-mu
-mu
-mu
-mu
-mu
-mu
-mu
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+Nx
+Ge
+Ge
+Ge
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}
 (4,1,1) = {"
-xp
-xp
-kY
-pz
-mu
-qJ
-MW
-BY
-RW
-Ki
-mu
-mu
-mu
-mu
-mu
-vr
-rx
-DO
-mu
-TL
-MW
-pz
-DI
-xp
-xp
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}
 (5,1,1) = {"
-gt
-NG
-WG
-pz
-Rg
-Cq
-Oi
-Yl
-LG
-uc
-hI
-TB
-Eg
-hI
-hI
-jL
-nz
-Yl
-hU
-ON
-tA
-pz
-qL
-NG
-SV
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}
 (6,1,1) = {"
-QA
-QA
-mG
-pz
-GK
-DE
-uW
-gL
-uW
-uW
-uW
-AY
-jz
-sz
-sz
-sz
-dR
-XU
-DE
-DE
-BT
-pz
-MU
-QA
-QA
+eQ
+eQ
+eQ
+Vn
+Vn
+Vn
+Vn
+Vn
+ei
+vk
+eQ
+eQ
+eQ
+eQ
+eQ
+JS
+Nz
+Vn
+Vn
+Vn
+Vn
+Vn
+eQ
+eQ
+eQ
 "}
 (7,1,1) = {"
-mu
-mu
-Ic
-Mf
-xk
-Hj
-xk
-oV
-wr
-gY
-oV
-oV
-zc
-kl
-kl
-bN
-dJ
-kl
-kl
-kl
-kl
-ea
-xS
-mu
-mu
+eQ
+eQ
+eQ
+RJ
+hT
+Bc
+cO
+pj
+vO
+bQ
+eQ
+eQ
+eQ
+eQ
+eQ
+TX
+zB
+uD
+Se
+Fe
+TC
+RJ
+eQ
+eQ
+eQ
 "}
 (8,1,1) = {"
-mu
-mu
-rj
-CC
-Au
-Au
-Au
-su
-Kj
-XQ
-pm
-bz
-bz
-bz
-uU
-Kj
-XQ
-my
-yn
-yn
-yn
-iu
-rj
-mu
-mu
+eQ
+eQ
+eQ
+RJ
+rc
+VB
+fI
+oS
+gW
+vk
+eQ
+eQ
+eQ
+eQ
+eQ
+By
+ud
+Ke
+pI
+mp
+Xn
+RJ
+eQ
+eQ
+eQ
 "}
 (9,1,1) = {"
-mu
-mu
-rj
-TA
-gP
-gP
-gP
-sd
-Kj
-XQ
-xX
-Or
-Or
-Or
-NM
-Kj
-XQ
-Pa
-Nl
-Nl
-Nl
-nR
-rj
-mu
-mu
+GT
+GT
+qH
+Vn
+rc
+VB
+fI
+pj
+Wa
+Kq
+eQ
+eQ
+eQ
+eQ
+eQ
+eu
+ck
+uD
+pI
+mp
+Xn
+Vn
+Nw
+GT
+GT
 "}
 (10,1,1) = {"
-mu
-mu
-rj
-ju
-Ei
-dC
-Ei
-Nm
-Kj
-XQ
-AO
-Eb
-Eb
-Eb
-lJ
-Kj
-XQ
-Px
-Id
-Id
-Id
-VH
-rj
-mu
-mu
+Xt
+gD
+aX
+Vn
+nK
+js
+Xa
+tA
+AH
+uw
+EH
+MU
+OQ
+EH
+EH
+vU
+Pm
+tA
+ez
+sW
+ha
+Vn
+Zs
+gD
+mR
 "}
 (11,1,1) = {"
-mu
-mu
-rj
-XC
-bz
-bz
-bz
-uU
-Kj
-XQ
-my
-yn
-yn
-yn
-iu
-Kj
-XQ
-CC
-Au
-Au
-Au
-su
-rj
-mu
-mu
+Wm
+Wm
+nh
+Vn
+cJ
+Br
+Hh
+ip
+Hh
+Hh
+Hh
+Rs
+lG
+rk
+rk
+rk
+dF
+Ma
+Br
+Br
+So
+Vn
+MK
+Wm
+Wm
 "}
 (12,1,1) = {"
-mu
-mu
-rj
-xX
-Or
-Or
-Or
-NM
-Kj
-Hy
-Pa
-Nl
-Nl
-Nl
-nR
-eB
-XQ
-TA
-gP
-gP
-gP
-sd
-rj
-mu
-mu
+eQ
+eQ
+te
+Qq
+nl
+Li
+nl
+rE
+Og
+WD
+rE
+rE
+YF
+Ia
+Ia
+Xl
+OV
+Ia
+Ia
+Ia
+Ia
+ar
+qy
+eQ
+eQ
 "}
 (13,1,1) = {"
-mu
-mu
-rj
-AO
-Eb
-Eb
-Eb
-lJ
-Kj
-XQ
-Px
-Id
-Id
-Id
-RQ
-Kj
-XQ
-Xf
-Ei
-Ei
-Ei
-Nm
-rj
-mu
-mu
+eQ
+eQ
+hp
+MB
+Sc
+Sc
+Sc
+ze
+YE
+iE
+cN
+eD
+eD
+eD
+oD
+YE
+hV
+rr
+zM
+zM
+zM
+iV
+hp
+eQ
+eQ
 "}
 (14,1,1) = {"
-mu
-mu
-rj
-UK
-yn
-yn
-yn
-iu
-Kj
-XQ
-CC
-Au
-OY
-Au
-su
-Kj
-XQ
-pm
-bz
-bz
-bz
-eW
-rj
-mu
-mu
+eQ
+eQ
+hp
+RL
+oz
+Zc
+oz
+sn
+YE
+iE
+yF
+mp
+td
+mp
+SH
+YE
+hV
+rc
+VB
+gT
+VB
+Tx
+hp
+eQ
+eQ
 "}
 (15,1,1) = {"
-mu
-mu
-rj
-Pa
-Nl
-Nl
-Nl
-nR
-Kj
-XQ
-TA
-gP
-gP
-gP
-sd
-Kj
-XQ
-xX
-Or
-rm
-Or
-NM
-rj
-mu
-mu
+eQ
+eQ
+hp
+bX
+Ix
+yM
+Ix
+Cl
+YE
+iE
+cD
+VM
+VM
+VM
+yq
+YE
+hV
+ws
+js
+js
+js
+xj
+hp
+eQ
+eQ
 "}
 (16,1,1) = {"
-mu
-mu
-rj
-Px
-Id
-Id
-Id
-RQ
-Kj
-XQ
-Xf
-Ei
-Ei
-Ei
-Nm
-Kj
-XQ
-AO
-Eb
-Eb
-Eb
-lJ
-rj
-mu
-mu
+eQ
+eQ
+hp
+iN
+eD
+eD
+eD
+oD
+YE
+iE
+rr
+zM
+zM
+zM
+iV
+YE
+hV
+MB
+Sc
+Sc
+Sc
+ze
+hp
+eQ
+eQ
 "}
 (17,1,1) = {"
-mu
-mu
-rj
-rj
-QJ
-Zj
-Zj
-Zj
-jf
-oJ
-Zj
-Zj
-Zj
-Zj
-Zj
-PU
-Fn
-Zj
-Zj
-Zj
-Zj
-rj
-Yc
-mu
-mu
+eQ
+eQ
+hp
+yF
+mp
+td
+mp
+SH
+YE
+GJ
+rc
+VB
+gT
+VB
+Tx
+UO
+hV
+RL
+oz
+Zc
+oz
+sn
+hp
+eQ
+eQ
 "}
 (18,1,1) = {"
-mu
-mu
-mu
-rj
-QT
-Lu
+eQ
+eQ
+hp
 cD
-DE
-DE
-vD
-tZ
-DE
-DE
-DE
-DE
-BL
-DE
-DE
-gJ
-eU
-dA
-rj
-mu
-mu
-mu
+VM
+VM
+VM
+yq
+YE
+iE
+ws
+js
+js
+js
+Bu
+YE
+hV
+MR
+Ix
+Ix
+Ix
+Cl
+hp
+eQ
+eQ
 "}
 (19,1,1) = {"
-mu
-mu
-mu
-rj
-Qs
-tu
-kx
-Ju
-tG
-pz
-pz
-IA
-IA
-IA
-pz
-pz
-PY
-Kh
-ky
-ZL
-Qs
-rj
-mu
-mu
-mu
+eQ
+eQ
+hp
+AR
+zM
+zM
+zM
+iV
+YE
+iE
+MB
+Sc
+Bq
+Sc
+ze
+YE
+hV
+cN
+eD
+eD
+eD
+oa
+hp
+eQ
+eQ
 "}
 (20,1,1) = {"
-mu
-mu
-mu
-mu
-mu
-mu
-ke
-ky
-xG
-mu
-mu
-mu
-mu
-mu
-mu
-mu
-eZ
-kx
-Jb
-mu
-mu
-mu
-mu
-mu
-mu
+eQ
+eQ
+hp
+rc
+VB
+gT
+VB
+Tx
+YE
+iE
+RL
+oz
+Zc
+oz
+sn
+YE
+hV
+yF
+mp
+KQ
+mp
+SH
+hp
+eQ
+eQ
+"}
+(21,1,1) = {"
+eQ
+eQ
+hp
+ws
+js
+js
+js
+Bu
+YE
+iE
+MR
+Ix
+Ix
+Ix
+Cl
+YE
+hV
+cD
+VM
+VM
+VM
+yq
+hp
+eQ
+eQ
+"}
+(22,1,1) = {"
+eQ
+eQ
+hp
+hp
+dY
+Hf
+GW
+GW
+Gd
+wk
+GW
+GW
+GW
+GW
+GW
+AV
+aE
+GW
+GW
+Hf
+GW
+hp
+ia
+eQ
+eQ
+"}
+(23,1,1) = {"
+eQ
+eQ
+eQ
+hp
+nM
+oN
+oN
+oN
+oN
+oN
+ys
+sk
+sk
+Hh
+wu
+mm
+mm
+mm
+mm
+mm
+Gn
+hp
+eQ
+eQ
+eQ
+"}
+(24,1,1) = {"
+eQ
+eQ
+eQ
+hp
+Se
+di
+hg
+Nm
+DD
+Nt
+qb
+Br
+Br
+Br
+pL
+Nm
+DD
+Nt
+iW
+Lw
+BV
+hp
+eQ
+eQ
+eQ
+"}
+(25,1,1) = {"
+eQ
+eQ
+eQ
+hp
+pI
+mp
+Xn
+Ju
+oz
+dw
+eA
+Br
+zT
+Br
+pL
+Ju
+oz
+dw
+jg
+VB
+Gp
+hp
+eQ
+eQ
+eQ
+"}
+(26,1,1) = {"
+eQ
+eQ
+eQ
+hp
+ez
+mV
+ha
+Ju
+oz
+dw
+yZ
+Br
+QK
+Br
+Ff
+Ju
+oz
+dw
+rG
+ul
+uh
+hp
+eQ
+eQ
+eQ
+"}
+(27,1,1) = {"
+eQ
+eQ
+eQ
+hp
+hp
+hp
+hp
+IV
+Ew
+zC
+nI
+Br
+Br
+Br
+pL
+IV
+Ew
+zC
+hp
+hp
+hp
+hp
+eQ
+eQ
+eQ
+"}
+(28,1,1) = {"
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+hp
+Vn
+Fv
+mL
+Gd
+Br
+Br
+Br
+aE
+GW
+TZ
+Vn
+hp
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+"}
+(29,1,1) = {"
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+Vn
+GZ
+gz
+PI
+hX
+fW
+hX
+PI
+mX
+QX
+Vn
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+"}
+(30,1,1) = {"
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+Pk
+iM
+Ap
+nx
+nx
+lm
+nx
+nx
+Pk
+iM
+qK
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 "}

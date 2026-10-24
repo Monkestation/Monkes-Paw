@@ -1,0 +1,92 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"iP" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron/white,
+/area/station/science)
+"ot" = (
+/obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/turf_decal/arrows/red{
+	dir = 8
+	},
+/turf/open/floor/iron/white,
+/area/station/science)
+"uv" = (
+/obj/effect/turf_decal/siding/purple{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/purple,
+/obj/structure/railing,
+/turf/open/floor/glass/reinforced,
+/area/station/science)
+"Bd" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/loading_area{
+	dir = 1
+	},
+/turf/open/floor/iron/white,
+/area/station/science)
+"Dh" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/obj/item/beacon,
+/turf/open/floor/iron/white,
+/area/station/science)
+"Di" = (
+/obj/effect/turf_decal/trimline/purple/filled/warning,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron/white,
+/area/station/science)
+"Ij" = (
+/obj/effect/turf_decal/siding/purple/end{
+	dir = 4
+	},
+/obj/structure/railing,
+/turf/open/floor/glass/reinforced,
+/area/station/science)
+"Og" = (
+/obj/effect/turf_decal/siding/purple/end{
+	dir = 8
+	},
+/obj/structure/railing,
+/turf/open/floor/glass/reinforced,
+/area/station/science)
+"Ur" = (
+/obj/effect/turf_decal/trimline/purple/filled/line{
+	dir = 1
+	},
+/turf/open/floor/iron/white,
+/area/station/science)
+
+(1,1,1) = {"
+Bd
+Og
+ot
+"}
+(2,1,1) = {"
+Dh
+uv
+Di
+"}
+(3,1,1) = {"
+Ur
+Ij
+iP
+"}
