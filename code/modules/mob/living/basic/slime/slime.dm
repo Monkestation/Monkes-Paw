@@ -14,7 +14,7 @@
 	icon_living = "grey-baby"
 	icon_dead = "grey-baby-dead"
 
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/items/weapons/bite.ogg'
 
 	maxHealth = 150
 	health = 150
@@ -353,7 +353,7 @@
 	if(stat == DEAD)
 		return
 	if(transformation_color)
-		var/mutable_appearance/warping_core = mutable_appearance('icons/obj/xenobiology/slimecrossing.dmi', "warping", MOB_BELOW_PIGGYBACK_LAYER)
+		var/mutable_appearance/warping_core = mutable_appearance('icons/obj/science/slimecrossing.dmi', "warping", MOB_BELOW_PIGGYBACK_LAYER)
 		warping_core.color = transformation_color
 		. += warping_core
 	if(current_mood && current_mood != SLIME_MOOD_NONE && !stat)
@@ -465,7 +465,7 @@
 ///Spawns a crossed slimecore item
 /mob/living/basic/slime/proc/spawn_corecross()
 	visible_message(span_danger("[src] shudders, its mutated core consuming the rest of its body!"))
-	playsound(src, 'sound/magic/smoke.ogg', 50, TRUE)
+	playsound(src, 'sound/effects/magic/smoke.ogg', 50, TRUE)
 	var/selected_crossbreed_path = GLOB.slime_crossbreeds["[crossbreed_modification]|[slime_type.type]"]
 	if(selected_crossbreed_path)
 		new selected_crossbreed_path(loc)

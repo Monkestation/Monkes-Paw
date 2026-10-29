@@ -165,7 +165,7 @@ GLOBAL_LIST(warped_rooms)
 // here be slime-dragons: nightmare rendering code below, solely bc i wanted cool masking
 /obj/effect/warped_room_exit
 	name = "warped rune"
-	icon = 'icons/obj/xenobiology/slimecrossing.dmi'
+	icon = 'icons/obj/science/slimecrossing.dmi'
 	icon_state = "rune_rainbow"
 	desc = "Walk onto this rune if you want to leave this place. You will have to leave eventually."
 	move_resist = INFINITY
