@@ -315,8 +315,9 @@
 		return
 	var/mob/living/cooled_mob = arrived
 	cooled_mob.extinguish_mob()
-	if(cooled_mob.bodytemperature > cooled_mob.standard_body_temperature)
-		cooled_mob.adjust_bodytemperature(cooled_mob.standard_body_temperature - cooled_mob.bodytemperature)
+	var/normal_temp = cooled_mob.get_body_temp_normal()
+	if(cooled_mob.bodytemperature > normal_temp)
+		cooled_mob.adjust_bodytemperature(INFINITY, max_temp = normal_temp)
 
 /obj/item/slimecross/warping/metal
 	slime_type = /datum/slime_type/metal
