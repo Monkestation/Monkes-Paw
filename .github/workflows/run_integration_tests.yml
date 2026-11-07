@@ -54,6 +54,7 @@ jobs:
             tools/ci/install_rust_g.sh
             tools/ci/mysql_config.cnf
             tools/ci/run_server.sh
+            z_modular_paw
 
       - name: Configure BYOND version
         uses: ./.github/actions/configure_byond_version
@@ -71,18 +72,18 @@ jobs:
           key: ${{ runner.os }}-native-libraries-${{ hashFiles('dependencies.sh') }}
 
       - parallel:
-        - name: Restore or install BYOND
-          uses: ./.github/actions/restore_or_install_byond
+          - name: Restore or install BYOND
+            uses: ./.github/actions/restore_or_install_byond
 
-        - name: Install rust-g
-          if: ${{ steps.native_libraries_cache.outputs.cache-hit != 'true' }}
-          run: |
-            bash tools/ci/install_rust_g.sh
+          - name: Install rust-g
+            if: ${{ steps.native_libraries_cache.outputs.cache-hit != 'true' }}
+            run: |
+              bash tools/ci/install_rust_g.sh
 
-        - name: Install dreamluau
-          if: ${{ steps.native_libraries_cache.outputs.cache-hit != 'true' }}
-          run: |
-            bash tools/ci/install_dreamluau.sh
+          - name: Install dreamluau
+            if: ${{ steps.native_libraries_cache.outputs.cache-hit != 'true' }}
+            run: |
+              bash tools/ci/install_dreamluau.sh
 
       # Excluded from the above parallel group because it reads event.json as it loads, and the runner empties and rewrites that file whenever another step starts (actions/runner#4641)
       - name: Download build artifact
