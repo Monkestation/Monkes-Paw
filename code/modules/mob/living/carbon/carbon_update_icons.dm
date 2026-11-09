@@ -1,38 +1,4 @@
-/mob/living/carbon/human/update_clothing(slot_flags)
-	if(slot_flags & ITEM_SLOT_BACK)
-		update_worn_back()
-	if(slot_flags & ITEM_SLOT_MASK)
-		update_worn_mask()
-	if(slot_flags & ITEM_SLOT_NECK)
-		update_worn_neck()
-	if(slot_flags & ITEM_SLOT_HANDCUFFED)
-		update_worn_handcuffs()
-	if(slot_flags & ITEM_SLOT_LEGCUFFED)
-		update_worn_legcuffs()
-	if(slot_flags & ITEM_SLOT_BELT)
-		update_worn_belt()
-	if(slot_flags & ITEM_SLOT_ID)
-		update_worn_id()
-	if(slot_flags & ITEM_SLOT_EARS)
-		update_inv_ears()
-	if(slot_flags & ITEM_SLOT_EYES)
-		update_worn_glasses()
-	if(slot_flags & ITEM_SLOT_GLOVES)
-		update_worn_gloves()
-	if(slot_flags & ITEM_SLOT_HEAD)
-		update_worn_head()
-	if(slot_flags & ITEM_SLOT_FEET)
-		update_worn_shoes()
-	if(slot_flags & ITEM_SLOT_OCLOTHING)
-		update_worn_oversuit()
-	if(slot_flags & ITEM_SLOT_ICLOTHING)
-		update_worn_undersuit()
-	if(slot_flags & ITEM_SLOT_SUITSTORE)
-		update_suit_storage()
-	if(slot_flags & (ITEM_SLOT_LPOCKET|ITEM_SLOT_RPOCKET))
-		update_pockets()
-
-	/// Updates features and clothing attached to a specific limb with limb-specific offsets
+/// Updates features and clothing attached to a specific limb with limb-specific offsets
 /mob/living/carbon/proc/update_features(feature_key)
 	switch(feature_key)
 		if(OFFSET_UNIFORM)
@@ -44,7 +10,7 @@
 		if(OFFSET_GLASSES)
 			update_worn_glasses()
 		if(OFFSET_EARS)
-			update_inv_ears()
+			update_worn_ears()
 		if(OFFSET_SHOES)
 			update_worn_shoes()
 		if(OFFSET_S_STORE)
@@ -314,7 +280,7 @@
 		if(get_held_index_of_item(I) % 2 == 0)
 			icon_file = I.righthand_file
 
-		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = TRUE)
+		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = TRUE, bodyshape = bodyshape)
 	return hands
 
 /mob/living/carbon/get_fire_overlay(stacks, on_fire)
@@ -430,8 +396,8 @@
 		inv.update_appearance()
 
 	if(wear_mask)
-		if(!(check_obscured_slots() & ITEM_SLOT_MASK))
-			overlays_standing[FACEMASK_LAYER] = wear_mask.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = 'icons/mob/clothing/mask.dmi')
+		if(!(obscured_slots & HIDEMASK))
+			overlays_standing[FACEMASK_LAYER] = wear_mask.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = 'icons/mob/clothing/mask.dmi', bodyshape = bodyshape)
 		update_hud_wear_mask(wear_mask)
 
 	apply_overlay(FACEMASK_LAYER)
@@ -444,8 +410,8 @@
 		inv.update_appearance()
 
 	if(wear_neck)
-		if(!(check_obscured_slots() & ITEM_SLOT_NECK))
-			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi')
+		if(!(obscured_slots & HIDENECK))
+			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi', bodyshape = bodyshape)
 		update_hud_neck(wear_neck)
 
 	apply_overlay(NECK_LAYER)
@@ -458,7 +424,7 @@
 		inv.update_appearance()
 
 	if(back)
-		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi')
+		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi', bodyshape = bodyshape)
 		update_hud_back(back)
 
 	apply_overlay(BACK_LAYER)
@@ -484,7 +450,8 @@
 		inv.update_appearance()
 
 	if(head)
-		overlays_standing[HEAD_LAYER] = head.build_worn_icon(default_layer = HEAD_LAYER, default_icon_file = 'icons/mob/clothing/head/default.dmi')
+		if(!(obscured_slots & HIDEHEADGEAR))
+			overlays_standing[HEAD_LAYER] = head.build_worn_icon(default_layer = HEAD_LAYER, default_icon_file = 'icons/mob/clothing/head/default.dmi', bodyshape = bodyshape)
 		update_hud_head(head)
 
 	apply_overlay(HEAD_LAYER)
@@ -547,6 +514,8 @@
 	var/list/needs_update = list()
 	var/limb_count_update = 0
 	for(var/obj/item/bodypart/limb as anything in bodyparts)
+		if(limb.bodypart_flags & BODYPART_ABSTRACT) // not drawn, and has no zone to key it by
+			continue
 		limb.update_limb(is_creating = update_limb_data) //Update limb actually doesn't do much, get_limb_icon is the cpu eater.
 
 		var/old_key = icon_render_keys?[limb.body_zone] //Checks the mob's icon render key list for the bodypart
@@ -569,6 +538,8 @@
 	//GENERATE NEW LIMBS
 	var/list/new_limbs = list()
 	for(var/obj/item/bodypart/limb as anything in bodyparts)
+		if(limb.bodypart_flags & BODYPART_ABSTRACT)
+			continue
 		if(limb in needs_update)
 			var/bodypart_icon = limb.get_limb_icon(dropped = FALSE, update_on = src)
 			new_limbs += bodypart_icon
@@ -608,6 +579,8 @@
 		. += "[limb_gender]-"
 	. += "[limb_id]"
 	. += "-[body_zone]"
+	if(!should_draw_greyscale && icon_static != initial(icon_static)) // limb styles swap the icon but keep the limb_id
+		. += "-[icon_static]"
 	if(should_draw_greyscale && draw_color)
 		. += "-[draw_color]"
 	if(is_invisible)
@@ -616,6 +589,9 @@
 		if(!overlay.can_draw_on_bodypart(src, owner))
 			continue
 		. += "-[jointext(overlay.generate_icon_cache(), "-")]"
+	for(var/datum/bodypart_texture/texture as anything in bodypart_textures)
+		if(texture.can_texture_bodypart(src))
+			. += "-[texture.icon_render_key()]"
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		. += "-[human_owner.mob_height]"
