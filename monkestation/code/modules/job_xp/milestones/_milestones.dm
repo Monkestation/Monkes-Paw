@@ -42,7 +42,9 @@
 		return TRUE
 	var/datum/db_query/query_add_gear_purchase = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("metacoin_item_purchases")] (`ckey`, `item_id`, `amount`) VALUES (:ckey, :item_id, :amount)"},
-		list("ckey" = user.ckey, "item_id" = item_path, "amount" = 1))
+		list("ckey" = user.ckey, "item_id" = item_path, "amount" = 1),
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
+	)
 	if(!query_add_gear_purchase.Execute())
 		to_chat(user, span_warning("Failed to add level up reward to the database, contact coders. Use Reload Job Rewards to try again."))
 		qdel(query_add_gear_purchase)
