@@ -91,6 +91,7 @@
 	internal_camera.internal_light = FALSE
 	internal_camera.network = camera_networks
 	internal_camera.c_tag = "LIVE: [broadcast_name]"
+	internal_camera.follow_holder()
 	wielder.apply_status_effect(/datum/status_effect/streamer, internal_camera, CALLBACK(src, PROC_REF(ensure_still_active)))
 	wielder.log_message("started a Spess.tv stream named \"[broadcast_name]\" at [loc_name(wielder)]", LOG_GAME)
 	start_broadcasting_network(camera_networks, "[broadcast_name] is now LIVE!")
@@ -101,7 +102,7 @@
 	set_microphone_state()
 
 	set_light_on(TRUE)
-	playsound(source = src, soundin = 'sound/machines/terminal_processing.ogg', vol = 20, vary = FALSE, ignore_walls = FALSE)
+	playsound(source = src, soundin = 'sound/machines/terminal/terminal_processing.ogg', vol = 20, vary = FALSE, ignore_walls = FALSE)
 	balloon_alert_to_viewers("live!")
 
 /// When deactivating the camera
@@ -114,7 +115,7 @@
 	stop_broadcasting_network(camera_networks)
 
 	set_light_on(FALSE)
-	playsound(source = src, soundin = 'sound/machines/terminal_prompt_deny.ogg', vol = 20, vary = FALSE, ignore_walls = FALSE)
+	playsound(source = src, soundin = 'sound/machines/terminal/terminal_prompt_deny.ogg', vol = 20, vary = FALSE, ignore_walls = FALSE)
 	balloon_alert_to_viewers("offline")
 
 /obj/item/broadcast_camera/proc/ensure_still_active()

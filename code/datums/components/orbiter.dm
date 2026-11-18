@@ -56,10 +56,10 @@
 	orbiter_list += newcomp.orbiter_list
 	newcomp.orbiter_list = null
 
-/datum/component/orbiter/PostTransfer()
-	if(!isatom(parent) || isarea(parent) || !get_turf(parent))
+/datum/component/orbiter/PostTransfer(datum/new_parent)
+	if(!isatom(parent) || isarea(new_parent) || !get_turf(new_parent))
 		return COMPONENT_INCOMPATIBLE
-	move_react(parent)
+	move_react(new_parent)
 
 /datum/component/orbiter/proc/begin_orbit(atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
 	if(orbiter.orbiting)
@@ -108,7 +108,7 @@
 		return
 	UnregisterSignal(orbiter, COMSIG_MOVABLE_MOVED)
 	SEND_SIGNAL(parent, COMSIG_ATOM_ORBIT_STOP, orbiter)
-	orbiter.SpinAnimation(0, 0)
+	orbiter.SpinAnimation(0, 0, parallel = FALSE) // PAW EDIT CHANGE - SLIME_CROSSBREEDS - ORIGINAL: orbiter.SpinAnimation(0, 0)
 	if(istype(orbiter_list[orbiter],/matrix)) //This is ugly.
 		orbiter.transform = orbiter_list[orbiter]
 	orbiter_list -= orbiter

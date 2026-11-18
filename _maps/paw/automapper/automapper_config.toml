@@ -2,7 +2,8 @@
 # [templates.example_template] - example_template should be replaced with the name of your map template.
 # directory - The direct path to our map files.
 # map_files - These are the names of the map files, including the extension, that will be loaded. Supports multiple for randomness.
-# required_map - This is the name of the required map that needs to be loaded in order for this template to load.
+# required_map - The path (relative to _maps/) of the map that needs to be loaded in order for this template to load, ie "map_files/MetaStation/MetaStation.dmm".
+# Must be the full path, since some maps share a filename (Oshan's station and trench are both Oshan.dmm). Use "builtin" for CentCom.
 # coordinates - The coordinates of the map template placement. (X, Y, Z). PLEASE NOTE: The Z coordinate is the same as would be shown in SDMM. NOT IN GAME.
 # leave it at 1 if it is not a multi-z map. It is relative to the map file Z, not the one loaded in game.
 # trait_name - The name of the Z level trait that will be used to determine what Z level we use.
@@ -30,6 +31,6 @@
 [templates.runtimestation_paw_test]
 map_files = ["runtimestation_paw_test.dmm"]
 directory = "_maps/paw/automapper/templates/runtimestation/"
-required_map = "runtimestation.dmm"
+required_map = "map_files/debug/runtimestation.dmm"
 coordinates = [35, 37, 1]
 trait_name = "Station"

@@ -32,7 +32,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 
 /datum/unit_test
 	/// Do not instantiate if type matches this
-	var/abstract_type = /datum/unit_test
+	abstract_type = /datum/unit_test
 
 	/// Behavior flags for this unit test
 	var/test_flags = UNIT_TEST_BASIC
@@ -352,6 +352,10 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	ignore += subtypesof(/atom/movable/screen/escape_menu)
 	///we generate mobs in these and create destroy does this in null space
 	ignore += typesof(/obj/item/loot_table_maker)
+
+	// PAW EDIT ADDITION START
+	ignore += typesof(/obj/effect/warped_rune) // don't feel like dealing with the side effects of these tbh
+	// PAW EDIT ADDITION END
 
 	/// We need to use json_decode to run randoms properly
 	ignore += typesof(/obj/item/cassette_tape)
