@@ -49,6 +49,10 @@ SUBSYSTEM_DEF(area_spawn)
 	var/list/datum/area_spawn/failed_area_spawns = list()
 
 /datum/controller/subsystem/area_spawn/Initialize()
+	// spawns land on random tiles so they can't be in the navmap bake, they dirty their own tiles when they spawn for real
+	#ifdef NAVMAP_BAKE_GENERATION
+	return SS_INIT_NO_NEED
+	#endif
 	for(var/iterating_type in subtypesof(/datum/area_spawn))
 		var/datum/area_spawn/iterating_area_spawn = new iterating_type
 		iterating_area_spawn.try_spawn()

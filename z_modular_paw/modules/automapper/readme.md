@@ -2,6 +2,14 @@
 
 Code: [@Gandalf2k15]
 
+Module ID: AUTOMAPPER
+
+### TG Proc/File Changes:
+
+- `code/modules/mapping/map_template.dm`: `proc/load` (automapper templates don't dirty their footprint, the navmap bake already has them)
+- `code/controllers/subsystem/navmap.dm`: `proc/current_map_fingerprint` (map ID includes station templates)
+- `tools/build_navmaps.py`: `changed_station_configs` (automapper folder rechecks bakes)
+
 ## About
 
 This automapper is designed to make mapping far easier for modular maps, it should mean less manual map resets(ideally, never).

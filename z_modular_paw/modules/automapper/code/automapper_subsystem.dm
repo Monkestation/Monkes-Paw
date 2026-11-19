@@ -151,6 +151,21 @@ SUBSYSTEM_DEF(automapper)
 	// Or you've map-edited template_noop which I'm fine with failing as well.
 	return findtextEx(model, "/turf/template_noop,\n")
 
+/// Hashable text for every template that lands on the given station map files, so the navmap bake's map ID changes when a template does.
+/datum/controller/subsystem/automapper/proc/get_navmap_fingerprint_material(list/map_files)
+	var/list/station_map_names = list()
+	for(var/map_file in map_files)
+		station_map_names += "[SSmapping.current_map.map_path]/[map_file]"
+	var/material = ""
+	for(var/datum/map_template/automap_template/template as anything in preloaded_map_templates)
+		if(!(template.required_map in station_map_names))
+			continue
+		var/template_text = file2text(template.mappath)
+		if(!template_text)
+			return null
+		material += "|[template.name]:[json_encode(loaded_config["templates"][template.name])]:[md5(template_text)]"
+	return material
+
 /**
  * This returns a list of turfs that have been preloaded and preselected using our templates.
  *
