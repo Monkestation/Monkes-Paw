@@ -385,6 +385,12 @@ SUBSYSTEM_DEF(navmap)
 			return null
 		material += "|[map_file]:[md5(map_text)]"
 		CHECK_TICK
+	// PAW EDIT ADDITION START - AUTOMAPPER
+	var/template_material = SSautomapper.get_navmap_fingerprint_material(map_files)
+	if(isnull(template_material))
+		return null
+	material += template_material
+	// PAW EDIT ADDITION END
 	return md5(material)
 
 /// Loads and checks the station bake before restoring it.

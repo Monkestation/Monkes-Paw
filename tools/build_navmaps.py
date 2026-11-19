@@ -54,6 +54,9 @@ def changed_station_configs(configs: list[tuple[str, Path]], base: str) -> list[
         "tools/build/", "tools/bootstrap/", "_maps/map_files/generic/",
         ".github/actions/configure_byond_version/", ".github/actions/restore_or_install_byond/",
         ".github/actions/setup_bun/",
+        # PAW EDIT ADDITION START - AUTOMAPPER
+        "_maps/paw/automapper/",
+        # PAW EDIT ADDITION END
     )
     if any(path.endswith((".dm", ".dme")) or path in shared_files or path.startswith(shared_directories) for path in changed):
         return configs
