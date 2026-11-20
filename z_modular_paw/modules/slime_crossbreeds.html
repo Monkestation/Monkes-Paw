@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../"><link rel="stylesheet" href="dmdoc.css"><title>z_modular_paw/modules/slime_crossbreeds/readme.md - MonkeStation 2.0</title></head><body><header><a href="index.html">MonkeStation 2.0</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>z_modular_paw/modules/slime_crossbreeds/readme.md <a href="https://github.com/Monkestation/Monkes-Paw/blob/3052d5af037f99482db6ab1d043195fa57fc41bb/z_modular_paw/modules/slime_crossbreeds/readme.md"><img src="git.png" width="16" height="16" title="z_modular_paw/modules/slime_crossbreeds/readme.md"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><p>https://github.com/Monkestation/Monkes-Paw/pull/7</p>
+<h2 id="slime-crossbreeds">Slime Crossbreeds</h2>
+<p>Module ID: SLIME_CROSSBREEDS</p>
+<h3 id="description">Description:</h3>
+<p>the crossbreeds Paw has that Monkestation's slime rancher doesn't. the rest of slime rancher lives upstream now, this is just what's left over:</p>
+<ul>
+<li>gentle extracts: activate an extract's minor or major effect without eating it</li>
+<li>crystalline extracts: place a slimic pylon that does stuff to whoever's near it</li>
+<li>warping extracts: draw runes on the floor. the black rune makes weapons starborne, the rainbow rune opens a pocket room</li>
+<li>transformative extracts: permanently change a slime <em>and</em> its babies. max three per slime</li>
+</ul>
+<h3 id="tg-proc-file-changes">TG Proc/File Changes:</h3>
+<ul>
+<li><code>code/modules/mob/living/basic/slime/actions.dm</code>: <code>finish_reproduce()</code> sends <code>COMSIG_SLIME_SPLIT</code> for the new baby, and leaves a cerulean-transformed parent an adult</li>
+<li><code>code/modules/mob/living/basic/slime/life.dm</code>: <code>handle_nutrition()</code> skips the hunger drain on silver-transformed slimes</li>
+<li><code>code/datums/components/orbiter.dm</code>: ending an orbit actually stops the spin animation, so a starborne weapon quits circling once it's picked up (upstream bug, nobody noticed bc ghosts restart their float animation right after)</li>
+</ul>
+<h3 id="modular-overrides">Modular Overrides:</h3>
+<ul>
+<li>N/A</li>
+</ul>
+<h3 id="defines">Defines:</h3>
+<ul>
+<li><code>code/__DEFINES/~paw_defines/slime_crossbreeds.dm</code>: <code>COMSIG_SLIME_SPLIT</code></li>
+</ul>
+<h3 id="included-files-that-are-not-contained-in-this-module">Included files that are not contained in this module:</h3>
+<ul>
+<li><code>_maps/templates/paw/warped_room.dmm</code> - the pocket room behind the rainbow warping rune, bc map templates have to live under <code>_maps/</code></li>
+</ul>
+<h3 id="credits">Credits:</h3>
+<ul>
+<li>Absolucy - the original slime rancher rework (<a href="https://github.com/OculisStation/OculisStation/pull/472">OculisStation PR #472</a>) and this port</li>
+<li>BeeStation and OculisStation - the warping crossbreeds and the warped room map</li>
+</ul></td></tr></table></main><footer>tgstation.dme <a href="https://github.com/Monkestation/Monkes-Paw/tree/3052d5af037f99482db6ab1d043195fa57fc41bb">3052d5a</a> (master) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.12.0</a></footer></body></html>
