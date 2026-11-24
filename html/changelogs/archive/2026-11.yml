@@ -878,3 +878,17 @@
   - rscadd: 'New action: Intrusive Thought (variant of Personality Commune)'
   tattax:
   - bugfix: fix trasenknox pull icon sometimes showing up as the righthand cuff spritte
+2026-11-20:
+  Absolucy:
+  - balance: Oozelings are now fireproof again, although they still use the slime
+      wetness membrane thing for water, instead of the hydrophobia button.
+  Veth-s:
+  - rscadd: Pick your addiction with the Junkie trait!
+  - rscadd: spence plush and supermatter wife
+  - rscadd: AIs now have 120s to pick their set of laws on first spawn, if they do
+      not, it defaults to the randomly assigned one shift start.
+  ashallaryn:
+  - rscadd: Tiny fans are now craftable via 5 iron, 1 micro-manipulator, requires
+      wrench
+  flleeppyy:
+  - rscadd: all neccessary changes to kickstart modularization for paw
