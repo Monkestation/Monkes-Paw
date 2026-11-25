@@ -26,7 +26,7 @@
 /datum/store_item/plushies/spence
 	name = "spence Plushie"
 	item_path = /obj/item/toy/plush/paw/admin/spence
-	item_cost = 50000
+	item_cost = 5000
 
 /obj/item/toy/plush/paw/plushiematter
 	name = "Plushiematter Crystal"
@@ -50,7 +50,7 @@
 /datum/store_item/plushies/plushiematter
 	name = "plushiematter Plushie"
 	item_path = /obj/item/toy/plush/paw/plushiematter
-	item_cost = 50000
+	item_cost = 5000
 
 /obj/item/toy/plush/paw/tris
 	name = "tris"
@@ -73,4 +73,4 @@
 /datum/store_item/plushies/tris
 	name = "tris"
 	item_path = /obj/item/toy/plush/paw/tris
-	item_cost = 50000
+	item_cost = 5000
