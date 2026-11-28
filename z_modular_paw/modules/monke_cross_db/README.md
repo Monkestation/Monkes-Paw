@@ -18,7 +18,7 @@ Library, achievements, patreon data,
 E.g:
 - `code/modules/mob/living.dm`: `proc/overriden_proc`, `var/overriden_var`
   -->
-- `code/controllers/subsystem/achievements.dm`: `proc/update_metadata`, `proc/load_high_scores`
+- `code/controllers/subsystem/achievements.dm`: `Initialize`, `proc/save_achievements_to_db`, `proc/update_metadata`, `proc/load_high_scores`
 - `code/controllers/subsystem/dbcore.dm`: `proc/NewQuery`, `proc/MassInsert`
 - `code/datums/patreon_data.dm`: `proc/get_patreon_rank`
 - `monkestation/code/modules/client/persistent_client.dm`: `/datum/persistent_client/New` (patreon and twitch ranks)

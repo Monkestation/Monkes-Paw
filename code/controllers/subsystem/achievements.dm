@@ -45,7 +45,8 @@ SUBSYSTEM_DEF(achievements)
 	var/datum/db_query/query = SSdbcore.NewQuery(
 		"SELECT a.achievement_key, COUNT(a.achievement_key) AS count FROM [format_table_name("achievements")] a \
 		JOIN [format_table_name("achievement_metadata")] m ON a.achievement_key = m.achievement_key AND m.achievement_type = 'achievement' \
-		GROUP BY a.achievement_key ORDER BY count DESC"
+		GROUP BY a.achievement_key ORDER BY count DESC",
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	if(query.Execute(async = TRUE))
 		while(query.NextRow())
@@ -77,7 +78,7 @@ SUBSYSTEM_DEF(achievements)
 		cheevos_to_save += PD.achievements.get_changed_data()
 	if(!length(cheevos_to_save))
 		return
-	SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE)
+	SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE, cross_db = CONFIG_GET(flag/sql_enabled_cross)) // PAW EDIT - MONKE_CROSS_DB - ORIGINAL: SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE)
 	SEND_SIGNAL(src, COMSIG_ACHIEVEMENTS_SAVED_TO_DB)
 
 /// Fills the leaderboards of every score with one query instead of one per score.
