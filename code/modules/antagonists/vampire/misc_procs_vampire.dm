@@ -388,7 +388,7 @@
 		qdel(src)
 
 /// Cached max vassal cap, to prevent it from ever going down
-GLOBAL_VAR_INIT(highest_vassal_cap, 1)
+GLOBAL_VAR_INIT(highest_vassal_cap, 2)
 
 /proc/max_vampire_vassals()
 	var/total_players = SSgamemode.get_correct_popcount()
