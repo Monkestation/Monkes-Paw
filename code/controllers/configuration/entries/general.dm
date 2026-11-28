@@ -94,6 +94,9 @@
 /// log game events
 /datum/config_entry/flag/log_game
 
+/// log minimap drawing events
+/datum/config_entry/flag/log_minimap_drawing
+
 /// log mech data
 /datum/config_entry/flag/log_mecha
 
@@ -431,30 +434,6 @@
 
 /datum/config_entry/flag/irc_first_connection_alert // do we notify the irc channel when somebody is connecting for the first time?
 
-/datum/config_entry/string/ipintel_email
-
-/datum/config_entry/string/ipintel_email/ValidateAndSet(str_val)
-	return str_val != "ch@nge.me" && ..()
-
-/datum/config_entry/number/ipintel_rating_bad
-	default = 1
-	integer = FALSE
-	min_val = 0
-	max_val = 1
-
-/datum/config_entry/number/ipintel_save_good
-	default = 12
-	integer = FALSE
-	min_val = 0
-
-/datum/config_entry/number/ipintel_save_bad
-	default = 1
-	integer = FALSE
-	min_val = 0
-
-/datum/config_entry/string/ipintel_domain
-	default = "check.getipintel.net"
-
 /datum/config_entry/flag/aggressive_changelog
 
 /datum/config_entry/flag/autoconvert_notes //if all connecting player's notes should attempt to be converted to the database
@@ -650,6 +629,7 @@
 
 /// URL for admins to be redirected to for 2FA
 /datum/config_entry/string/admin_2fa_url
+	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/number/hard_deletes_overrun_threshold
 	integer = FALSE
@@ -675,8 +655,10 @@
 	default = "There are no admins currently on. Do not press the button below if your ahelp is a joke, a request or a question. Use it only for cases of obvious grief."
 
 /datum/config_entry/string/urgent_adminhelp_webhook_url
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
 /datum/config_entry/string/regular_adminhelp_webhook_url
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
 /datum/config_entry/string/adminhelp_webhook_pfp
 
@@ -794,7 +776,7 @@
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
 /datum/config_entry/string/twitch_key
-	default = "changethisplease"
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
 /datum/config_entry/flag/generate_assets_in_init
 	default = FALSE

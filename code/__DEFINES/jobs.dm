@@ -287,3 +287,4 @@
 #define JOB_EXPLORER "Explorer"
 
 #define JOB_XENOBIOLOGIST "Xenobiologist"
+
