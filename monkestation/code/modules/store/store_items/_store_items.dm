@@ -50,7 +50,9 @@
 	var/datum/db_query/query_add_gear_purchase = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("metacoin_item_purchases")] (`ckey`, `item_id`, `amount`) VALUES (:ckey, :item_id, 1)
 		ON DUPLICATE KEY UPDATE amount = 1"},
-		list("ckey" = buyer.ckey, "item_id" = item_path))
+		list("ckey" = buyer.ckey, "item_id" = item_path),
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
+	)
 	if(!query_add_gear_purchase.Execute())
 		buyers_preferences.inventory -= item_path
 		to_chat(buyer, fail_message)

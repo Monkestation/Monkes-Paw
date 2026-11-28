@@ -4,11 +4,13 @@
 		return
 	var/datum/db_query/query_get_metacoins = SSdbcore.NewQuery(
 		"SELECT metacoins FROM [format_table_name("player")] WHERE ckey = :ckey",
-		list("ckey" = ckey)
+		list("ckey" = ckey),
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	var/datum/db_query/query_gear = SSdbcore.NewQuery(
 		"SELECT item_id,amount FROM [format_table_name("metacoin_item_purchases")] WHERE ckey = :ckey",
-		list("ckey" = ckey)
+		list("ckey" = ckey),
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	SSdbcore.QuerySelect(list(query_get_metacoins, query_gear), warn = TRUE)
 
@@ -67,7 +69,8 @@
 	//SQL query - updates the metacoins in the database (this is where the storage actually happens)
 	var/datum/db_query/query_inc_metacoins = SSdbcore.NewQuery(
 		"UPDATE [format_table_name("player")] SET metacoins = metacoins + :amount WHERE ckey = :ckey",
-		list("amount" = amount, "ckey" = ckey)
+		list("amount" = amount, "ckey" = ckey),
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	if(!query_inc_metacoins.warn_execute())
 		metacoins -= amount
@@ -108,7 +111,8 @@
 
 	var/datum/db_query/query_inc_metacoins = SSdbcore.NewQuery(
 		"UPDATE [format_table_name("player")] SET metacoins = metacoins + CASE ckey [cases.Join(" ")] END WHERE ckey IN ([placeholders.Join(", ")])",
-		arguments
+		arguments,
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	if(!query_inc_metacoins.warn_execute())
 		qdel(query_inc_metacoins)

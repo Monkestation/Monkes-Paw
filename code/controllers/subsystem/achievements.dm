@@ -45,7 +45,8 @@ SUBSYSTEM_DEF(achievements)
 	var/datum/db_query/query = SSdbcore.NewQuery(
 		"SELECT a.achievement_key, COUNT(a.achievement_key) AS count FROM [format_table_name("achievements")] a \
 		JOIN [format_table_name("achievement_metadata")] m ON a.achievement_key = m.achievement_key AND m.achievement_type = 'achievement' \
-		GROUP BY a.achievement_key ORDER BY count DESC"
+		GROUP BY a.achievement_key ORDER BY count DESC",
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 	)
 	if(query.Execute(async = TRUE))
 		while(query.NextRow())
@@ -77,7 +78,7 @@ SUBSYSTEM_DEF(achievements)
 		cheevos_to_save += PD.achievements.get_changed_data()
 	if(!length(cheevos_to_save))
 		return
-	SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE)
+	SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE, cross_db = CONFIG_GET(flag/sql_enabled_cross)) // PAW EDIT - MONKE_CROSS_DB - ORIGINAL: SSdbcore.MassInsert(format_table_name("achievements"), cheevos_to_save, duplicate_key = TRUE)
 	SEND_SIGNAL(src, COMSIG_ACHIEVEMENTS_SAVED_TO_DB)
 
 /// Fills the leaderboards of every score with one query instead of one per score.
@@ -103,7 +104,9 @@ SUBSYSTEM_DEF(achievements)
 			) ranked
 			WHERE rank_in_key <= 50
 			ORDER BY achievement_key, rank_in_key
-		"}, query_args)
+		"}, query_args,
+			cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
+		)
 		if(query.Execute(async = TRUE))
 			while(query.NextRow())
 				var/datum/award/score/score = scores_by_db_id[query.item[1]]
@@ -117,7 +120,9 @@ SUBSYSTEM_DEF(achievements)
 /datum/controller/subsystem/achievements/proc/update_metadata()
 	var/list/current_metadata = list()
 	//select metadata here
-	var/datum/db_query/Q = SSdbcore.NewQuery("SELECT achievement_key,achievement_version FROM [format_table_name("achievement_metadata")]")
+	var/datum/db_query/Q = SSdbcore.NewQuery("SELECT achievement_key,achievement_version FROM [format_table_name("achievement_metadata")]",
+		cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
+	)
 	if(!Q.Execute(async = TRUE))
 		qdel(Q)
 		return
@@ -133,4 +138,4 @@ SUBSYSTEM_DEF(achievements)
 			to_update += list(A.get_metadata_row())
 
 	if(to_update.len)
-		SSdbcore.MassInsert(format_table_name("achievement_metadata"),to_update,duplicate_key = TRUE)
+		SSdbcore.MassInsert(format_table_name("achievement_metadata"),to_update,duplicate_key = TRUE, cross_db = CONFIG_GET(flag/sql_enabled_cross)) // PAW EDIT - MONKE_CROSS_DB - ORIGINAL: SSdbcore.MassInsert(format_table_name("achievement_metadata"),to_update,duplicate_key = TRUE)

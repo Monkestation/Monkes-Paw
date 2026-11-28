@@ -22,7 +22,8 @@
 	if(SSdbcore.IsConnected())
 		var/datum/db_query/query_get_ranks = SSdbcore.NewQuery(
 			"SELECT patreon_key, patreon_rank, twitch_rank FROM [format_table_name("player")] WHERE ckey = :ckey",
-			list("ckey" = ckey)
+			list("ckey" = ckey),
+			cross_db = CONFIG_GET(flag/sql_enabled_cross) // PAW EDIT ADDITION - MONKE_CROSS_DB
 		)
 		if(query_get_ranks.warn_execute() && query_get_ranks.NextRow())
 			stored_patreon_key = query_get_ranks.item[1]
