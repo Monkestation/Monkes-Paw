@@ -38,6 +38,7 @@ jobs:
           sparse-checkout: |
             _maps
             .github
+            build/behavior_trees
             code/datums/greyscale/json_configs
             data/cassette_storage
             goon/icons
@@ -51,6 +52,7 @@ jobs:
             SQL/tgstation_schema_prefixed.sql
             tools/ci/install_byond.sh
             tools/ci/install_dreamluau.sh
+            tools/ci/install_navmap_pathfinder.sh
             tools/ci/install_rust_g.sh
             tools/ci/mysql_config.cnf
             tools/ci/run_server.sh

@@ -10,6 +10,7 @@
 	suicide_cry = "FOR THE SYNDICATE!!"
 	remove_from_manifest = TRUE
 	stinger_sound = 'sound/music/antag/ops.ogg'
+	desensitized_modifier = DESENSITIZED_THRESHOLD * 0.5
 	antag_count_points = 12
 	/// Which nukie team are we on?
 	var/datum/team/nuclear/nuke_team
@@ -57,6 +58,7 @@
 /datum/antagonist/nukeop/on_gain()
 	give_alias()
 	forge_objectives()
+	owner.current.add_personality(/datum/personality/callous)
 	. = ..()
 	equip_op()
 	if(send_to_spawnpoint)
@@ -319,7 +321,7 @@
 
 /datum/antagonist/nukeop/leader/proc/ask_name()
 	var/randomname = pick(GLOB.last_names)
-	var/newname = tgui_input_text(owner.current, "You are the nuclear operative [title]. Please choose a last name for your family.", "Name change", randomname, MAX_NAME_LEN)
+	var/newname = tgui_input_text(owner.current, "You are the nuclear operative [title]. Please choose a last name for your family.", "Name change", randomname, MAX_NAME_LEN, encode = FALSE)
 	if (!newname)
 		newname = randomname
 	else

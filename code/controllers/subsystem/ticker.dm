@@ -507,10 +507,14 @@ SUBSYSTEM_DEF(ticker)
 			var/acting_captain = !is_captain_job(player_assigned_role)
 			SSjob.promote_to_captain(new_player_living, acting_captain)
 			OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(minor_announce), player_assigned_role.get_captaincy_announcement(new_player_living)))
-		if((player_assigned_role.job_flags & JOB_ASSIGN_QUIRKS) && ishuman(new_player_living) && CONFIG_GET(flag/roundstart_traits))
-			if(new_player_mob.client?.prefs?.should_be_random_hardcore(player_assigned_role, new_player_living.mind))
-				new_player_mob.client.prefs.hardcore_random_setup(new_player_living)
-			SSquirks.AssignQuirks(new_player_living, new_player_mob.client)
+		if(ishuman(new_player_living))
+			if(player_assigned_role.job_flags & JOB_ASSIGN_QUIRKS)
+				if(CONFIG_GET(flag/roundstart_traits))
+					if(new_player_mob.client?.prefs?.should_be_random_hardcore(player_assigned_role, new_player_living.mind))
+						new_player_mob.client.prefs.hardcore_random_setup(new_player_living)
+					SSquirks.AssignQuirks(new_player_living, new_player_mob.client)
+			else // clear any personalities the prefs added since our job clearly does not want them
+				new_player_living.clear_personalities()
 
 		if(ishuman(new_player_living))
 			for(var/datum/loadout_item/item as anything in loadout_list_to_datums(new_player_mob.client?.prefs?.loadout_list))
@@ -812,8 +816,10 @@ SUBSYSTEM_DEF(ticker)
 	var/client/player_client = player?.client
 	if(!player_client)
 		return
-	var/volume = clamp(calculate_mixed_volume(player_client, 100, CHANNEL_LOBBYMUSIC), 15, 100)
-	SEND_SOUND(player_client, sound(round_end_sound, wait = 0, channel = CHANNEL_LOBBYMUSIC, volume = volume))
+	var/volume = calculate_mixed_volume(player_client, 100, CHANNEL_LOBBYMUSIC)
+	if(!volume)
+		return
+	SEND_SOUND(player_client, sound(round_end_sound, wait = 0, channel = CHANNEL_LOBBYMUSIC, volume = clamp(volume, 15, 100)))
 
 /datum/controller/subsystem/ticker/proc/Reboot(reason, end_string, delay)
 	set waitfor = FALSE
@@ -830,15 +836,14 @@ SUBSYSTEM_DEF(ticker)
 
 	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
 
-	var/start_wait = world.time
+	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay, TIMER_STOPPABLE)
+	// SetRoundEndSound() schedules the sound itself once every client has it
 	if(!round_end_sound)
 		var/song = choose_round_end_song()
 		if(song)
 			SetRoundEndSound(song)
-	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2)) //don't wait forever
-	var/time_left = delay - (world.time - start_wait)
-	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), time_left, TIMER_STOPPABLE)
-	schedule_round_end_sound(time_left)
+	else if(round_end_sound_sent)
+		schedule_round_end_sound(delay)
 
 
 /datum/controller/subsystem/ticker/proc/reboot_callback(reason, end_string)
@@ -1824,9 +1829,6 @@ SUBSYSTEM_DEF(ticker)
 		sql_mentors += list(list("ckey" = A.target, "rank" = A.rank_names()))
 
 	SSdbcore.MassInsert(format_table_name("mentor"), sql_mentors, duplicate_key = TRUE)
-	var/datum/db_query/query_mentor_rank_update = SSdbcore.NewQuery("UPDATE [format_table_name("player")] p INNER JOIN [format_table_name("mentor")] a ON p.ckey = a.ckey SET p.lastmentorrank = a.rank")
-	query_mentor_rank_update.Execute()
-	qdel(query_mentor_rank_update)
 
 	//json format backup file generation stored per server
 	var/json_file = file("data/mentors_backup.json")
@@ -1919,25 +1921,25 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/distribute_rewards(list/coin_rewards)
 	var/minutes = round((world.time - SSticker.round_start_time) / (1 MINUTES))
 	var/added_xp = round(25 + (minutes ** 0.85))
+	var/list/totals = list()
 	for(var/ckey in coin_rewards)
-		distribute_rewards_to_client(ckey, added_xp, coin_rewards[ckey])
+		totals[ckey] = distribute_rewards_to_client(ckey, added_xp, coin_rewards[ckey])
+	mass_adjust_metacoins(totals, "roundend rewards", announces = FALSE)
 	save_all_jobxp() // monkestation edit: nothing else saves the job xp
 
 /datum/controller/subsystem/ticker/proc/distribute_rewards_to_client(ckey, added_xp, list/rewards)
 	var/client/client = GLOB.directory[ckey]
 	if(!client)
-		return
+		return 0
 	var/total_amount = 0
 	for(var/reward in rewards)
 		var/amount = reward[1]
 		var/reason = reward[2]
 		total_amount += amount
 		to_chat(client, span_rose(span_bold("[abs(amount)] Monkecoins have been [amount >= 0 ? "deposited to" : "withdrawn from"] your account! Reason: [reason]")))
-	// don't do separate SQL queries for each reward, just add all the coins at once lol
-	if(total_amount)
-		client?.prefs?.adjust_metacoins(ckey, total_amount, reason = "roundend rewards", announces = FALSE)
 	if(client?.mob?.mind?.assigned_role)
 		add_jobxp(client, added_xp, client?.mob?.mind?.assigned_role?.title)
+	return total_amount
 
 /datum/controller/subsystem/ticker/proc/calculate_rewards_for_client(client/client, list/queue)
 	if(!istype(client) || QDELING(client) || isnewplayer(client?.mob))

@@ -11,8 +11,8 @@
 	density = FALSE
 	pass_flags = PASSTABLE|PASSGRILLE|PASSMOB
 	mob_size = MOB_SIZE_TINY
-	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_TINY
+	inhand_holder_type = /obj/item/clothing/head/mob_holder/mouse
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	gold_core_spawnable = FRIENDLY_SPAWN
 	faction = list(FACTION_RAT, FACTION_MAINT_CREATURES)
@@ -55,6 +55,7 @@
 
 /mob/living/basic/mouse/Initialize(mapload, tame = FALSE, new_body_color)
 	. = ..()
+	AddElement(/datum/element/can_be_held)
 	if(contributes_to_ratcap)
 		var/cap = CONFIG_GET(number/ratcap)
 		if (LAZYLEN(SSmobs.cheeserats) > cap)
@@ -206,16 +207,13 @@
 	faction |= FACTION_NEUTRAL
 	tame = TRUE
 	try_consume_cheese(cheese)
-	ai_controller.CancelActions() // Interrupt any current fleeing
+	ai_controller.cancel_current_plan() // Interrupt any current fleeing
 
-/// Replaces the default mob_holder with our version
 /mob/living/basic/mouse/mob_pickup(mob/living/user)
-	var/obj/item/clothing/head/mob_holder/mouse/holder = new(get_turf(src), src, held_state, head_icon, held_lh, held_rh, worn_slot_flags)
+	var/obj/item/clothing/head/mob_holder/mouse/holder = ..()
 	if(tame)
 		holder.toolspeed -= 0.3
-	user.visible_message(span_warning("[user] scoops up [src]!"))
-	user.put_in_hands(holder)
-	SEND_SIGNAL(src, COMSIG_MOB_PICKED_UP, user, holder)
+	return holder
 
 /// Attempts to consume a piece of cheese, causing a few effects.
 /mob/living/basic/mouse/proc/try_consume_cheese(obj/item/food/cheese/cheese)
@@ -444,6 +442,7 @@
 
 /// The mouse AI controller
 /datum/ai_controller/basic_controller/mouse
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/mouse.bt.json"
 	blackboard = list( // Always cowardly
 		BB_CURRENT_HUNTING_TARGET = null, // cheese
 		BB_LOW_PRIORITY_HUNTING_TARGET = null, // cable
@@ -460,48 +459,29 @@
 
 	ai_traits = STOP_MOVING_WHEN_PULLED
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-	planning_subtrees = list(
-		// Top priority is to look for and execute hunts for cheese even if someone is looking at us
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cheese,
-		// Next priority is see if anyone is looking at us
-		/datum/ai_planning_subtree/simple_find_nearest_target_to_flee,
-		// Skedaddle
-		/datum/ai_planning_subtree/flee_target/mouse,
-		// Try to speak, because it's cute
-		/datum/ai_planning_subtree/random_speech/mouse,
-		// Otherwise, look for and execute hunts for cabling
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cables,
-	)
-
-/// Don't look for anything to run away from if you are distracted by being adjacent to cheese
-/datum/ai_planning_subtree/flee_target/mouse
-
-/datum/ai_planning_subtree/flee_target/mouse/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
-	var/atom/hunted_cheese = controller.blackboard[BB_CURRENT_HUNTING_TARGET]
-	if (!isnull(hunted_cheese))
-		return // We see some cheese, which is more important than our life
-	return ..()
 
 /// AI controller for rats, slightly more complex than mice becuase they attack people
 /datum/ai_controller/basic_controller/mouse/rat
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/mouse_rat.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
-		BB_BASIC_MOB_CURRENT_TARGET = null, // heathen
+		BB_CURRENT_TARGET = null, // heathen
 		BB_CURRENT_HUNTING_TARGET = null, // cheese
 		BB_LOW_PRIORITY_HUNTING_TARGET = null, // cable
 	)
 
 	ai_traits = STOP_MOVING_WHEN_PULLED
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/pet_planning,
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cheese,
-		/datum/ai_planning_subtree/random_speech/mouse,
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cables,
-	)
+
+
+
+
+/datum/bt_node/subtree/eat_cable
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/eat_cable.bt.json"
+
+/datum/bt_node/subtree/eat_cheese
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/eat_cheese.bt.json"
+
+/datum/bt_node/subtree/play_instrument_on_floor
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/play_instrument_on_floor.bt.json"

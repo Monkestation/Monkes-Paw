@@ -95,6 +95,7 @@
 	if(!SSatoms.initialized)
 		return
 
+	SSair.hold_machinery_for_template(atmos_machines)
 	SSatoms.InitializeAtoms(areas + turfs + movables, returns_created_atoms ? created_atoms : null)
 
 	for(var/turf/unlit as anything in turfs)
@@ -212,7 +213,7 @@
 	if(!bounds)
 		return
 
-	if(no_changeturf && !istype(src, /datum/map_template/automap_template)) // PAW EDIT CHANGE - AUTOMAPPER - the navmap bake already includes automapper templates - ORIGINAL: if(no_changeturf)
+	if(no_changeturf)
 		// This load skips ChangeTurf, so dirty its region directly.
 		for(var/turf/changed_turf as anything in block(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ], bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ]))
 			changed_turf.nav_dirty()
