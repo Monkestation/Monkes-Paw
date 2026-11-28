@@ -91,7 +91,7 @@
 			connect_kheiral_network(loc)
 
 // LEMON AND HERE
-/obj/item/kheiral_cuffs/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/kheiral_cuffs/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands)
 		. += emissive_appearance(icon_file, "strandcuff_emissive", src, alpha = src.alpha)
@@ -114,5 +114,5 @@
 		to_chat(victim, span_danger("You age [(victim.age - before_age)] years!"))
 
 	to_chat(victim, span_danger("At the ripe age of [victim.age], your cells fail their cycle of mitosis, allowing the sands of time to wash over you."))
-	victim.dust(TRUE, TRUE, TRUE)
+	victim.dust(just_ash = TRUE, drop_items = TRUE, force = TRUE)
 	return MANUAL_SUICIDE

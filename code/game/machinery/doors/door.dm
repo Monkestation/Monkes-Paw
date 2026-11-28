@@ -14,7 +14,7 @@
 	max_integrity = 350
 	armor_type = /datum/armor/machinery_door
 	can_atmos_pass = ATMOS_PASS_DENSITY
-	flags_1 = PREVENT_CLICK_UNDER_1
+	flags_1 = PREVENT_CLICK_UNDER_1 | NAV_ALWAYS_CONDITIONAL_1
 	receive_ricochet_chance_mod = 0.8
 	damage_deflection = 10
 
@@ -27,6 +27,8 @@
 	var/visible = TRUE
 	var/operating = FALSE
 	var/glass = FALSE
+	tacmap_color = TACMAP_DOOR
+
 	/// Do we need to keep track of a filler panel with the airlock
 	var/multi_tile
 	/// A filler object used to fill the space of multi-tile airlocks
@@ -180,6 +182,9 @@
 
 	filler.density = density
 	filler.set_opacity(opacity)
+	var/turf/filler_turf = get_turf(filler)
+	if(filler_turf)
+		filler_turf.nav_dirty()
 
 /**
  * Checks which way the airlock is facing and adjusts the direction accordingly.
@@ -287,7 +292,7 @@
 
 	if(isliving(user) && isnull(user.mind))
 		var/mob/living/living_user = user
-		if(living_user.mob_size < MOB_SIZE_HUMAN)
+		if(living_user.mob_size < MOB_SIZE_HUMAN && !isbot(living_user))
 			return
 
 	if(elevator_mode && elevator_status == LIFT_PLATFORM_UNLOCKED)

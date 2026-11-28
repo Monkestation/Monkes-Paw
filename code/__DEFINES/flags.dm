@@ -20,6 +20,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define DF_USE_TAG (1<<0)
 #define DF_VAR_EDITED (1<<1)
 #define DF_ISPROCESSING (1<<2)
+/// Set on datums that should be tracked by the event logger.
+#define DF_EVLOGGING (1<<4)
 
 //FLAGS BITMASK
 // scroll down before changing the numbers on these
@@ -71,6 +73,10 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define DECAL_INIT_UPDATE_EXPERIENCED_1 (1<<20)
 /// This atom does not need to generate its own preview icon for GAGS
 #define NO_NEW_GAGS_PREVIEW_1 (1<<21)
+/// This atom does not affect navmap baking.
+#define NAV_IRRELEVANT_1 (1<<22)
+/// This atom is always a live navmap blocker, regardless of density.
+#define NAV_ALWAYS_CONDITIONAL_1 (1<<23)
 
 // Update flags for [/atom/proc/update_appearance]
 /// Update the atom's name
@@ -113,6 +119,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 /// This atom is a pseudo-floor that blocks map generation's checkPlaceAtom() from placing things like trees ontop of it.
 #define TURF_BLOCKS_POPULATE_TERRAIN_FLORAFEATURES (1<<8)
+/// This turf is queued for navmap baking.
+#define NAV_QUEUED (1<<9)
 
 ////////////////Area flags\\\\\\\\\\\\\\
 /// If it's a valid territory for cult summoning or the CRAB-17 phone to spawn
@@ -153,6 +161,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define AREA_BLOCKS_OUTGOING_RADIO (1<<17)
 /// Fishing here won't remove unique/limited loot from sources that are also used outside of it
 #define UNLIMITED_FISHING (1<<18)
+/// Gravity generators don't affect this area, so it has no gravity unless has_gravity is set
+#define NO_GRAVITY (1<<19)
 
 ////////////////Area Mapping Flags\\\\\\\\\\\\\\
 /// If false, loading multiple maps with this area type will create multiple instances.
@@ -367,3 +377,23 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Does this emote play a visual when being played, unrelated to whether or not it's visual
 //(which is whether you need to see to be told of the emote being played)
 #define EMOTE_HAS_VISUAL (1<<3)
+
+// Flags for the empath component
+/// Can the empath see if a living mob has combat mode on
+#define EMPATH_SEE_COMBAT (1<<0)
+/// Can the empath see if living mob has over 10 oxyloss
+#define EMPATH_SEE_OXY (1<<1)
+/// Can the empath see if living mob has over 10 toxloss
+#define EMPATH_SEE_TOX (1<<2)
+/// Can the empath see if living mob's sanity is at distressed or below
+#define EMPATH_SEE_SANITY (1<<3)
+/// Can the empath see if living mob is blind
+#define EMPATH_SEE_BLIND (1<<4)
+/// Can the empath see if living mob is deaf
+#define EMPATH_SEE_DEAF (1<<5)
+/// Can the empath see if living mob's body temperature is too hot for their species
+#define EMPATH_SEE_HOT (1<<6)
+/// Can the empath see if living mob's body temperature is too low for their species
+#define EMPATH_SEE_COLD (1<<7)
+/// Can the empath see if living mob has the fundamentally evil trait
+#define EMPATH_SEE_EVIL (1<<8)

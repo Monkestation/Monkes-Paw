@@ -105,6 +105,8 @@ SUBSYSTEM_DEF(gamemode)
 	/// Is storyteller secret or not
 	var/secret_storyteller = FALSE
 
+	var/alist/antag_poll_declines = alist()
+
 	/// List of new player minds we currently want to give our roundstart antag to
 	var/list/roundstart_antag_minds = list()
 
@@ -184,7 +186,7 @@ SUBSYSTEM_DEF(gamemode)
 		else if(!sch_event.alerted_admins && world.time >= sch_event.start_time - 1 MINUTES)
 			///Alert admins 1 minute before running and allow them to cancel or refund the event, once again.
 			sch_event.alerted_admins = TRUE
-			message_admins("Scheduled Event: [sch_event.event] will run in [DisplayTimeText(sch_event.start_time - world.time)]. (<a href='byond://?src=[REF(sch_event)];action=cancel'>CANCEL</a>) (<a href='byond://?src=[REF(sch_event)];action=refund'>REFUND</a>)")
+			message_admins("Scheduled Event: [sch_event.event] will run in [DisplayTimeText(sch_event.start_time - world.time)]. (<a href='byond://?src=[REF(sch_event)];[HrefToken(forceGlobal = TRUE)];action=cancel'>CANCEL</a>) (<a href='byond://?src=[REF(sch_event)];[HrefToken(forceGlobal = TRUE)];action=refund'>REFUND</a>)")
 
 	if(!halted_storyteller && current_storyteller)
 		// We update crew information here to adjust population scalling and event thresholds for the storyteller.
@@ -223,7 +225,7 @@ SUBSYSTEM_DEF(gamemode)
 		var/datum/job/player_role = player.mind?.assigned_role
 		if(player_role)
 			points += player_role.antag_capacity_points
-	return ANTAG_CAP_FLAT + max(points - (ANTAG_CAP_FLAT + 5), 1)
+	return max(points * ANTAG_CAP_LOWPOP_MULT, points - ANTAG_CAP_OFFSET)
 
 /// Return the total point value of active antags
 /datum/controller/subsystem/gamemode/proc/get_antag_count()
@@ -248,6 +250,14 @@ SUBSYSTEM_DEF(gamemode)
 /// Whether events can inject more antagonists into the round
 /datum/controller/subsystem/gamemode/proc/can_inject_antags()
 	return (get_antag_cap() > get_antag_count())
+
+/datum/controller/subsystem/gamemode/proc/remove_recent_decliners(list/candidates)
+	. = list()
+	for(var/mob/candidate as anything in candidates)
+		var/declined_at = antag_poll_declines[candidate.ckey]
+		if(declined_at && world.time < declined_at + ANTAG_DECLINE_COOLDOWN)
+			continue
+		. += candidate
 
 /// Gets candidates for antagonist roles.
 /datum/controller/subsystem/gamemode/proc/get_candidates(role, job_ban, observers, ready_newplayers, living_players, required_time, inherit_required_time = TRUE, \
@@ -371,9 +381,9 @@ SUBSYSTEM_DEF(gamemode)
 	var/datum/scheduled_event/scheduled = new (passed_event, world.time + passed_time, passed_cost, passed_ignore, passed_announce)
 	var/round_started = SSticker.HasRoundStarted()
 	if(round_started)
-		message_admins("Event: [passed_event] has been scheduled to run in [DisplayTimeText(passed_time)]. (<a href='byond://?src=[REF(scheduled)];action=cancel'>CANCEL</a>) (<a href='byond://?src=[REF(scheduled)];action=refund'>REFUND</a>)")
+		message_admins("Event: [passed_event] has been scheduled to run in [DisplayTimeText(passed_time)]. (<a href='byond://?src=[REF(scheduled)];[HrefToken(forceGlobal = TRUE)];action=cancel'>CANCEL</a>) (<a href='byond://?src=[REF(scheduled)];[HrefToken(forceGlobal = TRUE)];action=refund'>REFUND</a>)")
 	else //Only roundstart events can be scheduled before round start
-		message_admins("Event: [passed_event] has been scheduled to run on roundstart. (<a href='byond://?src=[REF(scheduled)];action=cancel'>CANCEL</a>)")
+		message_admins("Event: [passed_event] has been scheduled to run on roundstart. (<a href='byond://?src=[REF(scheduled)];[HrefToken(forceGlobal = TRUE)];action=cancel'>CANCEL</a>)")
 	scheduled_events += scheduled
 
 //simplified version of `get_active_player_count()`

@@ -119,11 +119,13 @@ SUBSYSTEM_DEF(dbcore)
 			queries_active -= query
 
 	// Now lets pull in standby queries if we have room.
-	if (length(queries_standby) > 0 && length(queries_active) < max_concurrent_queries)
-		var/list/queries_to_activate = queries_standby.Copy(1, min(length(queries_standby), max_concurrent_queries) + 1)
+	var/open_slots = max_concurrent_queries - length(queries_active)
+	if (length(queries_standby) > 0 && open_slots > 0)
+		var/activate_count = min(length(queries_standby), open_slots)
+		var/list/queries_to_activate = queries_standby.Copy(1, activate_count + 1)
+		queries_standby.Cut(1, activate_count + 1)
 
 		for (var/datum/db_query/query in queries_to_activate)
-			queries_standby.Remove(query)
 			create_active_query(query)
 
 	// And finally, let check queries for undeleted queries, check ticking if there is a lot of work to do.
@@ -249,6 +251,8 @@ SUBSYSTEM_DEF(dbcore)
 	if(var_name == NAMEOF(src, queries_standby))
 		return FALSE
 	if(var_name == NAMEOF(src, processing_queries))
+		return FALSE
+	if(var_name == NAMEOF(src, max_concurrent_queries))
 		return FALSE
 	return ..()
 
@@ -576,6 +580,8 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	var/list/item  //list of data values populated by NextRow()
 
 /datum/db_query/New(connection, sql, arguments)
+	if(IsAdminAdvancedProcCall())
+		CRASH("Advanced admin proc call tried to create a db query directly: [sql]")
 	SSdbcore.all_queries += src
 	SSdbcore.all_queries_num++
 	Activity("Created")
@@ -594,6 +600,13 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 
 /datum/db_query/CanProcCall(proc_name)
 	//fuck off kevinz
+	return FALSE
+
+// a query waiting in the standby queue reads its sql when it finally runs, so editing one is the same as writing your own query
+/datum/db_query/vv_edit_var(var_name, var_value)
+	return FALSE
+
+/datum/db_query/can_vv_get(var_name)
 	return FALSE
 
 /datum/db_query/proc/Activity(activity)
@@ -618,6 +631,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	if(!async)
 		start_time = REALTIMEOFDAY
 	Close()
+	job_id = null
 	status = DB_QUERY_STARTED
 	if(async)
 		if(!MC_RUNNING(SSdbcore.init_stage))
@@ -648,7 +662,9 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 
 /// Sleeps until execution of the query has finished.
 /datum/db_query/proc/sync()
-	while(status < DB_QUERY_FINISHED)
+	while(!isnull(status) && status < DB_QUERY_FINISHED)
+		if(job_id && process())
+			return
 		stoplag()
 
 /datum/db_query/process(seconds_per_tick)

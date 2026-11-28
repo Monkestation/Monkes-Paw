@@ -9,6 +9,7 @@
 	inhand_icon_state = null
 	armor_type = /datum/armor/utility_hardhat
 	flags_inv = 0
+	hair_mask = /datum/hair_mask/standard_hat_middle
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
 	clothing_flags = SNUG_FIT | PLASMAMAN_HELMET_EXEMPT
 	resistance_flags = FIRE_PROOF
@@ -102,7 +103,7 @@
 /obj/item/clothing/head/utility/hardhat/fire/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
 	. = ..()
 	if(!isinhands)
-		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha)
+		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
 
 /obj/item/clothing/head/utility/hardhat/upgraded
 	name = "workplace-ready hardhat"
@@ -162,7 +163,7 @@
 	if(.)
 		playsound(src, 'sound/vehicles/mecha/mechmove03.ogg', 50, TRUE)
 
-/obj/item/clothing/head/utility/hardhat/welding/worn_overlays(mutable_appearance/standing, isinhands)
+/obj/item/clothing/head/utility/hardhat/welding/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(isinhands)
 		return
@@ -212,6 +213,7 @@
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	visor_flags_cover = NONE
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
+	hair_mask = null
 	transparent_protection = HIDEMASK|HIDEEYES
 	visor_flags_inv = NONE
 	visor_state = "weldvisor_atmos"
@@ -220,10 +222,10 @@
 	. = ..()
 	AddElement(/datum/element/equipment_bodypart_texture, BODY_ZONE_HEAD, /datum/bodypart_texture/mesh/firesuit)
 
-/obj/item/clothing/head/utility/hardhat/welding/atmos/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/clothing/head/utility/hardhat/welding/atmos/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands)
-		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha)
+		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
 
 /obj/item/clothing/head/utility/hardhat/pumpkinhead
 	name = "carved pumpkin"
@@ -235,6 +237,8 @@
 	hat_type = "pumpkin"
 	clothing_flags = SNUG_FIT | PLASMAMAN_HELMET_EXEMPT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
+	hair_mask = null
+
 	armor_type = /datum/armor/none
 	light_outer_range = 2 //luminosity when on
 	flags_cover = HEADCOVERSEYES
@@ -257,7 +261,7 @@
 	if(light_on)
 		. += emissive_appearance(icon, "carved_pumpkin-emissive", src, alpha = src.alpha)
 
-/obj/item/clothing/head/utility/hardhat/pumpkinhead/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/clothing/head/utility/hardhat/pumpkinhead/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(light_on && !isinhands)
 		. += emissive_appearance(icon_file, "carved_pumpkin-emissive", src, alpha = src.alpha)
@@ -296,6 +300,7 @@
 	inhand_icon_state = null
 	hat_type = "reindeer"
 	flags_inv = 0
+	hair_mask = null
 	armor_type = /datum/armor/none
 	light_outer_range = 1 //luminosity when on
 

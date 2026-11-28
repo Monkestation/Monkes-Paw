@@ -12,6 +12,7 @@
 	preview_outfit = /datum/outfit/cultist
 	antag_flags = parent_type::antag_flags | FLAG_ANTAG_CAP_TEAM
 	antag_count_points = 3 //conversion antag, very low cost per member
+	desensitized_modifier = DESENSITIZED_THRESHOLD
 	var/datum/action/innate/cult/comm/communion = new
 	var/datum/action/innate/cult/mastervote/vote = new
 	var/datum/action/innate/cult/blood_magic/magic = new
@@ -531,8 +532,8 @@
 
 	blood_target_image = image('icons/effects/mouse_pointers/cult_target.dmi', new_target, "glow", ABOVE_MOB_LAYER)
 	blood_target_image.appearance_flags = RESET_COLOR
-	blood_target_image.pixel_x = -new_target.pixel_x
-	blood_target_image.pixel_y = -new_target.pixel_y
+	blood_target_image.pixel_w = -new_target.pixel_x
+	blood_target_image.pixel_z = -new_target.pixel_y
 
 	for(var/datum/mind/cultist as anything in members)
 		if(!cultist.current)

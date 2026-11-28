@@ -131,10 +131,7 @@
 #endif // 1 to use the default behaviour;
 								// 2 for preloading absolutely everything;
 
-#ifdef LOWMEMORYMODE
-#define FORCE_MAP "runtimestation"
 #define FORCE_MAP_DIRECTORY MAP_DIRECTORY_MAPS
-#endif
 
 //Additional code for the above flags.
 #ifdef TESTING
@@ -181,5 +178,6 @@
 		#warn Building with Dream Maker is no longer supported and will result in errors.
 		#warn In order to build, run BUILD.cmd in the root directory.
 		#warn Consider switching to VSCode editor instead, where you can press Ctrl+Shift+B to build.
+		#warn Without CBT, GAGS map icons break. Delete tgstation.dmb before your next BUILD.cmd, or it will reuse this build.
 	#endif
 #endif

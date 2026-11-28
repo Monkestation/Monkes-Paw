@@ -81,6 +81,24 @@ export const DmMapsIncludeTarget = new Juke.Target({
   },
 });
 
+export const BehaviorTreeCompilerTarget = new Juke.Target({
+  inputs: [
+    'code/**/*.bt.json',
+    'monkestation/code/**/*.bt.json',
+    'code/__DEFINES/**/*.dm',
+    'tools/build_bt.py',
+  ],
+  outputs: () => {
+    return Juke.glob('code/**/*.bt.json').map((file) => {
+      const rel = file.replace(/\.bt\.json$/, '');
+      return `build/behavior_trees/${rel}.bt.compiled.json`;
+    });
+  },
+  executes: async () => {
+    await Juke.exec('python', ['tools/build_bt.py']);
+  },
+});
+
 export const DmTarget = new Juke.Target({
   parameters: [
     DefineParameter,
@@ -90,6 +108,7 @@ export const DmTarget = new Juke.Target({
   ],
   dependsOn: ({ get }) => [
     get(DefineParameter).includes('ALL_MAPS') && DmMapsIncludeTarget,
+    BehaviorTreeCompilerTarget,
   ],
   inputs: [
     '_maps/map_files/generic/**',
@@ -106,8 +125,9 @@ export const DmTarget = new Juke.Target({
     NamedVersionFile,
   ],
   outputs: ({ get }) => {
-    if (get(DmVersionParameter)) {
-      return []; // Always rebuild when dm version is provided
+    if (get(DmVersionParameter) || get(DefineParameter).length > 0) {
+      // Always rebuild when a dm version or explicit CLI defines are provided to ensure juke re-runs
+      return [];
     }
     return [`${DME_NAME}.dmb`, `${DME_NAME}.rsc`];
   },

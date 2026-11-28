@@ -202,9 +202,84 @@
 
 /datum/status_effect/exercised
 	id = "Exercised"
-	duration = 1200
+	duration = 15 SECONDS
+	status_type = STATUS_EFFECT_REFRESH // New effects will add to total duration
 	alert_type = null
 	processing_speed = STATUS_EFFECT_NORMAL_PROCESS
+	alert_type = /atom/movable/screen/alert/status_effect/exercised
+	/// Having any of these reagents in your system extends the duration
+	var/static/list/supplementary_reagents_bonus = list(
+		/datum/reagent/consumable/ethanol/protein_blend = 10 SECONDS, // protein shakes are very robust
+		/datum/reagent/consumable/nutriment/protein = 5 SECONDS,
+		/datum/reagent/consumable/nutriment/vitamin = 4 SECONDS,
+		/datum/reagent/consumable/milk = 4 SECONDS,
+		/datum/reagent/consumable/rice = 3 SECONDS,
+		// keep in mind you can eat a raw egg to acquire both these reagents at the same time
+		/datum/reagent/consumable/eggwhite = 3 SECONDS,
+		/datum/reagent/consumable/eggyolk = 2 SECONDS,
+		// weak workout food
+		/datum/reagent/consumable/nutraslop = 2 SECONDS, // prison food to bulk up with
+		/datum/reagent/consumable/soymilk = 1 SECONDS, // darn vegans!
+		// time for the bad stuff
+		/datum/reagent/consumable/sugar = -1 SECONDS,
+		/datum/reagent/consumable/monkey_energy = -1 SECONDS, // the marketing was a lie
+	)
+
+/// Returns how much extra time a workout adds, based on our diet, traits and athletics level
+/datum/status_effect/exercised/proc/workout_duration(mob/living/new_owner, bonus_time)
+	if(!bonus_time || !new_owner.mind || !iscarbon(new_owner))
+		return 0 SECONDS
+
+	var/modifier = 1
+	if(HAS_TRAIT(new_owner, TRAIT_HULK))
+		modifier += 0.5
+
+	if(HAS_TRAIT(new_owner, TRAIT_STIMMED)) // Naturally produces stimulants to help get you PUMPED
+		modifier += 1
+
+	if(HAS_TRAIT(new_owner, TRAIT_FAT)) // less xp until you get into shape
+		modifier -= 0.5
+
+	if(new_owner.reagents.has_reagent(/datum/reagent/drug/pumpup)) // steriods? yes please!
+		modifier += 3
+
+	var/food_boost = 0
+	for(var/datum/reagent/workout_reagent in supplementary_reagents_bonus)
+		if(new_owner.reagents.has_reagent(workout_reagent))
+			food_boost += supplementary_reagents_bonus[workout_reagent]
+
+	var/skill_level_boost = (new_owner.mind.get_skill_level(/datum/skill/athletics) - 1) * 2 SECONDS
+	bonus_time = (bonus_time + food_boost + skill_level_boost) * modifier
+
+	var/exhaustion_limit = new_owner.mind.get_skill_modifier(/datum/skill/athletics, SKILL_VALUE_MODIFIER) + world.time
+	if(duration + bonus_time >= exhaustion_limit)
+		duration = exhaustion_limit
+		to_chat(new_owner, span_userdanger("Your muscles are exhausted! Might be a good idea to sleep..."))
+		new_owner.emote("scream")
+		return // exhaustion_limit
+
+	return bonus_time
+
+/datum/status_effect/exercised/on_creation(mob/living/new_owner, bonus_time)
+	duration += workout_duration(new_owner, bonus_time)
+	return ..()
+
+/datum/status_effect/exercised/refresh(mob/living/new_owner, bonus_time)
+	duration += workout_duration(new_owner, bonus_time)
+	new_owner.clear_mood_event("exercise") // we need to reset the old mood event in case our fitness skill changes
+	new_owner.add_mood_event("exercise", /datum/mood_event/exercise, new_owner.mind.get_skill_level(/datum/skill/athletics))
+
+/datum/status_effect/exercised/on_apply()
+	owner.add_mood_event("exercise", /datum/mood_event/exercise, owner.mind.get_skill_level(/datum/skill/athletics))
+	return ..()
+
+/datum/status_effect/exercised/on_remove()
+	owner.clear_mood_event("exercise")
+
+/atom/movable/screen/alert/status_effect/exercised
+	name = "Exercise"
+	desc = "You feel well exercised! Sleeping will improve your fitness."
+	icon_state = "exercised"
 
 //Hippocratic Oath: Applied when the Rod of Asclepius is activated.
 /datum/status_effect/hippocratic_oath
@@ -749,3 +824,44 @@
 	name = "Radiation shielding"
 	desc = "You're immune to radiation, get settled quick!"
 	icon_state = "radiation_shield"
+
+/// Applies desensitized mood modifier to the mob, carrying between mind transfers
+/datum/status_effect/desensitized
+	id = "desensitized"
+	duration = STATUS_EFFECT_PERMANENT
+	status_type = STATUS_EFFECT_MULTIPLE
+	alert_type = null
+	/// How much to multiply desensitization level by
+	var/magnitude = 1.0
+	/// Effect ID for removal purposes
+	var/effect_id
+
+/datum/status_effect/desensitized/on_creation(mob/living/new_owner, effect_id, magnitude)
+	src.effect_id = effect_id
+	src.magnitude = max(DESENSITIZED_MINIMUM, magnitude)
+	return ..()
+
+/datum/status_effect/desensitized/on_apply()
+	owner.mind?.desensitized_level *= magnitude
+	RegisterSignal(owner, COMSIG_MOB_MIND_TRANSFERRED_INTO, PROC_REF(add_magnitude))
+	RegisterSignal(owner, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(remove_magnitude))
+	return TRUE
+
+/datum/status_effect/desensitized/on_remove()
+	owner.mind?.desensitized_level /= magnitude
+	UnregisterSignal(owner, list(COMSIG_MOB_MIND_TRANSFERRED_INTO, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF))
+
+/datum/status_effect/desensitized/before_remove(effect_id, magnitude)
+	if(istext(src.effect_id) && istext(effect_id)) // if an id is set, they must match
+		return src.effect_id == effect_id
+	if(isnum(magnitude)) // otherwise if a magnitude is passed, it must match
+		return src.magnitude == magnitude
+	return FALSE
+
+/datum/status_effect/desensitized/proc/add_magnitude(datum/source, mob/living/old_body, datum/mind/swapping)
+	SIGNAL_HANDLER
+	swapping.desensitized_level *= magnitude
+
+/datum/status_effect/desensitized/proc/remove_magnitude(datum/source, mob/living/old_body, datum/mind/swapping)
+	SIGNAL_HANDLER
+	swapping.desensitized_level /= magnitude

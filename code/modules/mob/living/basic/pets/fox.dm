@@ -19,7 +19,6 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 	gold_core_spawnable = FRIENDLY_SPAWN
-	can_be_held = TRUE
 	held_state = "fox"
 	melee_damage_lower = 5
 	melee_damage_upper = 5
@@ -31,6 +30,9 @@
 
 /mob/living/basic/pet/fox/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/can_be_held)
+	AddElement(/datum/element/cultist_pet)
+	AddElement(/datum/element/wears_collar)
 	AddElement(/datum/element/pet_bonus, "pants and yaps happily!")
 	AddElement(/datum/element/footstep, footstep_type = FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/tiny_mob_hunter, MOB_SIZE_SMALL)
@@ -44,22 +46,11 @@
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/target_retaliate/to_flee,
-		/datum/ai_planning_subtree/flee_target/from_flee_key,
-		/datum/ai_planning_subtree/simple_find_target/not_while_observed,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/random_speech/fox,
-	)
+	behavior_tree_json = "code/modules/mob/living/basic/pets/fox.bt.json"
 
 // An AI controller for more docile foxes.
 /datum/ai_controller/basic_controller/fox/docile
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/target_retaliate/to_flee,
-		/datum/ai_planning_subtree/flee_target/from_flee_key,
-		/datum/ai_planning_subtree/random_speech/fox,
-	)
+	behavior_tree_json = "code/modules/mob/living/basic/pets/fox_docile.bt.json"
 
 // The captain's fox, Renault
 /mob/living/basic/pet/fox/renault
@@ -72,3 +63,14 @@
 // A more docile subtype that won't attack other animals.
 /mob/living/basic/pet/fox/docile
 	ai_controller = /datum/ai_controller/basic_controller/fox/docile
+
+/// Cold resistant and doesn't need to breathe, so it can live out on the icemoon
+/mob/living/basic/pet/fox/arctic
+	name = "arctic fox"
+	desc = "A fox with a thick white coat, right at home in the snow."
+	icon_state = "arctic_fox"
+	icon_living = "arctic_fox"
+	icon_dead = "arctic_fox_dead"
+	held_state = "arctic_fox"
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	minimum_survivable_temperature = 0

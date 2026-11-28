@@ -18,11 +18,13 @@ Library, achievements, patreon data,
 E.g:
 - `code/modules/mob/living.dm`: `proc/overriden_proc`, `var/overriden_var`
   -->
-- `code/controllers/subsystem/achievements.dm`: `proc/update_metadata`
+- `code/controllers/subsystem/achievements.dm`: `proc/update_metadata`, `proc/load_high_scores`
 - `code/controllers/subsystem/dbcore.dm`: `proc/NewQuery`, `proc/MassInsert`
-- `code/datums/patreon_data.dm`: `proc/fetch_key_and_rank`, `proc/get_patreon_rank`
+- `code/datums/patreon_data.dm`: `proc/get_patreon_rank`
+- `monkestation/code/modules/client/persistent_client.dm`: `/datum/persistent_client/New` (patreon and twitch ranks)
+- `monkestation/code/modules/client/preferences/inventory.dm`: `proc/load_metacoins_and_inventory`, `proc/adjust_metacoins`, `/proc/mass_adjust_metacoins`
 - `code/datums/achievements/_achievement_data.dm`: `proc/load_all_achievements`,
-- `code/datums/achievements/_awards.dm`: `proc/get_raw_value`, `proc/LoadHighScores`, `/datum/award/score/achievements_score/get_ui_data`, `/datum/award/score/achievements_score/on_achievement_data_init`
+- `code/datums/achievements/_awards.dm`: `proc/get_raw_value`, `/datum/award/score/achievements_score/proc/LoadHighScores`
 - `code/modules/library/admin_only.dm`: `/update_page_contents`, `/update_page_count`, `/view_book`, `get_book_history`, `hide_book` ok im not copying and pasting every single proc name fuck you use your god damn eyes
 - `code/modules/library/lib_machines.dm`
 - `code/modules/library/random_books.dm`

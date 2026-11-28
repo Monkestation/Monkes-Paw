@@ -70,7 +70,7 @@
 	var/movement_type = GROUND
 
 	var/atom/movable/pulling
-	var/grab_state = 0
+	var/grab_state = GRAB_PASSIVE
 	/// The strongest grab we can acomplish
 	var/max_grab = GRAB_PASSIVE
 	var/throwforce = 0
@@ -122,9 +122,6 @@
 	/// If TRUE, then this will be affected by things such as the "Bot Language Matrix Malfunction" station trait.
 	var/can_language_malfunction = TRUE
 
-	/// The weight for A* pathfinding added to turfs this atom is on.
-	var/astar_weight
-
 /mutable_appearance/emissive_blocker
 
 /mutable_appearance/emissive_blocker/New()
@@ -170,6 +167,8 @@
 		blocker.dir = dir
 		blocker.appearance_flags = appearance_flags | EMISSIVE_APPEARANCE_FLAGS
 		blocker.plane = GET_NEW_PLANE(EMISSIVE_PLANE, PLANE_TO_OFFSET(plane)) // Takes a light path through the normal macro for a microop
+		if (IS_TOPDOWN_PLANE(plane))
+			blocker.layer = TOPDOWN_TO_EMISSIVE_LAYER(layer)
 		// Ok so this is really cursed, but I want to set with this blocker cheaply while
 		// Still allowing it to be removed from the overlays list later
 		// So I'm gonna flatten it, then insert the flattened overlay into overlays AND the managed overlays list, directly
@@ -194,11 +193,28 @@
 		if(MOVABLE_LIGHT_BEAM)
 			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE, is_beam = TRUE)
 
-	if(astar_weight && isturf(loc))
-		var/turf/turf_loc = loc
-		turf_loc.astar_weight += astar_weight
+	if(NAV_RELEVANT(src))
+		nav_dirty_footprint()
+
+/// Dirties every turf this covers, since a multi-tile movable spans more than its loc.
+/atom/movable/proc/nav_dirty_footprint()
+	for(var/turf/covered_turf in (isturf(loc) ? locs : list(get_turf(src))))
+		covered_turf.nav_dirty()
+
+/atom/movable/set_density(new_value)
+	. = ..()
+	if(isnull(.)) //no change
+		return
+
+	if(!(flags_1 & (NAV_IRRELEVANT_1 | NAV_ALWAYS_CONDITIONAL_1)))
+		if(isturf(loc))
+			nav_dirty_footprint()
 
 /atom/movable/Destroy(force)
+	//Update the navmap if the destroyed thing was nav relevant : )
+	if(NAV_RELEVANT(src))
+		nav_dirty_footprint()
+
 	QDEL_NULL(language_holder)
 	QDEL_NULL(em_block)
 
@@ -594,7 +610,7 @@
 	if(!. || !isliving(moving_atom))
 		return
 	var/mob/living/pulled_mob = moving_atom
-	set_pull_offsets(pulled_mob, grab_state)
+	set_pull_offsets(pulled_mob, grab_state, animate = FALSE)
 
 /**
  * Checks if the pulling and pulledby should be stopped because they're out of reach.
@@ -878,12 +894,6 @@
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(src)
 
-	if(astar_weight)
-		if(old_turf)
-			old_turf.astar_weight -= astar_weight
-		if(new_turf)
-			new_turf.astar_weight += astar_weight
-
 	if (old_turf?.z != new_turf?.z)
 		var/same_z_layer = (GET_TURF_PLANE_OFFSET(old_turf) == GET_TURF_PLANE_OFFSET(new_turf))
 		on_changed_z_level(old_turf, new_turf, same_z_layer)
@@ -901,6 +911,18 @@
 
 		else if(new_turf && !old_turf)
 			SSspatial_grid.enter_cell(src, new_turf)
+
+	// Shit moving; mark em dirty if relevant
+	if(NAV_RELEVANT(src))
+		if(old_turf)
+			old_turf.nav_dirty()
+			if(new_turf && old_turf.z == new_turf.z && length(locs) > 1)
+				// the old footprint is the new one shifted back by how far we moved
+				for(var/turf/covered_turf in locs)
+					var/turf/old_covered_turf = locate(covered_turf.x + old_turf.x - new_turf.x, covered_turf.y + old_turf.y - new_turf.y, old_turf.z)
+					old_covered_turf?.nav_dirty()
+		if(new_turf && new_turf != old_turf)
+			nav_dirty_footprint()
 
 	return TRUE
 
@@ -1485,9 +1507,9 @@
 	return
 
 
-/atom/movable/proc/do_attack_animation(atom/attacked_atom, visual_effect_icon, obj/item/used_item, no_effect, fov_effect = TRUE)
+/atom/movable/proc/do_attack_animation(atom/attacked_atom, visual_effect_icon, obj/item/used_item, no_effect, fov_effect = TRUE, item_animation_override = null)
 	if(!no_effect && (visual_effect_icon || used_item))
-		do_item_attack_animation(attacked_atom, visual_effect_icon, used_item)
+		do_item_attack_animation(attacked_atom, visual_effect_icon, used_item, animation_type = item_animation_override)
 
 	if(attacked_atom == src)
 		return //don't do an animation if attacking self
@@ -1679,6 +1701,7 @@
 	SEND_SIGNAL(src, COMSIG_MOVABLE_SET_GRAB_STATE, newstate)
 	. = grab_state
 	grab_state = newstate
+	SEND_SIGNAL(pulling, COMSIG_MOVABLE_CHANGED_GRABBED_STATE, grab_state)
 	switch(grab_state) // Current state.
 		if(GRAB_PASSIVE)
 			pulling.remove_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), CHOKEHOLD_TRAIT)
@@ -1786,3 +1809,42 @@
 	if(!("[REF(target)]" in faction_src))
 		faction_target -= "[REF(target)]" //same thing here.
 	return faction_check(faction_src, faction_target, TRUE)
+
+/// Returns TRUE if the ally (an atom or its REF) or allies in the list are in our faction list. If match_all is set, all of them have to be there.
+/atom/movable/proc/has_ally(ally_or_allies, match_all)
+	if(!LAZYLEN(faction))
+		return FALSE
+	if(!islist(ally_or_allies))
+		ally_or_allies = list(ally_or_allies)
+	for(var/ally in ally_or_allies)
+		var/ally_ref = isdatum(ally) ? REF(ally) : ally
+		var/found = (ally_ref in faction)
+		if(found != match_all)
+			return found
+	return match_all
+
+/// Returns TRUE if the faction or factions in the list are in our faction list. If match_all is set, all of them have to be there.
+/**
+ * Replaces the atom's faction list with the given list of factions, or clears it if the list is empty or null.
+ */
+/atom/movable/proc/set_faction(factions)
+	if (factions == faction) // Same list in memory - early return
+		return TRUE
+	if (!islist(factions) && !isnull(factions))
+		stack_trace("Tried to call set_faction on [src] with a non-list arg.")
+		return FALSE
+
+	if (!LAZYLEN(factions)) // empty list, should just null it in that case
+		LAZYNULL(faction)
+		return TRUE
+
+	faction = string_list(factions)
+	return TRUE
+
+/atom/movable/proc/has_faction(faction_or_factions, match_all)
+	if(!LAZYLEN(faction))
+		return FALSE
+	if(!islist(faction_or_factions))
+		return faction_or_factions in faction
+	var/match_count = length(faction & faction_or_factions)
+	return match_all ? (match_count == length(faction_or_factions)) : (match_count > 0)

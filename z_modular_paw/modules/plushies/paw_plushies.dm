@@ -26,7 +26,7 @@
 /datum/store_item/plushies/spence
 	name = "spence Plushie"
 	item_path = /obj/item/toy/plush/paw/admin/spence
-	item_cost = 50000
+	item_cost = 5000
 
 /obj/item/toy/plush/paw/plushiematter
 	name = "Plushiematter Crystal"
@@ -50,4 +50,27 @@
 /datum/store_item/plushies/plushiematter
 	name = "plushiematter Plushie"
 	item_path = /obj/item/toy/plush/paw/plushiematter
-	item_cost = 50000
+	item_cost = 5000
+
+/obj/item/toy/plush/paw/tris
+	name = "tris"
+	desc = "THEY TURNED HER INTO A MARKETABLE PLUSHIE!!!!!!"
+	icon_state = "tris"
+	gender = FEMALE
+	pet_message = "The Ants Are Coming"
+	squeak_override = list(
+		'sound/machines/pda_ringtones/meow1.ogg' = 1,
+		'sound/machines/pda_ringtones/meow2.ogg' = 1,
+		'sound/machines/pda_ringtones/meow3.ogg' = 1,
+		'sound/machines/pda_ringtones/meow4.ogg' = 1,
+		'sound/machines/pda_ringtones/meow_electric.ogg' = 1,
+	)
+
+/datum/loadout_item/plushies/tris
+	name = "Tris Plushie"
+	item_path = /obj/item/toy/plush/paw/tris
+
+/datum/store_item/plushies/tris
+	name = "tris"
+	item_path = /obj/item/toy/plush/paw/tris
+	item_cost = 5000

@@ -759,6 +759,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/on_mousedrop_onto(datum/source, atom/over_object, mob/user)
 	SIGNAL_HANDLER
 
+	if(SEND_SIGNAL(parent, COMSIG_STORAGE_DUMP_PRE_TRANSFER, src, over_object, user) & CANCEL_STORAGE_DUMP)
+		return COMPONENT_CANCEL_MOUSEDROP_ONTO
+
 	if(ismecha(user.loc) || user.incapacitated() || !user.canUseStorage())
 		return NONE
 
@@ -1038,10 +1041,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(to_show.active_storage != src && (to_show.stat == CONSCIOUS))
 		for(var/obj/item/thing in real_location)
 			if(thing.on_found(to_show))
-				to_show.active_storage.hide_contents(to_show)
+				to_show.active_storage?.hide_contents(to_show)
+				return FALSE
 
-	if(to_show.active_storage)
-		to_show.active_storage.hide_contents(to_show)
+	to_show.active_storage?.hide_contents(to_show)
 
 	to_show.active_storage = src
 
